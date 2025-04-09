@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\aftab\\Desktop\\LampShade_Project\\Code\\LampShade\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|c:\\users\\aftab\\desktop\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +31,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\aftab\\Desktop\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "C:\\Users\\aftab\\Desktop\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AQIAAM4AAAAAAAAAAAAAANwAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T10:00:37.844Z",
+              "EditorCaption": ""
             }
           ]
         },
