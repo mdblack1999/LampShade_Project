@@ -125,7 +125,7 @@ function makeSlug(source, dist) {
 
 var convertToSlug = function (str) {
     var $slug = '';
-    const trimmed = $.Trim(str);
+    const trimmed = $.trim(str);
     $slug = trimmed.replace(/[^a-z0-9-آ-ی-]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
     return $slug.toLowerCase();
 };

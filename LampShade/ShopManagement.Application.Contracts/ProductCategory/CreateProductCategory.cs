@@ -5,7 +5,7 @@ namespace ShopManagement.Application.Contracts.ProductCategory
 {
     public class CreateProductCategory
     {
-        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -13,13 +13,13 @@ namespace ShopManagement.Application.Contracts.ProductCategory
         public string PictureAlt { get; set; }
         public string PictureTitle { get; set; }
 
-        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Keywords { get; set; }
 
-        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string MetaDescription { get; set; }
 
-        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Slug { get; set; }
     }
 }
