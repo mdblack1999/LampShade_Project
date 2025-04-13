@@ -24,7 +24,7 @@ namespace ShopManagement.Application
             var slug = command.Slug.Slugify();
             var product = new Product(command.Name , command.Code ,
                command.ShortDescription , command.Description , command.Picture ,
-               command.PictureAlt , command.PictureTitle , command.CategoryId , slug ,
+               command.PictureAlt , command.PictureTitle , command.CategoryId , slug , command.UnitPrice,
                command.Keywords , command.MetaDescription);
 
             _productRepository.Create(product);
@@ -46,8 +46,9 @@ namespace ShopManagement.Application
 
             product.Edit(command.Name , command.Code ,
                command.ShortDescription , command.Description , command.Picture ,
-               command.PictureAlt , command.PictureTitle , command.CategoryId , slug ,
-               command.Keywords , command.MetaDescription);
+               command.PictureAlt , command.PictureTitle , command.CategoryId , slug 
+               ,command.UnitPrice , command.Keywords , command.MetaDescription);
+              
 
             _productRepository.SaveChanges();
             return operation.Succedded();
@@ -57,6 +58,11 @@ namespace ShopManagement.Application
         {
             return _productRepository.GetDetails(id);
 
+        }
+
+        public List<ProductViewModel> GetProducts()
+        {
+            return _productRepository.GetProducts();
         }
 
         public OperationResult IsStock(long id)
