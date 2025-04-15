@@ -2,7 +2,6 @@
 using ShopManagement.Application.Contracts.Slide;
 using ShopManagement.Domain.SlideAgg;
 using System.Collections.Generic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application
 {
@@ -19,7 +18,7 @@ namespace ShopManagement.Application
         {
             var operation = new OperationResult();
             var slide = new Slide(command.Picture , command.PictureAlt , command.PictureTitle ,
-                command.Text , command.Heading , command.Title , command.BtnText);
+                command.Text , command.Heading ,command.Link, command.Title , command.BtnText);
             _slideRepository.Create(slide);
             _slideRepository.SaveChanges();
             return operation.Succedded();
@@ -31,8 +30,9 @@ namespace ShopManagement.Application
             var slide = _slideRepository.Get(command.Id);
             if (slide == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
+
             slide.Edit(command.Picture , command.PictureAlt , command.PictureTitle ,
-                command.Heading , command.Title , command.BtnText , command.BtnText);
+                command.Heading , command.Title , command.Text , command.Link , command.BtnText);
             _slideRepository.SaveChanges();
             return operation.Succedded();
         }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _01_LampShadeQuery.Contracts.Slide;
+using _01_LampShadeQuery.Query;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
 using ShopManagement.Application.Contracts.Product;
@@ -16,7 +18,7 @@ namespace ShopManagement.Configuration
 {
     public class ShopManagementBootstrapper
     {
-        public static void Configure(IServiceCollection services,string ConnectionString)
+        public static void Configure(IServiceCollection services , string ConnectionString)
         {
             //Register Product-Category
             services.AddTransient<IProductCategoryApplication , ProductCategoryApplication>();
@@ -33,6 +35,9 @@ namespace ShopManagement.Configuration
             //Register Slide
             services.AddTransient<ISlideApplication , SlideApplication>();
             services.AddTransient<ISlideRepository , SlideRepository>();
+
+            //Query For UI
+            services.AddTransient<ISlideQuery , SlideQuery>();
 
             services.AddDbContext<ShopContext>(x => x.UseSqlServer(ConnectionString));
         }
