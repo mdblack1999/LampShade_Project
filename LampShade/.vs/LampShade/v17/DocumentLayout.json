@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{DCF20136-AC2B-41B2-9D53-804B89E2A595}|DiscountManagement.Infrastructure.EFCore\\DiscountManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\discountmanagement.infrastructure.efcore\\migrations\\20250416222458_customerdiscount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF20136-AC2B-41B2-9D53-804B89E2A595}|DiscountManagement.Infrastructure.EFCore\\DiscountManagement.Infrastructure.EFCore.csproj|solutionrelative:discountmanagement.infrastructure.efcore\\migrations\\20250416222458_customerdiscount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0A53C75-0FC3-4B8F-867E-68A67E2E2408}|DiscountManagement.Configuration\\DiscountManagement.Configuration.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\discountmanagement.configuration\\discountmanagementbootstraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0A53C75-0FC3-4B8F-867E-68A67E2E2408}|DiscountManagement.Configuration\\DiscountManagement.Configuration.csproj|solutionrelative:discountmanagement.configuration\\discountmanagementbootstraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -22,34 +9,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20250416222458_CustomerDiscount.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\DiscountManagement.Infrastructure.EFCore\\Migrations\\20250416222458_CustomerDiscount.cs",
-              "RelativeDocumentMoniker": "DiscountManagement.Infrastructure.EFCore\\Migrations\\20250416222458_CustomerDiscount.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\DiscountManagement.Infrastructure.EFCore\\Migrations\\20250416222458_CustomerDiscount.cs",
-              "RelativeToolTip": "DiscountManagement.Infrastructure.EFCore\\Migrations\\20250416222458_CustomerDiscount.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T22:24:59.415Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Startup.cs",
-              "RelativeDocumentMoniker": "ServiceHost\\Startup.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Startup.cs",
-              "RelativeToolTip": "ServiceHost\\Startup.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAswBgAAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T22:19:43.289Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -69,19 +30,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DiscountManagementBootstraper.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\DiscountManagement.Configuration\\DiscountManagementBootstraper.cs",
-              "RelativeDocumentMoniker": "DiscountManagement.Configuration\\DiscountManagementBootstraper.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\DiscountManagement.Configuration\\DiscountManagementBootstraper.cs",
-              "RelativeToolTip": "DiscountManagement.Configuration\\DiscountManagementBootstraper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T22:09:55.615Z",
-              "EditorCaption": ""
             }
           ]
         },

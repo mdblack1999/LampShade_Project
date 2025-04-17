@@ -7,6 +7,7 @@ namespace ServiceHost
     {
         public static void Main(string[] args)
         {
+            // Implement Serilog after
             CreateHostBuilder(args).Build().Run();
         }
 

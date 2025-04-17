@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace DiscountManagement.Application
 {
-    public class CustomerDiscountApplication : ICsutomerDiscountApplication
+    public class CustomerDiscountApplication : ICustomerDiscountApplication
     {
-        private readonly ICsutoemrDsicountRepository _custoemrDsicountRepository;
+        private readonly ICustoemrDsicountRepository _custoemrDsicountRepository;
 
-        public CustomerDiscountApplication(ICsutoemrDsicountRepository csutoemrDsicountRepository)
+        public CustomerDiscountApplication(ICustoemrDsicountRepository csutoemrDsicountRepository)
         {
             _custoemrDsicountRepository = csutoemrDsicountRepository;
         }

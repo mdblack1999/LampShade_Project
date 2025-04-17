@@ -22,29 +22,36 @@ namespace ShopManagement.Configuration
         public static void Configure(IServiceCollection services , string ConnectionString)
         {
             //Register Product-Category
-            services.AddTransient<IProductCategoryApplication , ProductCategoryApplication>();
-            services.AddTransient<IProductCategoryRepository , ProductCategoryRepository>();
+            services.AddScoped<IProductCategoryApplication , ProductCategoryApplication>();
+            services.AddScoped<IProductCategoryRepository , ProductCategoryRepository>();
 
             //Register Product
-            services.AddTransient<IProductApplication , ProductApplication>();
-            services.AddTransient<IProductRepository , ProductRepository>();
+            services.AddScoped<IProductApplication , ProductApplication>();
+            services.AddScoped<IProductRepository , ProductRepository>();
 
             //Register Product-Picture
-            services.AddTransient<IProductPictureApplication , ProductPictureApplication>();
-            services.AddTransient<IProductPictureRepository , ProductPictureRepository>();
+            services.AddScoped<IProductPictureApplication , ProductPictureApplication>();
+            services.AddScoped<IProductPictureRepository , ProductPictureRepository>();
 
             //Register Slide
-            services.AddTransient<ISlideApplication , SlideApplication>();
-            services.AddTransient<ISlideRepository , SlideRepository>();
+            services.AddScoped<ISlideApplication , SlideApplication>();
+            services.AddScoped<ISlideRepository , SlideRepository>();
 
             //Query For Slider UI
-            services.AddTransient<ISlideQuery , SlideQuery>();
+            services.AddScoped<ISlideQuery , SlideQuery>();
 
             //Query For ProductCategory UI
-            services.AddTransient<IProductCategoryQuery , ProductCategoryQuery>();
+            services.AddScoped<IProductCategoryQuery , ProductCategoryQuery>();
 
 
-            services.AddDbContext<ShopContext>(x => x.UseSqlServer(ConnectionString));
+
+            //services.AddDbContext<ShopContext>(x => x.UseSqlServer(ConnectionString));
+            services.AddDbContextPool<ShopContext>(options =>
+                options.UseSqlServer(ConnectionString , sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(); // برای هندل خطاهای موقتی دیتابیس
+                    sqlOptions.CommandTimeout(60);     // تنظیم timeout برای queryهای سنگین
+                }));
         }
     }
 }

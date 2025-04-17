@@ -1,4 +1,5 @@
 ﻿using _01_LampShadeQuery.Contracts.Slide;
+using Microsoft.EntityFrameworkCore;
 using ShopManagement.Infrastructure.EfCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace _01_LampShadeQuery.Query
                     PictureAlt = x.PictureAlt ,
                     PictureTitle = x.PictureTitle ,
                     Text = x.Text
-                }).ToList();
+                }).AsNoTracking().ToList();
 
         }
     }

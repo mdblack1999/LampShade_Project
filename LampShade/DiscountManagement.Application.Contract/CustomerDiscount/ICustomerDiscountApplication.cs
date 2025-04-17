@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DiscountManagement.Application.Contract.CustomerDiscount
 {
-    public interface ICsutomerDiscountApplication
+    public interface ICustomerDiscountApplication
     {
         OperationResult Define(DefineCustomerDiscount command);
         OperationResult Edit(EditCustomerDiscount command);
