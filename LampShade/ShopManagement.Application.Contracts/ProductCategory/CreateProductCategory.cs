@@ -18,6 +18,7 @@ namespace ShopManagement.Application.Contracts.ProductCategory
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string MetaDescription { get; set; }
+        public string SubText { get; set; } = "همین الان بخر!";
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Slug { get; set; }

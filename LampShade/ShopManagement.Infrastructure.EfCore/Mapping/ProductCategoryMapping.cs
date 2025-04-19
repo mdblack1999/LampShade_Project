@@ -17,7 +17,8 @@ namespace ShopManagement.Infrastructure.EfCore.Mapping
             builder.Property(x => x.PictureTitle).HasMaxLength(500);
             builder.Property(x => x.Keywords).HasMaxLength(80).IsRequired();
             builder.Property(x => x.MetaDescription).HasMaxLength(150).IsRequired();
-            builder.Property(x => x.Slug).HasMaxLength(400).IsRequired();
+            builder.Property(x => x.Slug).HasMaxLength(450).IsRequired();
+            builder.Property(x => x.SubText).HasMaxLength(255);
 
             //RelationShips
             builder.HasMany(x => x.Products)

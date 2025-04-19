@@ -29,6 +29,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                 Picture= x.Picture ,
                 PictureAlt = x.PictureAlt ,
                 PictureTitle = x.PictureTitle ,
+                SubText = x.SubText,
                 Slug = x.Slug
             }).FirstOrDefault(x => x.Id == id);
         }
@@ -38,7 +39,8 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             return _context.ProductCategories.Select(x => new ProductCategoryViewModel
             {
                 Id= x.Id ,
-                Name = x.Name 
+                Name = x.Name,
+                SubText = x.SubText
             }).AsNoTracking().ToList();
         }
 
@@ -49,7 +51,9 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                 Id = x.Id ,
                 Name = x.Name ,
                 Picture = x.Picture ,
-                CreationDate = x.CreationDate.ToFarsi()
+                CreationDate = x.CreationDate.ToFarsi(),
+                IsRemoved = x.IsRemoved,
+                SubText =x.SubText
             });
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))

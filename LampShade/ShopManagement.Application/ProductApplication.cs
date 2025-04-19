@@ -29,7 +29,7 @@ namespace ShopManagement.Application
 
             _productRepository.Create(product);
             _productRepository.SaveChanges();
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public OperationResult Edit(EditProduct command)
@@ -51,7 +51,7 @@ namespace ShopManagement.Application
               
 
             _productRepository.SaveChanges();
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public EditProduct GetDetails(long id)
@@ -74,7 +74,7 @@ namespace ShopManagement.Application
             //در انبار موجود شود
             product.InStock();
             _productRepository.SaveChanges();
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public OperationResult NotInStock(long id)
@@ -86,7 +86,7 @@ namespace ShopManagement.Application
             //عدم  موجودی در انبار
             product.NotInStock();
             _productRepository.SaveChanges();
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public List<ProductViewModel> Search(ProductSearchModel searchModel)

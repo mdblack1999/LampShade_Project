@@ -50,7 +50,6 @@ namespace ShopManagement.Configuration
                 options.UseSqlServer(ConnectionString , sqlOptions =>
                 {
                     sqlOptions.EnableRetryOnFailure(); // برای هندل خطاهای موقتی دیتابیس
-                    sqlOptions.CommandTimeout(60);     // تنظیم timeout برای queryهای سنگین
                 }));
         }
     }

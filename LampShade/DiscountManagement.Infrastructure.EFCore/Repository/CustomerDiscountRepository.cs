@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DiscountManagement.Infrastructure.EFCore.Repository
 {
-    public class CustomerDiscountRepository : RepositoryBase<long , CustomerDiscount>, ICustoemrDsicountRepository
+    public class CustomerDiscountRepository : RepositoryBase<long , CustomerDiscount>, ICustomerDsicountRepository
     {
         private readonly DiscountContext _context;
         private readonly ShopContext _shopContext;
@@ -24,7 +24,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
         {
             return _context.CustomerDiscounts.Select(x => new EditCustomerDiscount
             {
-                Id = id ,
+                Id = x.Id ,
                 ProductId = x.ProductId ,
                 DiscountRate = x.DiscountRate ,
                 StartDate = x.StartDate.ToString() ,

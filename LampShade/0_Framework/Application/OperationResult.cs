@@ -9,7 +9,7 @@
         {
             IsSuccedded = false;
         }
-        public OperationResult Succedded(string message = "عملیات با موفقیت انجام شد")
+        public OperationResult Succeeded(string message = "عملیات با موفقیت انجام شد")
         {
             IsSuccedded = true;
             Message = message;

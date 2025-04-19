@@ -17,13 +17,14 @@ namespace _01_LampShadeQuery.Query
 
         public List<ProductCategoryQueryModel> GetProductCategories()
         {
-            return _context.ProductCategories.Select(x => new ProductCategoryQueryModel
+            return _context.ProductCategories.Where(x => !x.IsRemoved).Select(x => new ProductCategoryQueryModel
             {
                 Id = x.Id ,
                 Name = x.Name ,
                 Picture = x.Picture ,
                 PictureAlt = x.PictureAlt ,
                 PictureTitle = x.PictureTitle ,
+                SubText = x.SubText ,
                 Slug = x.Slug
             }).AsNoTracking().ToList();
         }

@@ -1,4 +1,3 @@
-using DiscountManagement.Application;
 using DiscountManagement.Application.Contract.CustomerDiscount;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,8 +11,8 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscounts
     {
         [TempData]
         public string Message { get; set; }
-        public CustomerDiscountSearchModel SearchModel;
-        public List<CustomerDiscountViewModel> CustomerDiscounts;
+        public CustomerDiscountSearchModel SearchModel { get; set; }
+        public List<CustomerDiscountViewModel> CustomerDiscounts { get; set; }
         public SelectList Products;
 
         private readonly IProductApplication _productApplication;

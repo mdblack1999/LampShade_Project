@@ -14,15 +14,16 @@ namespace ShopManagement.Domain.ProductCategoryAgg
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
         public string Slug { get; private set; }
+        public string SubText { get; private set; }
         public List<Product> Products { get; private set; }
-
+        public bool IsRemoved { get; private set; }
 
         public ProductCategory()
         {
             Products = new List<Product>();
         }
         public ProductCategory(string name , string description , string picture ,
-            string pictureAlt , string pictureTitle , string keywords , string metaDescription , string slug)
+            string pictureAlt , string pictureTitle , string keywords , string metaDescription,string subText, string slug)
         {
             Name = name;
             Description = description;
@@ -31,10 +32,12 @@ namespace ShopManagement.Domain.ProductCategoryAgg
             PictureTitle = pictureTitle;
             Keywords = keywords;
             MetaDescription = metaDescription;
+            SubText = subText;
+            IsRemoved = false;
             Slug = slug;
         }
         public void Edit(string name , string description , string picture ,
-            string pictureAlt , string pictureTitle , string keywords , string metaDescription , string slug)
+            string pictureAlt , string pictureTitle , string keywords , string metaDescription , string subText , string slug)
         {
             Name = name;
             Description = description;
@@ -43,7 +46,18 @@ namespace ShopManagement.Domain.ProductCategoryAgg
             PictureTitle = pictureTitle;
             Keywords = keywords;
             MetaDescription = metaDescription;
+            SubText = subText;
             Slug = slug;
         }
+        public void Remove()
+        {
+            IsRemoved = true;
+        }
+
+        public void Restore()
+        {
+            IsRemoved = false;
+        }
+
     }
 }

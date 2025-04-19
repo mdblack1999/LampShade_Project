@@ -22,12 +22,12 @@ namespace ShopManagement.Application
 
             var slug = command.Slug.Slugify();
             var productCategory = new ProductCategory(command.Name , command.Description , command.Picture ,
-                command.PictureAlt , command.PictureTitle , command.Keywords , command.MetaDescription , slug);
+                command.PictureAlt , command.PictureTitle , command.Keywords , command.MetaDescription , command.SubText , slug);
 
             _productCategoryRepository.Create(productCategory);
             _productCategoryRepository.SaveChanges();
 
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public OperationResult Edit(EditProductCategory command)
@@ -43,12 +43,38 @@ namespace ShopManagement.Application
 
             var slug = command.Slug.Slugify();
             productCategory.Edit(command.Name , command.Description , command.Picture , command.PictureAlt
-                , command.PictureTitle , command.Keywords , command.MetaDescription , slug);
+                , command.PictureTitle , command.Keywords , command.MetaDescription , command.SubText , slug);
 
             _productCategoryRepository.SaveChanges();
-            return operation.Succedded();
+            return operation.Succeeded();
 
         }
+
+        public OperationResult Remove(long id)
+        {
+            var operation = new OperationResult();
+            var category = _productCategoryRepository.Get(id);
+            if (category == null)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            category.Remove();
+            _productCategoryRepository.SaveChanges();
+            return operation.Succeeded();
+        }
+
+        public OperationResult Restore(long id)
+        {
+            var operation = new OperationResult();
+            var category = _productCategoryRepository.Get(id);
+            if (category == null)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            category.Restore();
+            _productCategoryRepository.SaveChanges();
+            return operation.Succeeded();
+        }
+
+
 
         public EditProductCategory GetDetails(long id)
         {

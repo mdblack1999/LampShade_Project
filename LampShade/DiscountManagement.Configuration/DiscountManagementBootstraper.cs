@@ -16,18 +16,17 @@ namespace DiscountManagement.Configuration
         {
             //Register Customer Discount
             services.AddScoped<ICustomerDiscountApplication , CustomerDiscountApplication>();
-            services.AddScoped<ICustoemrDsicountRepository , CustomerDiscountRepository>();
+            services.AddScoped<ICustomerDsicountRepository , CustomerDiscountRepository>();
 
             //Register Colleague Discount
             services.AddScoped<IColleagueDiscountApplication , ColleagueDiscountApplication>();
             services.AddScoped<IColleagueDiscountRepository , ColleagueDiscountRepository>();
 
             //register Context
-            services.AddDbContext<DiscountContext>(options =>
+            services.AddDbContextPool<DiscountContext>(options =>
                 options.UseSqlServer(connectionString , sqlOptions =>
                 {
-                    sqlOptions.EnableRetryOnFailure();
-                    sqlOptions.CommandTimeout(60);     
+                    sqlOptions.EnableRetryOnFailure();   
                 }));
 
         }

@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label asp-for="Picture" class="control-label">عکس</label>
-                    <input type="text" class="form-control" asp-for="Picture" accept="image/*">
+                    <input type="text" class="form-control" asp-for="Picture">
                     <span asp-validation-for="Picture" class="error"></span>
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label asp-for="Keywords" class="control-label">کلمات کلیدی</label>
-                    <input asp-for="Keywords" type="text" class="form-control">
+                    <input asp-for="Keywords" type="text" class="form-control" placeholder="کتاب، کتابخانه،...">
                     <span class="error"></span>
                 </div>
             </div>
@@ -80,6 +80,14 @@
                     <textarea class="form-control autogrow" asp-for="MetaDescription"
                               style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
                     <span asp-validation-for="MetaDescription" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="SubText" class="control-label">متن راهنما</label>
+                    <input asp-for="SubText" class="form-control" placeholder="همین الان بخر، محصول جدید.." />
                 </div>
             </div>
         </div>

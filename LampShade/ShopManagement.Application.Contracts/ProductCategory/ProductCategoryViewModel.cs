@@ -7,6 +7,8 @@
         public string Picture { get; set; }
         public string CreationDate { get; set; }
         public long PictureCount { get; set; }
+        public string SubText { get; set; }
+        public bool IsRemoved { get; set; }
 
     }
 }

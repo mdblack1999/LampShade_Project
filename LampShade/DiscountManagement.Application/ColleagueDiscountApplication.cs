@@ -26,7 +26,7 @@ namespace DiscountManagement.Application
             _colleagueDiscountRepository.Create(colleagueDiscount);
             _colleagueDiscountRepository.SaveChanges();
 
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public OperationResult Edit(EditColleagueDiscount command)
@@ -44,7 +44,7 @@ namespace DiscountManagement.Application
             colleagueDiscount.Edit(command.ProductId , command.DiscountRate);
             _colleagueDiscountRepository.SaveChanges();
 
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public EditColleagueDiscount GetDetails(long id)
@@ -63,7 +63,7 @@ namespace DiscountManagement.Application
             colleagueDiscount.Remove();
             _colleagueDiscountRepository.SaveChanges();
 
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public OperationResult Restore(long id)
@@ -77,7 +77,7 @@ namespace DiscountManagement.Application
             colleagueDiscount.Restore();
             _colleagueDiscountRepository.SaveChanges();
 
-            return operation.Succedded();
+            return operation.Succeeded();
         }
 
         public List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel)
