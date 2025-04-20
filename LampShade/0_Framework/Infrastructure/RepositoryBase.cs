@@ -38,7 +38,7 @@ namespace _0_Framework.Infrastructure
 
         public void SaveChanges()
         {
-             _context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

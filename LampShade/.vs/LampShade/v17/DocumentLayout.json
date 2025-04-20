@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BEAA25F5-7FB6-401F-AAE6-CCE90F73D269}|InventoryManagement.Domain\\InventoryManagement.Domain.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\inventorymanagement.domain\\inventoryagg\\iinventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BEAA25F5-7FB6-401F-AAE6-CCE90F73D269}|InventoryManagement.Domain\\InventoryManagement.Domain.csproj|solutionrelative:inventorymanagement.domain\\inventoryagg\\iinventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{01470EEE-373C-4910-87CA-2FB1AB3467DA}|InventoryManagement.Infrastructure.Configuration\\InventoryManagement.Infrastructure.Configuration.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\inventorymanagement.infrastructure.configuration\\inventorymanagementbootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{01470EEE-373C-4910-87CA-2FB1AB3467DA}|InventoryManagement.Infrastructure.Configuration\\InventoryManagement.Infrastructure.Configuration.csproj|solutionrelative:inventorymanagement.infrastructure.configuration\\inventorymanagementbootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54D665B7-EC7E-4FE2-869A-6D43F8E86207}|InventoryManagement.Application\\InventoryManagement.Application.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\inventorymanagement.application\\inventoryapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54D665B7-EC7E-4FE2-869A-6D43F8E86207}|InventoryManagement.Application\\InventoryManagement.Application.csproj|solutionrelative:inventorymanagement.application\\inventoryapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,14 +43,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "IInventoryRepository.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Domain\\InventoryAgg\\IInventoryRepository.cs",
-              "RelativeDocumentMoniker": "InventoryManagement.Domain\\InventoryAgg\\IInventoryRepository.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Domain\\InventoryAgg\\IInventoryRepository.cs",
-              "RelativeToolTip": "InventoryManagement.Domain\\InventoryAgg\\IInventoryRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAmAAAA",
+              "Title": "InventoryManagementBootstrapper.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Infrastructure.Configuration\\InventoryManagementBootstrapper.cs",
+              "RelativeDocumentMoniker": "InventoryManagement.Infrastructure.Configuration\\InventoryManagementBootstrapper.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Infrastructure.Configuration\\InventoryManagementBootstrapper.cs",
+              "RelativeToolTip": "InventoryManagement.Infrastructure.Configuration\\InventoryManagementBootstrapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T23:41:35.58Z",
+              "WhenOpened": "2025-04-20T10:17:38.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InventoryApplication.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Application\\InventoryApplication.cs",
+              "RelativeDocumentMoniker": "InventoryManagement.Application\\InventoryApplication.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Application\\InventoryApplication.cs",
+              "RelativeToolTip": "InventoryManagement.Application\\InventoryApplication.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAAAFkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T09:25:43.229Z",
               "EditorCaption": ""
             }
           ]
