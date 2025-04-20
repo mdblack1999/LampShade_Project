@@ -12,9 +12,6 @@ namespace ShopManagement.Application.Contracts.Product
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Code { get; set; }
-
-        [Range(0.01 , double.MaxValue , ErrorMessage = ValidationMessages.IsInvalid)]
-        public double UnitPrice { get; set; }
         public bool IsInStock { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]

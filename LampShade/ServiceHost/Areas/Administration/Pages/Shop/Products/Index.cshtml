@@ -64,8 +64,6 @@
                                     <th class="text-center">نام</th>
                                     <th class="text-center">کد</th>
                                     <th class="text-center">گروه</th>
-                                    <th class="text-center">قیمت واحد</th>
-                                    <th class="text-center">موجودی</th>
                                     <th class="text-center">تاریخ تولید</th>
                                     <th class="text-center">عملیات</th>
                                 </tr>
@@ -81,8 +79,8 @@
                                         <td class="text-center">@item.Name</td>
                                         <td class="text-center">@item.Code</td>
                                         <td class="text-center">@item.Category</td>
-                                        <td class="text-center">@item.UnitPrice</td>
-                                        <td class="text-center">
+                                        @* <td class="text-center">@item.UnitPrice</td>   is Deletee After Inventory
+                                         <td class="text-center">
                                             @if (item.IsInStock)
                                             {
                                                 <i class="fa fa-check fa-3x text-success"></i>
@@ -91,28 +89,13 @@
                                             {
                                                 <i class="fa fa-remove fa-3x text-danger"></i>
                                             }
-                                        </td>
+                                        </td> *@
                                         <td class="text-center">@item.CreationDate</td>
                                         <td>
                                             <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
                                                href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
-                                            @if (item.IsInStock)
-                                            {
-                                                <a asp-page="./Index" asp-page-handler="NotInStock" asp-route-id="@item.Id"
-                                                   class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
-                                                    اتمام موجودی
-                                                </a>
-                                            }
-                                            else
-                                            {
-                                                <a asp-page="./Index" asp-page-handler="IsInStock" asp-route-id="@item.Id"
-                                                   class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                    موجود شد
-                                                </a>
-                                            }
-
                                         </td>
                                     </tr>
                                 }

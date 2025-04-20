@@ -24,7 +24,7 @@ namespace ShopManagement.Application
             var slug = command.Slug.Slugify();
             var product = new Product(command.Name , command.Code ,
                command.ShortDescription , command.Description , command.Picture ,
-               command.PictureAlt , command.PictureTitle , command.CategoryId , slug , command.UnitPrice,
+               command.PictureAlt , command.PictureTitle , command.CategoryId , slug ,
                command.Keywords , command.MetaDescription);
 
             _productRepository.Create(product);
@@ -46,9 +46,9 @@ namespace ShopManagement.Application
 
             product.Edit(command.Name , command.Code ,
                command.ShortDescription , command.Description , command.Picture ,
-               command.PictureAlt , command.PictureTitle , command.CategoryId , slug 
-               ,command.UnitPrice , command.Keywords , command.MetaDescription);
-              
+               command.PictureAlt , command.PictureTitle , command.CategoryId , slug
+               , command.Keywords , command.MetaDescription);
+
 
             _productRepository.SaveChanges();
             return operation.Succeeded();
@@ -65,33 +65,35 @@ namespace ShopManagement.Application
             return _productRepository.GetProducts();
         }
 
-        public OperationResult IsStock(long id)
-        {
-            var operation = new OperationResult();
-            var product = _productRepository.Get(id);
-            if (product == null)
-                return operation.Failed(ApplicationMessages.RecordNotFound);
-            //در انبار موجود شود
-            product.InStock();
-            _productRepository.SaveChanges();
-            return operation.Succeeded();
-        }
+        #region InStock Old
+        //public OperationResult IsStock(long id)
+        //{
+        //    var operation = new OperationResult();
+        //    var product = _productRepository.Get(id);
+        //    if (product == null)
+        //        return operation.Failed(ApplicationMessages.RecordNotFound);
+        //    //در انبار موجود شود
+        //    product.InStock();
+        //    _productRepository.SaveChanges();
+        //    return operation.Succeeded();
+        //}
 
-        public OperationResult NotInStock(long id)
-        {
-            var operation = new OperationResult();
-            var product = _productRepository.Get(id);
-            if (product == null)
-                return operation.Failed(ApplicationMessages.RecordNotFound);
-            //عدم  موجودی در انبار
-            product.NotInStock();
-            _productRepository.SaveChanges();
-            return operation.Succeeded();
-        }
+        //public OperationResult NotInStock(long id)
+        //{
+        //    var operation = new OperationResult();
+        //    var product = _productRepository.Get(id);
+        //    if (product == null)
+        //        return operation.Failed(ApplicationMessages.RecordNotFound);
+        //    //عدم  موجودی در انبار
+        //    product.NotInStock();
+        //    _productRepository.SaveChanges();
+        //    return operation.Succeeded();
+        //}
+        #endregion
 
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
-           return _productRepository.Search(searchModel);
+            return _productRepository.Search(searchModel);
         }
     }
 }

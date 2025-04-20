@@ -11,7 +11,6 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
     public class ProductRepository : RepositoryBase<long , Product>, IProductRepository
     {
         private readonly ShopContext _context;
-
         public ProductRepository(ShopContext context) : base(context)
         {
             _context = context;
@@ -32,7 +31,6 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                 PictureAlt = x.PictureAlt ,
                 PictureTitle = x.PictureTitle ,
                 Picture = x.Picture ,
-                UnitPrice = x.UnitPrice ,
                 ShortDescription = x.ShortDescription
 
             }).FirstOrDefault(x => x.Id == id);
@@ -57,11 +55,9 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                     Id = x.Id ,
                     Name = x.Name ,
                     Category = x.Category.Name ,
-                    UnitPrice = x.UnitPrice ,
                     CategoryId = x.CategoryId ,
                     Code = x.Code ,
                     Picture = x.Picture ,
-                    IsInStock = x.IsInStock ,
                     CreationDate = x.CreationDate.ToFarsi()
                 });
 
@@ -74,7 +70,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             if (searchModel.CategoryId != 0)
                 query = query.Where(x => x.CategoryId == searchModel.CategoryId);
 
-            return query.OrderByDescending(x => x.Id).ToList();
+            return query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
         }
     }
 }

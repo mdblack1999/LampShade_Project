@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InventoryManagement.Application.Contract.Inventory
 {
-    public interface IInventoryApplication 
+    public interface IInventoryApplication
     {
         OperationResult Create(CreateInventory command);
         OperationResult Edit(EditInventory command);
@@ -11,7 +11,8 @@ namespace InventoryManagement.Application.Contract.Inventory
         OperationResult Reduce(ReduceInventory command);
         OperationResult Reduce(List<ReduceInventory> command);
         EditInventory GetDetails(long id);
-        List<inventoryViewModel> search(InventorySearchModel searchModel);
+        List<inventoryViewModel> Search(InventorySearchModel searchModel);
+        List<InventoryOperationViewModel> GetOperationsLog(long inventoryId);
 
     }
 }

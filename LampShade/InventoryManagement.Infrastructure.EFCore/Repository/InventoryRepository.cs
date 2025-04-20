@@ -1,4 +1,5 @@
-﻿using _0_Framework.Infrastructure;
+﻿using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 using InventoryManagement.Application.Contract.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +31,27 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
             {
                 Id = x.Id ,
                 ProductId = x.ProductId ,
-                UnitPrice = x.UnitPrice
+                UnitPrice = x.UnitPrice ,
+
 
             }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
+        {
+            var inventory = _inventoryContext.Inventory.FirstOrDefault(x => x.Id == inventoryId);
+            return inventory.Operations.Select(x => new InventoryOperationViewModel
+            {
+                Id = x.Id ,
+                Count = x.Count ,
+                CurrentCount = x.CurrentCount ,
+                Description = x.Description ,
+                Operation = x.Operation ,
+                OperationDate = x.OperationDate.ToFarsi() ,
+                Operator = "مدیر سیستم" ,
+                OperatorId = x.OperatorId ,
+                OrderId = x.OrderId
+            }).OrderByDescending(x=>x.Id).ToList();
         }
 
         public List<inventoryViewModel> Search(InventorySearchModel searchModel)
@@ -44,12 +63,13 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
                 ProductId = x.ProductId ,
                 UnitPrice = x.UnitPrice ,
                 InStock = x.InStock ,
-                CurrentCount = x.CalculateCurrentCount()
+                CurrentCount = x.CalculateCurrentCount() ,
+                CreationDate = x.CreationDate.ToFarsi()
             });
             if (searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
 
-            if (!searchModel.InStock)
+            if (searchModel.InStock)
                 query = query.Where(x => !x.InStock);
 
             var inventory = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();

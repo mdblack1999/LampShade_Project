@@ -46,7 +46,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                 EndDateGr = x.EndDate ,
                 DiscountRate = x.DiscountRate ,
                 ProductId = x.ProductId ,
-                Reason = x.Reason,
+                Reason = x.Reason ,
                 CreationDate = x.CreationDate.ToFarsi()
             });
 

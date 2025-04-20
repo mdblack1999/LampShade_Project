@@ -11,9 +11,7 @@ namespace ShopManagement.Domain.ProductAgg
         public string Code { get; private set; }
         public string ShortDescription { get; private set; }
         public string Description { get; private set; }
-        public double UnitPrice { get; private set; }
         public string Picture { get; private set; }
-        public bool IsInStock { get; private set; }
         public string PictureAlt { get; private set; }
         public string PictureTitle { get; private set; }
         public long CategoryId { get; private set; }
@@ -25,7 +23,7 @@ namespace ShopManagement.Domain.ProductAgg
 
         public Product(string name , string code , string shortDescription , string description ,
             string picture , string pictureAlt , string pictureTitle , long categoryId , string slug
-            , double unitPrice , string keywords , string metaDescription)
+            , string keywords , string metaDescription)
         {
             Name = name;
             Code = code;
@@ -35,15 +33,13 @@ namespace ShopManagement.Domain.ProductAgg
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             CategoryId = categoryId;
-            UnitPrice = unitPrice;
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
-            IsInStock = true;
         }
 
         public void Edit(string name , string code , string shortDescription , string description , string picture ,
-            string pictureAlt , string pictureTitle , long categoryId , string slug , double unitPrice ,
+            string pictureAlt , string pictureTitle , long categoryId , string slug ,
             string keywords , string metaDescription)
         {
             Name = name;
@@ -57,18 +53,9 @@ namespace ShopManagement.Domain.ProductAgg
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             CategoryId = categoryId;
-            UnitPrice = unitPrice;
             Slug = slug;
             Keywords = keywords;
             MetaDescription = metaDescription;
-        }
-        public void InStock()
-        {
-            IsInStock = true;
-        }
-        public void NotInStock()
-        {
-            IsInStock = false;
         }
     }
 

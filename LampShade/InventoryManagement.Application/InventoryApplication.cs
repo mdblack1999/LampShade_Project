@@ -48,6 +48,11 @@ namespace InventoryManagement.Application
             return _inventoryRepository.GetDetails(id);
         }
 
+        public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
+        {
+            return _inventoryRepository.GetOperationsLog(inventoryId);
+        }
+
         public OperationResult Increase(IncreaseInventory command)
         {
             var operation = new OperationResult();
@@ -90,7 +95,7 @@ namespace InventoryManagement.Application
             return operation.Succeeded();
         }
 
-        public List<inventoryViewModel> search(InventorySearchModel searchModel)
+        public List<inventoryViewModel> Search(InventorySearchModel searchModel)
         {
             return _inventoryRepository.Search(searchModel);
         }

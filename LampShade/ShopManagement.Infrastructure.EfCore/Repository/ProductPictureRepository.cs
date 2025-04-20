@@ -42,7 +42,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             });
             if (searchModel.ProductId != 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
-            return query.OrderByDescending(x => x.Id).ToList();
+            return query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
         }
     }
 }
