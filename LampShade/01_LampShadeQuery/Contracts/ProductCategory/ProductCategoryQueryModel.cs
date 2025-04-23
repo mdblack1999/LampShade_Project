@@ -1,4 +1,7 @@
-﻿namespace _01_LampShadeQuery.Contracts.ProductCategory
+﻿using _01_LampShadeQuery.Contracts.Product;
+using System.Collections.Generic;
+
+namespace _01_LampShadeQuery.Contracts.ProductCategory
 {
     public class ProductCategoryQueryModel
     {
@@ -9,7 +12,10 @@
         public string PictureTitle { get; set; }
         public bool IsRemoved { get; set; }
         public string SubText { get; set; }
+        public string Description { get; set; }
         public string Slug { get; set; }
-
+        public string Keywords { get; set; }
+        public string MetaDescription { get; set; }
+        public List<ProductQueryModel> Products { get; set; }
     }
 }

@@ -2,8 +2,10 @@ using InventoryManagement.Application.Contract.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging.Abstractions;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
@@ -58,11 +60,12 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
             return new JsonResult(result);
         }
 
-        public IActionResult OnGetIncrease(long id)
+        public IActionResult OnGetIncrease(long id,string name)
         {
             var command = new IncreaseInventory()
             {
-                InventoryId = id
+                InventoryId = id ,
+                Product = name
             };
             return Partial("Increase",command);
         }
@@ -73,11 +76,12 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
             return new JsonResult(result);
         }
 
-        public IActionResult OnGetReduce(long id)
+        public IActionResult OnGetReduce(long id , string name)
         {
             var command = new ReduceInventory()
             {
-                InventoryId = id
+                InventoryId = id,
+                Product = name
             };
             return Partial("Reduce" , command);
         }   

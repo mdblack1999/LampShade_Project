@@ -1,11 +1,4 @@
 
-/**
-* Theme: Moltran Admin Template
-* Author: Coderthemes
-* SweetAlert - 
-* Usage: $.SweetAlert.methodname
-*/
-
 !function($) {
     "use strict";
 

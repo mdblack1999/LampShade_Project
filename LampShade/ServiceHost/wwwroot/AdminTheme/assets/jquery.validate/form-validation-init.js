@@ -1,10 +1,4 @@
 
-/**
-* Theme: Moltran Admin Template
-* Author: Coderthemes
-* Form Validator
-*/
-
 !function($) {
     "use strict";
 

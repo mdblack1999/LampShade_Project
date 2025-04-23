@@ -1,9 +1,4 @@
 
-/**
-* Theme: Moltran Admin Template
-* Author: Coderthemes
-* Code Editors pages
-*/
 
 !function($) {
     "use strict";

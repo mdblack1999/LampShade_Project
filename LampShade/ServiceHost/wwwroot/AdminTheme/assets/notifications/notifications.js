@@ -1,10 +1,4 @@
 
-/**
-* Theme: Moltran Admin Template
-* Author: Coderthemes
-* Notification
-*/
-
 !function($) {
     "use strict";
 

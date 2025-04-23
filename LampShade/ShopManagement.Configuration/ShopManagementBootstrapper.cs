@@ -1,4 +1,5 @@
-﻿using _01_LampShadeQuery.Contracts.ProductCategory;
+﻿using _01_LampShadeQuery.Contracts.Product;
+using _01_LampShadeQuery.Contracts.ProductCategory;
 using _01_LampShadeQuery.Contracts.Slide;
 using _01_LampShadeQuery.Query;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace ShopManagement.Configuration
 
             //Query For ProductCategory UI
             services.AddScoped<IProductCategoryQuery , ProductCategoryQuery>();
+            //Query For Latest Arrivals UI
+            services.AddScoped<IProductQuery , ProductQuery>();
 
 
 
