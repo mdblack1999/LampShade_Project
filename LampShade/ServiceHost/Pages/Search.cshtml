@@ -73,10 +73,11 @@
                                                         {
                                                             <div class="single-grid-product__label">
                                                                 <span class="sale">-@product.DiscountRate%</span>
+                                                                <span class="new">تخفیف</span>
                                                             </div>
                                                         }
                                                         <a asp-page="/Product">
-                                                            <img src="@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
+                                                            <img src="~/ProductPictures/@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
                                                         </a>
                                                     </div>
                                                     <div class="single-grid-product__content">

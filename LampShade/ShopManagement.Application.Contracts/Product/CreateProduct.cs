@@ -19,7 +19,7 @@ namespace ShopManagement.Application.Contracts.Product
         public string ShortDescription { get; set; }
         public string Description { get; set; }
 
-        [MaxFileSize(3 * 1024 * 1024 , ErrorMessage = ValidationMessages.MaxFileSize)]
+        [MaxFileSize(2 * 1024 * 1024 , ErrorMessage = ValidationMessages.MaxFileSize)]
         [FileExtensionLimitation(new[] { "jpeg" , "jpg" , "png" } , ErrorMessage = ValidationMessages.IsInValidFileFormat)]
         public IFormFile Picture { get; set; }
 

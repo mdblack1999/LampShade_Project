@@ -22,11 +22,17 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             return _context.ProductPicture.Select(x => new EditProductPicture
             {
                 Id = id ,
-                Picture = x.Picture ,
                 PictureAlt = x.PictureAlt ,
                 PictureTitle = x.PictureTitle ,
                 ProductId = x.ProductId
             }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public ProductPicture GetWithProductAndCategory(long id)
+        {
+            return _context.ProductPicture.Include(x => x.Product)
+                .ThenInclude(x => x.Category)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)
@@ -36,9 +42,9 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                 Id = x.Id ,
                 Picture = x.Picture ,
                 CreationDate = x.CreationDate.ToFarsi() ,
-                Product = x.Product.Name,
-                ProductId = x.ProductId,
-                IsRemoved=x.IsRemoved
+                Product = x.Product.Name ,
+                ProductId = x.ProductId ,
+                IsRemoved = x.IsRemoved
             });
             if (searchModel.ProductId != 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
