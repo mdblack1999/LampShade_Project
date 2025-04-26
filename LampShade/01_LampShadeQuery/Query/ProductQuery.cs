@@ -7,6 +7,7 @@ using ShopManagement.Infrastructure.EfCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 
 namespace _01_LampShadeQuery.Query
@@ -37,6 +38,7 @@ namespace _01_LampShadeQuery.Query
             var product = _context.Products
                 .Include(x => x.Category)
                 .Include(x => x.ProductPictures)
+                .Include(x => x.Comments)
                 .Select(x => new ProductQueryModel
                 {
                     Id = x.Id ,
@@ -52,6 +54,7 @@ namespace _01_LampShadeQuery.Query
                     Keywords = x.Keywords ,
                     MetaDescription = x.MetaDescription ,
                     ShortDescription = x.ShortDescription ,
+                    Comments = MapComments(x.Comments) ,
                     Pictures = MapProductPictures(x.ProductPictures)
                 }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
@@ -78,6 +81,17 @@ namespace _01_LampShadeQuery.Query
 
 
             return product;
+        }
+
+        private static List<CommentQueryModel> MapComments(List<Comment> xComments)
+        {
+            return xComments.Where(x => x.Status == Comment.CommentStatus.Confirmed)
+                .Select(x => new CommentQueryModel
+                {
+                    Id = x.Id ,
+                    Name = x.Name ,
+                    Message = x.Message
+                }).OrderByDescending(x => x.Id).ToList();
         }
 
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)

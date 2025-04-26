@@ -5,10 +5,12 @@ using _01_LampShadeQuery.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
+using ShopManagement.Application.Contracts.Comment;
 using ShopManagement.Application.Contracts.Product;
 using ShopManagement.Application.Contracts.ProductCategory;
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagement.Application.Contracts.Slide;
+using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -33,6 +35,10 @@ namespace ShopManagement.Configuration
             //Register Product-Picture
             services.AddScoped<IProductPictureApplication , ProductPictureApplication>();
             services.AddScoped<IProductPictureRepository , ProductPictureRepository>();
+
+            //Register Comment
+            services.AddScoped<ICommentRepository , CommentRepository>();
+            services.AddScoped<ICommentApplication , CommentApplication>();
 
             //Register Slide
             services.AddScoped<ISlideApplication , SlideApplication>();
