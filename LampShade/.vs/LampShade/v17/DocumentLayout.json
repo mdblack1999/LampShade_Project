@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\product.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\product.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\01_lampshadequery\\query\\productquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|solutionrelative:01_lampshadequery\\query\\productquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\01_lampshadequery\\contracts\\product\\productquerymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|solutionrelative:01_lampshadequery\\contracts\\product\\productquerymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +43,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductQueryModel.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Contracts\\Product\\ProductQueryModel.cs",
+              "RelativeDocumentMoniker": "01_LampShadeQuery\\Contracts\\Product\\ProductQueryModel.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Contracts\\Product\\ProductQueryModel.cs",
+              "RelativeToolTip": "01_LampShadeQuery\\Contracts\\Product\\ProductQueryModel.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAowBoAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T13:58:51.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductQuery.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Query\\ProductQuery.cs",
+              "RelativeDocumentMoniker": "01_LampShadeQuery\\Query\\ProductQuery.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Query\\ProductQuery.cs",
+              "RelativeToolTip": "01_LampShadeQuery\\Query\\ProductQuery.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFcAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T13:15:55.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Product.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Product.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Product.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Product.cshtml",
+              "RelativeToolTip": "ServiceHost\\Pages\\Product.cshtml",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGcAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T12:57:55.791Z",
+              "EditorCaption": ""
             }
           ]
         },
