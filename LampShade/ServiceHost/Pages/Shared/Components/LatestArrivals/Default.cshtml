@@ -48,14 +48,14 @@
                                                 <span class="new">جدید</span>
                                             }
                                         </div>
-                                        <a href="single-product.html">
+                                        <a asp-page="/Product">
                                             <img src="@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
-                                            @* <img src="~/Theme/assets/img/products/1_1-600x800.jpg" class="img-fluid" alt=""> *@
+                                            @* <img src="~/Theme/assets/img/Products/1_1-600x800.jpg" class="img-fluid" alt=""> *@
                                         </a>
                                     </div>
                                     <div class="single-grid-product__content">
                                         <div class="single-grid-product__category-rating">
-                                            <span class="category"><a href="shop-left-sidebar.html">@product.Category</a></span>
+                                            <span class="category"><a asp-page="/ProductCategory">@product.Category</a></span>
                                             <span class="rating">
                                                 <i class="ion-android-star active"></i>
                                                 <i class="ion-android-star active"></i>
@@ -65,7 +65,7 @@
                                             </span>
                                         </div>
                                         <h3 class="single-grid-product__title">
-                                            <a href="single-product.html"> @product.Name</a>
+                                            <a asp-page="/Product"> @product.Name</a>
                                         </h3>
                                         <p class="single-grid-product__price">
                                             @if (product.HasDiscount)

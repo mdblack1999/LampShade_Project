@@ -2,8 +2,6 @@
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagement.Domain.ProductPictureAgg;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application
 {
@@ -22,9 +20,9 @@ namespace ShopManagement.Application
             if (_productPictureRepository.Exists(x => x.Picture == command.Picture && x.ProductId == command.ProductId))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var productpictrure = new ProductPicture(command.ProductId , command.Picture , command.PictureAlt
+            var productPicture = new ProductPicture(command.ProductId , command.Picture , command.PictureAlt
                 , command.PictureTitle);
-            _productPictureRepository.Create(productpictrure);
+            _productPictureRepository.Create(productPicture);
             _productPictureRepository.SaveChanges();
             return operation.Succeeded();
 

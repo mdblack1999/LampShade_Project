@@ -196,15 +196,18 @@ jQuery.validator.addMethod("maxFileSize",
     });
 jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
 
-//jQuery.validator.addMethod("maxFileSize",
-//    function (value, element, params) {
-//        var size = element.files[0].size;
-//        var maxSize = 3 * 1024 * 1024;
-//        debugger;
-//        if (size > maxSize)
-//            return false;
-//        else {
-//            return true;
-//        }
-//    });
-//jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
+jQuery.validator.addMethod("FileExtensionLimit",
+    function (value, element, params) {
+    var allowedExtensions = ['.jpg', '.jpeg', '.png'];
+    var fileName = element.files[0].name;
+    var extension = fileName.substr(fileName.lastIndexOf('.')).toLowerCase();
+
+    if (allowedExtensions.indexOf(extension) === -1) {
+        return false; 
+    }
+    return true;
+}, "فرمت فایل باید jpg، jpeg یا png باشد.");
+
+jQuery.validator.unobtrusive.adapters.addBool("FileExtensionLimit");
+
+

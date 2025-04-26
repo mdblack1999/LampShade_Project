@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DiscountManagement.Infrastructure.EFCore.Repository
 {
-    public class CustomerDiscountRepository : RepositoryBase<long , CustomerDiscount>, ICustomerDsicountRepository
+    public class CustomerDiscountRepository : RepositoryBase<long , CustomerDiscount>, ICustomerDiscountRepository
     {
         private readonly DiscountContext _context;
         private readonly ShopContext _shopContext;

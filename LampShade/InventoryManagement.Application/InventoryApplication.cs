@@ -95,7 +95,7 @@ namespace InventoryManagement.Application
             return operation.Succeeded();
         }
 
-        public List<inventoryViewModel> Search(InventorySearchModel searchModel)
+        public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
             return _inventoryRepository.Search(searchModel);
         }

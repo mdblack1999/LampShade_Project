@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DiscountManagement.Domain.CustomerDiscountAgg
 {
-    public interface ICustomerDsicountRepository : IRepository<long , CustomerDiscount>
+    public interface ICustomerDiscountRepository : IRepository<long , CustomerDiscount>
     {
         EditCustomerDiscount GetDetails(long id);
         List<CustomerDiscountViewModel> Search(CustomerDiscountSearchModel searchModel);

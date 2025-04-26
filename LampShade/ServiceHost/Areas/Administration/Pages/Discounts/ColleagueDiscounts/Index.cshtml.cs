@@ -18,9 +18,9 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
         private readonly IProductApplication _productApplication;
         private readonly IColleagueDiscountApplication _colleagueDiscountApplication;
 
-        public IndexModel(IProductApplication ProductApplication , IColleagueDiscountApplication colleagueDiscountApplication)
+        public IndexModel(IProductApplication productApplication , IColleagueDiscountApplication colleagueDiscountApplication)
         {
-            _productApplication = ProductApplication;
+            _productApplication = productApplication;
             _colleagueDiscountApplication = colleagueDiscountApplication;
         }
 
@@ -47,9 +47,9 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
 
         public IActionResult OnGetEdit(long id)
         {
-            var colleagueDisscount = _colleagueDiscountApplication.GetDetails(id);
-            colleagueDisscount.Products = _productApplication.GetProducts();
-            return Partial("Edit" , colleagueDisscount);
+            var colleagueDiscount = _colleagueDiscountApplication.GetDetails(id);
+            colleagueDiscount.Products = _productApplication.GetProducts();
+            return Partial("Edit" , colleagueDiscount);
         }
 
         public JsonResult OnPostEdit(EditColleagueDiscount command)

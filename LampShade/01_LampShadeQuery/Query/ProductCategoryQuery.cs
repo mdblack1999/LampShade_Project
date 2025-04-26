@@ -41,12 +41,12 @@ namespace _01_LampShadeQuery.Query
 
         public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
         {
-            var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+            var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId , x.UnitPrice , }).ToList();
             var discounts = _discountContext.CustomerDiscounts
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId }).AsNoTracking().ToList();
             var categories = _context.ProductCategories.Include(x => x.Products)
-                 .ThenInclude(x => x.Category)
+                 .ThenInclude(x => x.Category).AsSplitQuery()
                  .Select(x => new ProductCategoryQueryModel
                  {
                      Id = x.Id ,
@@ -100,7 +100,7 @@ namespace _01_LampShadeQuery.Query
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).AsNoTracking().ToList();
             var category = _context.ProductCategories.Include(x => x.Products)
-                 .ThenInclude(x => x.Category)
+                 .ThenInclude(x => x.Category).AsSplitQuery()
                  .Select(x => new ProductCategoryQueryModel
                  {
                      Id = x.Id ,

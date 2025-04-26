@@ -5,11 +5,11 @@ namespace ServiceHost.ViewComponents
 {
     public class MenuViewComponent : ViewComponent
     {
-        private readonly IProductCategoryQuery _productCategoryQuery;
+        public IProductCategoryQuery ProductCategoryQuery { get; }
 
         public MenuViewComponent(IProductCategoryQuery productCategoryQuery)
         {
-            _productCategoryQuery = productCategoryQuery;
+            ProductCategoryQuery = productCategoryQuery;
         }
 
         public IViewComponentResult Invoke()

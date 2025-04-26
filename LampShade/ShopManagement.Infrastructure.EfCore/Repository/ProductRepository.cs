@@ -16,6 +16,11 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             _context = context;
         }
 
+        public Product GetProductWithCategory(long id)
+        {
+            return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+        }
+
         public EditProduct GetDetails(long id)
         {
             return _context.Products.Select(x => new EditProduct
@@ -30,7 +35,6 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                 MetaDescription = x.MetaDescription ,
                 PictureAlt = x.PictureAlt ,
                 PictureTitle = x.PictureTitle ,
-                Picture = x.Picture ,
                 ShortDescription = x.ShortDescription
 
             }).FirstOrDefault(x => x.Id == id);
@@ -49,7 +53,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             var query = _context.Products
-                .Include(x => x.Category)
+                .Include(x => x.Category).AsSplitQuery()
                 .Select(x => new ProductViewModel
                 {
                     Id = x.Id ,

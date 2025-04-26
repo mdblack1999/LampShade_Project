@@ -2,13 +2,9 @@
 {
     public class OperationResult
     {
-        public bool IsSuccedded { get; set; }
+        public bool IsSuccedded { get; set; } = false;
         public string Message { get; set; }
 
-        public OperationResult()
-        {
-            IsSuccedded = false;
-        }
         public OperationResult Succeeded(string message = "عملیات با موفقیت انجام شد")
         {
             IsSuccedded = true;

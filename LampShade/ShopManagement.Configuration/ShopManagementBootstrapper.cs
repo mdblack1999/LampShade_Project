@@ -20,7 +20,7 @@ namespace ShopManagement.Configuration
 {
     public class ShopManagementBootstrapper
     {
-        public static void Configure(IServiceCollection services , string ConnectionString)
+        public static void Configure(IServiceCollection services , string connectionString)
         {
             //Register Product-Category
             services.AddScoped<IProductCategoryApplication , ProductCategoryApplication>();
@@ -48,11 +48,11 @@ namespace ShopManagement.Configuration
 
 
 
-            //services.AddDbContext<ShopContext>(x => x.UseSqlServer(ConnectionString));
+            //services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
             services.AddDbContextPool<ShopContext>(options =>
-                options.UseSqlServer(ConnectionString , sqlOptions =>
+                options.UseSqlServer(connectionString , sqlOptions =>
                 {
-                    sqlOptions.EnableRetryOnFailure(); // برای هندل خطاهای موقتی دیتابیس
+                    sqlOptions.EnableRetryOnFailure();
                 }));
         }
     }

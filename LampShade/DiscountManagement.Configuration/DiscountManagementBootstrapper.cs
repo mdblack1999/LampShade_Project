@@ -10,13 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiscountManagement.Configuration
 {
-    public class DiscountManagementBootstraper
+    public class DiscountManagementBootstrapper
     {
         public static void Configure(IServiceCollection services , string connectionString)
         {
             //Register Customer Discount
             services.AddScoped<ICustomerDiscountApplication , CustomerDiscountApplication>();
-            services.AddScoped<ICustomerDsicountRepository , CustomerDiscountRepository>();
+            services.AddScoped<ICustomerDiscountRepository , CustomerDiscountRepository>();
 
             //Register Colleague Discount
             services.AddScoped<IColleagueDiscountApplication , ColleagueDiscountApplication>();

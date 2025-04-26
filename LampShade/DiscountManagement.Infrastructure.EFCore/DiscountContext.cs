@@ -17,8 +17,8 @@ namespace DiscountManagement.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var assemly = typeof(CustomerDiscountMapping).Assembly;
-            modelBuilder.ApplyConfigurationsFromAssembly(assemly);
+            var assembly = typeof(CustomerDiscountMapping).Assembly;
+            modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
             base.OnModelCreating(modelBuilder);
         }

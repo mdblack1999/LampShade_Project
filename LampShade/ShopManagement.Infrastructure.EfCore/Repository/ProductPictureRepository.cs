@@ -31,7 +31,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
 
         public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)
         {
-            var query = _context.ProductPicture.Include(x => x.Product).Select(x => new ProductPictureViewModel
+            var query = _context.ProductPicture.Include(x => x.Product).AsSplitQuery().Select(x => new ProductPictureViewModel
             {
                 Id = x.Id ,
                 Picture = x.Picture ,

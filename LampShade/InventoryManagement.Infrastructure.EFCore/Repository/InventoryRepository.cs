@@ -54,10 +54,10 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
             }).OrderByDescending(x=>x.Id).ToList();
         }
 
-        public List<inventoryViewModel> Search(InventorySearchModel searchModel)
+        public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
             var products = _shopContext.Products.Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
-            var query = _inventoryContext.Inventory.Select(x => new inventoryViewModel
+            var query = _inventoryContext.Inventory.Select(x => new InventoryViewModel
             {
                 Id = x.Id ,
                 ProductId = x.ProductId ,
@@ -72,7 +72,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
             if (searchModel.InStock)
                 query = query.Where(x => !x.InStock);
 
-            var inventory = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+            List<InventoryViewModel> inventory = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
 
             inventory.ForEach(item =>
               item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name);

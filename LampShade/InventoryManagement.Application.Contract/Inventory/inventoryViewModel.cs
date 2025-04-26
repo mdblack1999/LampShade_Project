@@ -2,7 +2,7 @@
 
 namespace InventoryManagement.Application.Contract.Inventory
 {
-    public class inventoryViewModel
+    public class InventoryViewModel
     {
         public long Id { get; set; }
         public long ProductId { get; set; }

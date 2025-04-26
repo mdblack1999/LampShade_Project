@@ -2,10 +2,8 @@ using InventoryManagement.Application.Contract.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging.Abstractions;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
@@ -14,15 +12,15 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         [TempData]
         public string Message { get; set; }
         public InventorySearchModel SearchModel;
-        public List<inventoryViewModel> Inventory;
+        public List<InventoryViewModel> Inventory;
         public SelectList Products;
 
         private readonly IProductApplication _productApplication;
         private readonly IInventoryApplication _inventoryApplication;
 
-        public IndexModel(IProductApplication ProductApplication , IInventoryApplication inventoryApplication)
+        public IndexModel(IProductApplication productApplication , IInventoryApplication inventoryApplication)
         {
-            _productApplication = ProductApplication;
+            _productApplication = productApplication;
             _inventoryApplication = inventoryApplication;
         }
 

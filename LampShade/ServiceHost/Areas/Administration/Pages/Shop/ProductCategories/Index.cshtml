@@ -1,5 +1,5 @@
 ﻿@page
-@model ServiceHost.Areas.Administration.Pages.Shop.ProductCategoreis.IndexModel
+@model ServiceHost.Areas.Administration.Pages.Shop.ProductCategories.IndexModel
 @{
 }
 @{
@@ -62,7 +62,7 @@
                                     <tr>
                                         <td class="text-center">@item.Id</td>
                                         <td class="text-center">
-                                            <img src="@item.Picture" style="width: 70px; height: 70px" />
+                                            <img src="~/ProductPictures/@item.Picture" style="width: 70px; height: 70px" alt="@item.Name"/>
                                         </td>
                                         <td class="text-center">@item.Name</td>
                                         <td class="text-center">@item.CreationDate</td>
