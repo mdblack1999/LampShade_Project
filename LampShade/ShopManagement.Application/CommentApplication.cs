@@ -2,7 +2,6 @@
 using _0_Framework.Application;
 using ShopManagement.Application.Contracts.Comment;
 using ShopManagement.Domain.CommentAgg;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application
 {
@@ -57,6 +56,18 @@ namespace ShopManagement.Application
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
             comment.Spam();
+            _commentRepository.SaveChanges();
+            return operation.Succeeded();
+        }
+
+        public OperationResult Pending(long id)
+        {
+            var operation = new OperationResult();
+            var comment = _commentRepository.Get(id);
+            if (comment == null)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            comment.Pending();
             _commentRepository.SaveChanges();
             return operation.Succeeded();
         }

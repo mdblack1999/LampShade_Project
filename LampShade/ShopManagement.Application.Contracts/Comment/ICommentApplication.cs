@@ -9,6 +9,7 @@ namespace ShopManagement.Application.Contracts.Comment
         OperationResult Confirm(long id);
         OperationResult Cancel(long id);
         OperationResult Spam(long id);
+        OperationResult Pending(long id);
         List<CommentViewModel> Search(CommentSearchModel searchModel);
 
     }

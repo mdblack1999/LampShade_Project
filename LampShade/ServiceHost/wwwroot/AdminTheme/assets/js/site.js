@@ -210,4 +210,12 @@ jQuery.validator.addMethod("FileExtensionLimit",
 
 jQuery.validator.unobtrusive.adapters.addBool("FileExtensionLimit");
 
+$.notifyDefaults({
+    placement: { from: "top", align: "left" },
+    delay: 4000,
+    animate: {
+        enter: 'animated fadeInDown',
+        exit: 'animated fadeOutUp'
+    }
+});
 

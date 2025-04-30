@@ -1,6 +1,6 @@
 ﻿@page
 @using ShopManagement.Application.Contracts.Comment
-@model ServiceHost.Areas.Administration.Pages.Shop.Comment.IndexModel
+@model ServiceHost.Areas.Administration.Pages.Shop.Comments.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
     ViewData["title"] = "مدیریت کامنت ها";
@@ -22,7 +22,7 @@
                 <form class="form-inline" role="form" method="get">
                     <div class="form-group">
                         <label class="sr-only" asp-for="SearchModel.Name"></label>
-                        <input class="form-control" asp-for="SearchModel.Name" placeholder="نام مشتری">
+                        <input class="form-control" asp-for="SearchModel.Name" placeholder="نام کاربر">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" asp-for="SearchModel.Email"></label>
@@ -71,18 +71,22 @@
                                             @if (item.Status == CommentViewModel.CommentStatus.Canceled)
                                             {
                                                 <span class="text-danger">کنسل شده</span>
+                                                <i class="fa fa-times-circle"></i>
                                             }
                                             @if (item.Status == CommentViewModel.CommentStatus.Pending)
                                             {
-                                                <span class="text-info">در انتظار</span>
+                                                <span class="text-warning">در انتظار</span>
+                                                <i class="fa fa-info-circle"></i>
                                             }
                                             @if (item.Status == CommentViewModel.CommentStatus.Confirmed)
                                             {
                                                 <span class="text-success">تایید شده</span>
+                                                <i class="fa fa-check"></i>
                                             }
                                             @if (item.Status == CommentViewModel.CommentStatus.Spam)
                                             {
                                                 <span class="text-danger">اسپم</span>
+                                                <i class="fa fa-trash"></i>
                                             }
                                         </td>
                                         <td class="text-center">
@@ -90,46 +94,46 @@
                                             {
                                                 case CommentViewModel.CommentStatus.Pending:
                                                     <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
-                                                       class="btn btn-warning btn-rounded waves-effect waves-light m-b-5">
+                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
                                                         کنسل
                                                     </a>
                                                     <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
                                                        class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
+                                                        تایید و انتشار
                                                     </a>
                                                     <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
+                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
                                                         اسپم
                                                     </a>
                                                     break;
                                                 case CommentViewModel.CommentStatus.Confirmed:
                                                     <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
-                                                       class="btn btn-warning btn-rounded waves-effect waves-light m-b-5">
+                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
                                                         کنسل
                                                     </a>
                                                     <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
+                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
                                                         اسپم
                                                     </a>
                                                     break;
                                                 case CommentViewModel.CommentStatus.Canceled:
                                                     <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
                                                        class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
+                                                        تایید و انتشار
                                                     </a>
                                                     <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
+                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
                                                         اسپم
                                                     </a>
                                                     break;
                                                 case CommentViewModel.CommentStatus.Spam:
                                                     <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
                                                        class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
+                                                        تایید و انتشار
                                                     </a>
-                                                    <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
+                                                    <a asp-page="./Index" asp-page-handler="Pending" asp-route-id="@item.Id"
                                                        class="btn btn-warning btn-rounded waves-effect waves-light m-b-5">
-                                                        کنسل
+                                                        در انتظار
                                                     </a>
                                                     break;
                                             }

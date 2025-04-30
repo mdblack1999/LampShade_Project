@@ -35,5 +35,7 @@ namespace ShopManagement.Domain.CommentAgg
         public void Confirm() => Status = CommentStatus.Confirmed;
         public void Cancel() => Status = CommentStatus.Canceled;
         public void Spam() => Status = CommentStatus.Spam;
+        public void Pending() => Status = CommentStatus.Pending;
+
     }
 }

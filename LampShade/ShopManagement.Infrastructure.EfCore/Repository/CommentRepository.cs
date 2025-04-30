@@ -29,7 +29,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
                     Name = x.Name ,
                     ProductId = x.ProductId ,
                     ProductName = x.Product.Name ,
-                    CommentDate = x.CreationDate.ToFarsi()
+                    CommentDate = x.CreationDate.ToFarsiFull()
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));

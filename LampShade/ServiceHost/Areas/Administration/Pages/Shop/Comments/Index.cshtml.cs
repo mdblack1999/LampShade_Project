@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using ShopManagement.Application.Contracts.Comment;
 
-namespace ServiceHost.Areas.Administration.Pages.Shop.Comment
+namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
 {
     public class IndexModel : PageModel
     {
@@ -41,9 +41,20 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comment
             Message = result.Message;
             return RedirectToPage("./Index");
         }
+
         public IActionResult OnGetSpam(long id)
         {
             var result = _commentApplication.Spam(id);
+            if (result.IsSuccedded)
+                return RedirectToPage("./Index");
+
+            Message = result.Message;
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnGetPending(long id)
+        {
+            var result = _commentApplication.Pending(id);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
