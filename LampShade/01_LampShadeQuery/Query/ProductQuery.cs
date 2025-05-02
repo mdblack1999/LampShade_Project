@@ -79,7 +79,6 @@ namespace _01_LampShadeQuery.Query
                 }
             }
 
-
             return product;
         }
 
@@ -108,11 +107,15 @@ namespace _01_LampShadeQuery.Query
 
         public List<ProductQueryModel> GetLatestArrivals()
         {
-            var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+            var inventory = _inventoryContext.Inventory
+                .Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+
             var discounts = _discountContext.CustomerDiscounts
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId }).AsNoTracking().ToList();
-            var products = _context.Products.Include(x => x.Category).AsSplitQuery()
+
+            var products = _context.Products
+                .Include(x => x.Category).AsSplitQuery()
                  .Select(product => new ProductQueryModel
                  {
                      Id = product.Id ,
@@ -150,11 +153,13 @@ namespace _01_LampShadeQuery.Query
 
             var inventory = _inventoryContext.Inventory
                 .Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+
             var discounts = _discountContext.CustomerDiscounts
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).AsNoTracking().ToList();
 
-            var query = _context.Products.Include(x => x.Category).AsSplitQuery()
+            var query = _context.Products
+                .Include(x => x.Category).AsSplitQuery()
                  .Select(product => new ProductQueryModel
                  {
                      Id = product.Id ,
@@ -175,12 +180,16 @@ namespace _01_LampShadeQuery.Query
 
             foreach (var product in products)
             {
-                var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+                var productInventory = inventory
+                    .FirstOrDefault(x => x.ProductId == product.Id);
                 if (productInventory != null)
                 {
                     var price = productInventory.UnitPrice;
                     product.Price = price.ToMoney();
-                    var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+
+                    var discount = discounts
+                        .FirstOrDefault(x => x.ProductId == product.Id);
+
                     if (discount != null)
                     {
                         int discountRate = discount.DiscountRate;

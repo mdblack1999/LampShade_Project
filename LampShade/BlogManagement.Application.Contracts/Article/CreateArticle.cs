@@ -33,6 +33,7 @@ namespace BlogManagement.Application.Contracts.Article
         public string Keywords { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MaxLength(500,ErrorMessage = ValidationMessages.MaxTextSize)]
         public string MetaDescription { get; set; }
 
         public string CanonicalAddress { get; set; }

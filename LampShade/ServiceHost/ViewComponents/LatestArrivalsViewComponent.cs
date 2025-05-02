@@ -1,5 +1,4 @@
 ﻿using _01_LampShadeQuery.Contracts.Product;
-using _01_LampShadeQuery.Contracts.ProductCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.ViewComponents
@@ -15,8 +14,8 @@ namespace ServiceHost.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var Products = _productQuery.GetLatestArrivals();
-            return View(Products);
+            var products = _productQuery.GetLatestArrivals();
+            return View(products);
         }
     }
 }

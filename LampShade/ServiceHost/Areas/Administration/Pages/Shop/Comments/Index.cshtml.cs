@@ -21,6 +21,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
         public void OnGet(CommentSearchModel searchModel)
         {
             Comments = _commentApplication.Search(searchModel);
+            SearchModel = searchModel;
         }
 
         public IActionResult OnGetConfirm(long id)

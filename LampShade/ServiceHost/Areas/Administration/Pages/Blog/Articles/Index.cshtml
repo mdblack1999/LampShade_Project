@@ -1,8 +1,6 @@
 ﻿@page
 @model ServiceHost.Areas.Administration.Pages.Blog.Articles.IndexModel
 @{
-}
-@{
     Layout = "Shared/_AdminLayout";
     ViewData["title"] = "مدیریت مقالات";
 }
@@ -26,7 +24,11 @@
                 <form class="form-inline" role="form" method="get">
                     <div class="form-group">
                         <label class="sr-only" asp-for="SearchModel.Title"></label>
-                        <input class="form-control" asp-for="SearchModel.Title" placeholder="عنوان مقاله">
+                        <input class="form-control" asp-for="SearchModel.Title" placeholder="عنوان مقاله..">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" asp-for="SearchModel.PublishDate"></label>
+                        <input class="form-control persianDateInput" asp-for="SearchModel.PublishDate" placeholder="تاریخ انتشار..">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" asp-for="SearchModel.CategoryId"></label>

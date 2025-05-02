@@ -95,10 +95,13 @@ namespace _01_LampShadeQuery.Query
 
         public ProductCategoryQueryModel GetProductCategoryWithProductsBy(string slug)
         {
-            var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+            var inventory = _inventoryContext.Inventory
+                .Select(x => new { x.ProductId , x.UnitPrice , }).AsNoTracking().ToList();
+
             var discounts = _discountContext.CustomerDiscounts
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).AsNoTracking().ToList();
+
             var category = _context.ProductCategories.Include(x => x.Products)
                  .ThenInclude(x => x.Category).AsSplitQuery()
                  .Select(x => new ProductCategoryQueryModel

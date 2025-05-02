@@ -30,7 +30,7 @@ namespace BlogManagement.Application
             var categorySlug = _articleCategoryRepository.GetSlugBy(command.CategoryId);
             var path = $"{categorySlug}/{slug}";
             var pictureName = _fileUploader.Upload(command.Picture , path);
-            var publishDate = command.PublishDate.ToGeorgianDateTime();
+            var publishDate = command.PublishDate.ToGeorgianDateTime().Date;
 
             var article = new Article(command.Title , command.ShortDescription , command.Description , pictureName ,
                 command.PictureAlt , command.PictureTitle , publishDate , slug , command.Keywords ,
@@ -54,13 +54,12 @@ namespace BlogManagement.Application
 
             var slug = command.Slug.Slugify();
             var path = $"{article.Category.Slug}/{slug}";
-            var pictureName = _fileUploader.Upload(command.Picture , path);
-            var publishDate = command.PublishDate.ToGeorgianDateTime();
+            var pictureName = _fileUploader.Upload(command.Picture, path);
+            var publishDate = command.PublishDate.ToGeorgianDateTime().Date;
 
-
-            article.Edit(command.Title , command.ShortDescription , command.Description , pictureName ,
-                command.PictureAlt , command.PictureTitle , publishDate , slug , command.Keywords ,
-                command.MetaDescription , command.CanonicalAddress , command.CategoryId);
+            article.Edit(command.Title, command.ShortDescription, command.Description, pictureName,
+                command.PictureAlt, command.PictureTitle, publishDate, slug, command.Keywords, command.MetaDescription,
+                command.CanonicalAddress, command.CategoryId);
 
             _articleRepository.SaveChanges();
             return operation.Succeeded();

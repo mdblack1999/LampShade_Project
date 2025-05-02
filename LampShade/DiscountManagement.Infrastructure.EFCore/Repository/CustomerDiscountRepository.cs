@@ -27,9 +27,9 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                 Id = x.Id ,
                 ProductId = x.ProductId ,
                 DiscountRate = x.DiscountRate ,
-                StartDate = x.StartDate.ToString() ,
-                EndDate = x.EndDate.ToString() ,
-                Reason = x.Reason
+                StartDate = x.StartDate.Date.ToString() ,
+                EndDate = x.EndDate.Date.ToString() ,
+                Reason = x.Reason,
 
             }).FirstOrDefault(x => x.Id == id);
         }

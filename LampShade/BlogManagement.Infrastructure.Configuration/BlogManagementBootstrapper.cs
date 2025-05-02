@@ -1,4 +1,7 @@
-﻿using BlogManagement.Application;
+﻿using _01_LampShadeQuery.Contracts.Article;
+using _01_LampShadeQuery.Contracts.ArticleCategory;
+using _01_LampShadeQuery.Query;
+using BlogManagement.Application;
 using BlogManagement.Application.Contracts.Article;
 using BlogManagement.Application.Contracts.ArticleCategory;
 using BlogManagement.Domain.ArticleAgg;
@@ -21,6 +24,12 @@ namespace BlogManagement.Infrastructure.Configuration
             //Register Article
             services.AddScoped<IArticleApplication , ArticleApplication>();
             services.AddScoped<IArticleRepository , ArticleRepository>();
+
+            //Register UI Article
+            services.AddScoped<IArticleQuery, ArticleQuery>();
+            services.AddScoped<IArticleCategoryQuery, ArticleCategoryQuery>();
+
+
 
             services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
         }

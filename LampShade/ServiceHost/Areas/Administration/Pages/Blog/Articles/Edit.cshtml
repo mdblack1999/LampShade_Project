@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model ServiceHost.Areas.Administration.Pages.Blog.Articles.EditModel
 @{
     Layout = "Shared/_AdminLayout";
@@ -17,7 +17,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="Command.Title" class="control-label">عنوان مقاله</label>
-                                <input type="text" class="form-control" asp-for="Command.Title" onchange="makeSlug('Command.Title', 'Command.Slug')">
+                                <input type="text" class="form-control" asp-for="Command.Title" onchange="makeSlug('Command_Title', 'Command_Slug')">
                                 <span asp-validation-for="Command.Title" class="error"></span>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="col-md-6">
                             <div class="form-group no-margin">
                                 <label asp-for="Command.ShortDescription" class="control-label">توضیحات کوتاه</label>
-                                <textarea class="form-control autogrow" asp-for="Command.ShortDescription" onchange="fillField('Command.ShortDescription', 'Command.MetaDescription')"
+                                <textarea class="form-control autogrow" asp-for="Command.ShortDescription" onchange="fillField('Command_ShortDescription', 'Command_MetaDescription')"
                                           style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
                                 <span asp-validation-for="Command.ShortDescription" class="error"></span>
                             </div>
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" asp-for="Command.Id" value="command.Id"/>
+                    <input type="hidden" asp-for="Command.Id"/>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">ویرایش</button>
                     <a asp-page="./Index" class="btn btn-dark waves-effect waves-light m-b-5">بازگشت</a>
                 </form>

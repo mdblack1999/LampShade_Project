@@ -13,6 +13,7 @@ namespace BlogManagement.Domain.ArticleAgg
         public string PictureAlt { get; private set; }
         public string PictureTitle { get; private set; }
         public DateTime PublishDate { get; private set; }
+        public int VisitCount { get; private set; }
         public string Slug { get; private set; }
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
@@ -38,9 +39,9 @@ namespace BlogManagement.Domain.ArticleAgg
             CategoryId = categoryId;
         }
 
-        public void Edit(string title , string shortDescription , string description , string picture ,
-            string pictureAlt , string pictureTitle, DateTime publishDate , string slug , string keywords , string metaDescription ,
-            string canonicalAddress , long categoryId)
+        public void Edit(string title, string shortDescription, string description,
+            string picture, string pictureAlt, string pictureTitle, DateTime publishDate, string slug,
+            string keywords, string metaDescription, string canonicalAddress, long categoryId)
         {
             Title = title;
             ShortDescription = shortDescription;
@@ -58,5 +59,6 @@ namespace BlogManagement.Domain.ArticleAgg
             CanonicalAddress = canonicalAddress;
             CategoryId = categoryId;
         }
+        public void IncreaseVisitCount() => VisitCount++;
     }
 }

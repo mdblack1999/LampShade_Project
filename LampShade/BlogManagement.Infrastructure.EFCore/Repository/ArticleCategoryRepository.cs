@@ -38,7 +38,8 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             return _context.ArticleCategories.Select(x => new ArticleCategoryViewModel
             {
                 Id = x.Id ,
-                Name = x.Name
+                Name = x.Name ,
+                ArticlesCount = x.Articles.Count
             }).AsNoTracking().ToList();
         }
 
@@ -49,15 +50,17 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel)
         {
-            var query = _context.ArticleCategories.
-                Select(x => new ArticleCategoryViewModel
+            var query = _context.ArticleCategories
+                .Include(x => x.Articles)
+                .Select(x => new ArticleCategoryViewModel
                 {
                     Id = x.Id ,
                     Name = x.Name ,
                     Description = x.Description ,
                     Picture = x.Picture ,
                     ShowOrder = x.ShowOrder ,
-                    CreationDate = x.CreationDate.ToFarsiFull()
+                    CreationDate = x.CreationDate.ToFarsiFull() ,
+                    ArticlesCount = x.Articles.Count
                 });
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))

@@ -37,6 +37,9 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
             if (!string.IsNullOrWhiteSpace(searchModel.Email))
                 query = query.Where(x => x.Email.Contains(searchModel.Email));
 
+            if (searchModel.Status.HasValue)
+                query = query.Where(x => x.Status == searchModel.Status.Value);
+
             return query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
         }
     }
