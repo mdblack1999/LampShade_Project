@@ -7,8 +7,9 @@ using ShopManagement.Infrastructure.EfCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ShopManagement.Domain.CommentAgg;
+using CommentManagement.Infrastructure.EFCore;
 using ShopManagement.Domain.ProductPictureAgg;
+using _01_LampShadeQuery.Contracts.Comment;
 
 namespace _01_LampShadeQuery.Query
 {
@@ -17,28 +18,29 @@ namespace _01_LampShadeQuery.Query
         private readonly InventoryContext _inventoryContext;
         private readonly DiscountContext _discountContext;
         private readonly ShopContext _context;
+        private readonly CommentContext _commentContext;
 
-        public ProductQuery(ShopContext context , InventoryContext inventoryContext , DiscountContext discountContext)
+        public ProductQuery(ShopContext context , InventoryContext inventoryContext , DiscountContext discountContext , CommentContext commentContext)
         {
             _context = context;
             _inventoryContext = inventoryContext;
             _discountContext = discountContext;
+            _commentContext = commentContext;
         }
 
 
-        public ProductQueryModel GetDetails(string slug)
+        public ProductQueryModel GetProductDetails(string slug)
         {
-            var inventory = _inventoryContext.Inventory.
-                Select(x => new { x.ProductId , x.UnitPrice , x.InStock }).AsNoTracking().ToList();
+            var inventory = _inventoryContext.Inventory.AsNoTracking()
+                .Select(x => new { x.ProductId , x.UnitPrice , x.InStock }).ToList();
 
             var discounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
-                .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).AsNoTracking().ToList();
+                .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now).AsNoTracking()
+                .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).ToList();
 
             var product = _context.Products
                 .Include(x => x.Category)
-                .Include(x => x.ProductPictures)
-                .Include(x => x.Comments)
+                .Include(x => x.ProductPictures).AsNoTracking()
                 .Select(x => new ProductQueryModel
                 {
                     Id = x.Id ,
@@ -54,9 +56,8 @@ namespace _01_LampShadeQuery.Query
                     Keywords = x.Keywords ,
                     MetaDescription = x.MetaDescription ,
                     ShortDescription = x.ShortDescription ,
-                    Comments = MapComments(x.Comments) ,
                     Pictures = MapProductPictures(x.ProductPictures)
-                }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
+                }).FirstOrDefault(x => x.Slug == slug);
 
             if (product == null)
                 return new ProductQueryModel();
@@ -78,19 +79,22 @@ namespace _01_LampShadeQuery.Query
                     product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
             }
-
-            return product;
-        }
-
-        private static List<CommentQueryModel> MapComments(List<Comment> xComments)
-        {
-            return xComments.Where(x => x.Status == Comment.CommentStatus.Confirmed)
+            product.Comments = _commentContext.Comments
+                .Where(x => x.Type == CommentType.ProductType)
+                .Where(x => x.OwnerRecordId == product.Id).AsNoTracking()
                 .Select(x => new CommentQueryModel
                 {
                     Id = x.Id ,
                     Name = x.Name ,
-                    Message = x.Message
-                }).OrderByDescending(x => x.Id).ToList();
+                    Message = x.Message,
+                    CreationDate = x.CreationDate.ToFarsiFull(),
+                    Status = (CommentStatusDto)x.Status
+                })
+                .Where(x => x.Status == CommentStatusDto.Confirmed) 
+                .OrderByDescending(x => x.Id)
+                .ToList();
+
+            return product;
         }
 
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)

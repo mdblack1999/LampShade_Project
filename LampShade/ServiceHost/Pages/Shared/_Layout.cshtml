@@ -4,7 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lampshapde Store</title>
+    @if (ViewData["Title"] != null)
+    {
+        <title>@ViewData["Title"] - فروشگاه لوازم دکوری</title>
+    }
+    else
+    {
+        <title>فروشگاه لوازم دکوری</title>
+    }
+    <meta name="Keywords" content="@ViewData["Keywords"]"/>
+    <meta name="description" content="@ViewData["MetaDescription"]" />
 
     <link href="~/Theme/assets/css/vendors.css" rel="stylesheet">
     <link href="~/Theme/assets/css/style.css" rel="stylesheet">
@@ -38,6 +47,7 @@
     <div id="scroll-top">
         <span>برو بالا</span><i class="ion-chevron-right"></i><i class="ion-chevron-right"></i>
     </div>
+    @await RenderSectionAsync("Scripts" , required: false)
 
     <script src="~/Theme/assets/js/vendors.js"></script>
     <script src="~/Theme/assets/js/active.js"></script>

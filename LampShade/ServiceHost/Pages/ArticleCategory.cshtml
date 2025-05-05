@@ -1,7 +1,9 @@
 ﻿@page "{id}"
 @model ServiceHost.Pages.ArticleCategoryModel
 @{
-    ViewData["Title"] = "مقالات";
+    ViewData["Title"] = Model.ArticleCategory.Name;
+    ViewData["Keywords"] = Model.ArticleCategory.Keywords;
+    ViewData["MetaDescription"] = Model.ArticleCategory.MetaDescription;
 }
 
 <div class="breadcrumb-area section-space--half">
@@ -93,7 +95,7 @@
                                 <div class="page-sidebar-wrapper">
                                     <div class="single-sidebar-widget">
 
-                                        <h4 class="single-sidebar-widget__title">گروه مقالات</h4>
+                                        <h3 class="single-sidebar-widget__title">گروه مقالات</h3>
                                         <ul class="single-sidebar-widget__category-list">
 
                                             @foreach (var category in Model.ArticleCategories)
@@ -108,7 +110,7 @@
                                     </div>
                                     <div class="single-sidebar-widget">
 
-                                        <h4 class="single-sidebar-widget__title">آخرین مقالات</h4>
+                                        <h3 class="single-sidebar-widget__title">آخرین مقالات</h3>
                                         <div class="block-container">
 
                                             @foreach (var article in Model.LatestArticles)

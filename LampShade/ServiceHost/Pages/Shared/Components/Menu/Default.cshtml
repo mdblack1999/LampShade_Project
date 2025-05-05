@@ -222,45 +222,42 @@
 
         <div class="offcanvas-inner-content">
             <div class="offcanvas-mobile-search-area">
+
                 <form action="#">
                     <input type="search" placeholder="جستجو ...">
                     <button type="submit">
                         <i class="fa fa-search"></i>
                     </button>
                 </form>
+
             </div>
             <nav class="offcanvas-navigation">
                 <ul>
                     <li class="">
                         <a asp-page="/Index">صفحه اصلی</a>
                     </li>
+
                     <li class="menu-item-has-children">
-                        <a href="#">محصولات</a>
+                        <a asp-page="./ProductCategory">محصولات</a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="blog-left-sidebar.html">دکوری</a>
-                            </li>
-                            <li>
-                                <a href="blog-right-sidebar.html">فضای نگهدرنده</a>
-                            </li>
-                            <li>
-                                <a href="blog-post-left-sidebar.html">صندلی </a>
-                            </li>
+                            @foreach (var category in Model.ProductCategories)
+                            {
+                                <li>
+                                    <a asp-page="./ProductCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                </li>
+                            }
                         </ul>
                     </li>
 
                     <li class="menu-item-has-children">
-                        <a href="#">مقالات</a>
+                        <a asp-page="./ArticleCategory">مقالات</a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="blog-left-sidebar.html">گروه مقاله 1</a>
-                            </li>
-                            <li>
-                                <a href="blog-right-sidebar.html">گروه مقاله 2</a>
-                            </li>
-                            <li>
-                                <a href="blog-post-left-sidebar.html">گروه مقاله 3 </a>
-                            </li>
+                            @foreach (var category in Model.ArticleCategories)
+                            {
+                                <li>
+                                    <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                </li>
+                            }
                         </ul>
                     </li>
                     <li class="">
@@ -276,10 +273,10 @@
                             <a href="#">پروفایل من </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="login-register.html">ثبت نام</a>
+                                    <a asp-page="./Register">ثبت نام</a>
                                 </li>
                                 <li>
-                                    <a href="login-register.html">وود</a>
+                                    <a asp-page="./Login">وود</a>
                                 </li>
                             </ul>
                         </li>
@@ -303,7 +300,6 @@
                         </ul>
                     </div>
                 </div>
-                <!--Off Canvas Widget Social Start-->
                 <div class="off-canvas-widget-social">
                     <a href="#" title="Facebook">
                         <i class="fa fa-facebook"></i>
@@ -321,9 +317,7 @@
                         <i class="fa fa-vimeo-square"></i>
                     </a>
                 </div>
-                <!--Off Canvas Widget Social End-->
             </div>
         </div>
     </div>
-
 </div>

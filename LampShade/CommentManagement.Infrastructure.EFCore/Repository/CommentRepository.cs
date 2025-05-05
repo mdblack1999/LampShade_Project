@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Infrastructure;
+using CommentManagement.Application.Contracts.Comment;
+using CommentManagement.Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
-using ShopManagement.Application.Contracts.Comment;
-using ShopManagement.Domain.CommentAgg;
 
-namespace ShopManagement.Infrastructure.EfCore.Repository
+namespace CommentManagement.Infrastructure.EFCore.Repository
 {
     public class CommentRepository : RepositoryBase<long , Comment>, ICommentRepository
     {
-        private readonly ShopContext _context;
-        public CommentRepository(ShopContext context) : base(context)
+        private readonly CommentContext _context;
+        public CommentRepository(CommentContext context) : base(context)
         {
             _context = context;
         }
@@ -19,17 +20,18 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
         public List<CommentViewModel> Search(CommentSearchModel searchModel)
         {
             var query = _context.Comments
-                .Include(x => x.Product)
                 .Select(x => new CommentViewModel
                 {
                     Id = x.Id ,
-                    Email = x.Email ,
-                    Status = (CommentViewModel.CommentStatus)x.Status ,
-                    Message = x.Message ,
                     Name = x.Name ,
-                    ProductId = x.ProductId ,
-                    ProductName = x.Product.Name ,
-                    CommentDate = x.CreationDate.ToFarsiFull()
+                    Email = x.Email ,
+                    Website = x.Website ,
+                    Message = x.Message.Substring(0 , Math.Min(x.Message.Length , 50)) + "..." ,
+                    OwnerRecordId = x.OwnerRecordId ,
+                    Type = x.Type ,
+                    CommentDate = x.CreationDate.ToFarsiFull() ,
+                    Status = (CommentViewModel.CommentStatus)x.Status,
+                    
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));

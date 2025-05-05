@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Application;
 
-namespace ShopManagement.Application.Contracts.Comment
+namespace CommentManagement.Application.Contracts.Comment
 {
     public interface ICommentApplication
     {
         OperationResult Add(AddComment command);
-        OperationResult Confirm(long id);
-        OperationResult Cancel(long id);
-        OperationResult Spam(long id);
-        OperationResult Pending(long id);
+        OperationResult ChangeStatus(long id , CommentViewModel.CommentStatus status);
         List<CommentViewModel> Search(CommentSearchModel searchModel);
-
     }
 }

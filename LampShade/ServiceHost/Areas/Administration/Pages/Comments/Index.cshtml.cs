@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using ShopManagement.Application.Contracts.Comment;
+using CommentManagement.Application.Contracts.Comment;
 
-namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
+namespace ServiceHost.Areas.Administration.Pages.Comments
 {
     public class IndexModel : PageModel
     {
@@ -26,7 +26,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
 
         public IActionResult OnGetConfirm(long id)
         {
-            var result = _commentApplication.Confirm(id);
+            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Confirmed);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -35,7 +35,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
         }
         public IActionResult OnGetCancel(long id)
         {
-            var result = _commentApplication.Cancel(id);
+            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Canceled);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -45,7 +45,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
 
         public IActionResult OnGetSpam(long id)
         {
-            var result = _commentApplication.Spam(id);
+            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Spam);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -55,7 +55,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Comments
 
         public IActionResult OnGetPending(long id)
         {
-            var result = _commentApplication.Pending(id);
+            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Pending);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
