@@ -73,14 +73,16 @@
                                     <tr>
                                         <td class="text-center">@item.Id</td>
                                         <td class="text-center">@item.Name</td>
-                                        @if (item.Type == 1)
-                                        {
-                                            <span class="text-success">محصولات</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="text-success">مقالات</span>
-                                        }
+                                        <td class="text-center">
+                                            @if (item.Type == 1)
+                                            {
+                                                <span class="text-success">محصولات</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-success">مقالات</span>
+                                            }
+                                        </td>
                                         <td class="text-center">@item.Email</td>
                                         <td class="text-center">@item.Message</td>
                                         <td class="text-center">@item.CommentDate</td>

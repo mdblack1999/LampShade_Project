@@ -26,7 +26,7 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
                     Name = x.Name ,
                     Email = x.Email ,
                     Website = x.Website ,
-                    Message = x.Message.Substring(0 , Math.Min(x.Message.Length , 50)) + "..." ,
+                    Message = x.Message,
                     OwnerRecordId = x.OwnerRecordId ,
                     Type = x.Type ,
                     CommentDate = x.CreationDate.ToFarsiFull() ,

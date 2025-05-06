@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\comments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\comments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0090D56-9C33-4EDA-8505-1915432C735C}|CommentManagement.Infrastructure.EFCore\\CommentManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\commentmanagement.infrastructure.efcore\\commenttools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0090D56-9C33-4EDA-8505-1915432C735C}|CommentManagement.Infrastructure.EFCore\\CommentManagement.Infrastructure.EFCore.csproj|solutionrelative:commentmanagement.infrastructure.efcore\\commenttools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0090D56-9C33-4EDA-8505-1915432C735C}|CommentManagement.Infrastructure.EFCore\\CommentManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\commentmanagement.infrastructure.efcore\\repository\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0090D56-9C33-4EDA-8505-1915432C735C}|CommentManagement.Infrastructure.EFCore\\CommentManagement.Infrastructure.EFCore.csproj|solutionrelative:commentmanagement.infrastructure.efcore\\repository\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.infrastructure.efcore\\migrations\\20250506233244_accountadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|solutionrelative:accountmanagement.infrastructure.efcore\\migrations\\20250506233244_accountadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 302,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,41 +38,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CommentTools.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\CommentManagement.Infrastructure.EFCore\\CommentTools.cs",
-              "RelativeDocumentMoniker": "CommentManagement.Infrastructure.EFCore\\CommentTools.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\CommentManagement.Infrastructure.EFCore\\CommentTools.cs",
-              "RelativeToolTip": "CommentManagement.Infrastructure.EFCore\\CommentTools.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T02:15:53.804Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Comments\\Index.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Comments\\Index.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Comments\\Index.cshtml",
-              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Comments\\Index.cshtml",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAAAFEAAABNAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-05T02:13:16.732Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CommentRepository.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\CommentManagement.Infrastructure.EFCore\\Repository\\CommentRepository.cs",
-              "RelativeDocumentMoniker": "CommentManagement.Infrastructure.EFCore\\Repository\\CommentRepository.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\CommentManagement.Infrastructure.EFCore\\Repository\\CommentRepository.cs",
-              "RelativeToolTip": "CommentManagement.Infrastructure.EFCore\\Repository\\CommentRepository.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAACAAAABGAAAA",
+              "Title": "20250506233244_AccountAdded.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
+              "RelativeDocumentMoniker": "AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
+              "RelativeToolTip": "AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T02:12:46.328Z",
+              "WhenOpened": "2025-05-06T23:32:45.518Z",
               "EditorCaption": ""
             }
           ]
