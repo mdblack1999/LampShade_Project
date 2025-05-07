@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.infrastructure.efcore\\migrations\\20250506233244_accountadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|solutionrelative:accountmanagement.infrastructure.efcore\\migrations\\20250506233244_accountadded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\accounts\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\accounts\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,14 +39,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20250506233244_AccountAdded.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
-              "RelativeDocumentMoniker": "AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
-              "RelativeToolTip": "AccountManagement.Infrastructure.EFCore\\Migrations\\20250506233244_AccountAdded.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T23:32:45.518Z",
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Account\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Account\\ChangePassword.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Account\\ChangePassword.cshtml",
+              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Account\\ChangePassword.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T10:02:36.637Z",
               "EditorCaption": ""
             }
           ]
