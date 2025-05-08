@@ -27,19 +27,17 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
 
         public EditInventory GetDetails(long id)
         {
-            return _inventoryContext.Inventory.Select(x => new EditInventory
+            return _inventoryContext.Inventory.AsNoTracking().Select(x => new EditInventory
             {
                 Id = x.Id ,
                 ProductId = x.ProductId ,
-                UnitPrice = x.UnitPrice ,
-
-
+                UnitPrice = x.UnitPrice 
             }).FirstOrDefault(x => x.Id == id);
         }
 
         public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
         {
-            var inventory = _inventoryContext.Inventory.FirstOrDefault(x => x.Id == inventoryId);
+            var inventory = _inventoryContext.Inventory.AsNoTracking().FirstOrDefault(x => x.Id == inventoryId);
             return inventory.Operations.Select(x => new InventoryOperationViewModel
             {
                 Id = x.Id ,
@@ -56,7 +54,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
 
         public List<InventoryViewModel> Search(InventorySearchModel searchModel)
         {
-            var products = _shopContext.Products.Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
+            var products = _shopContext.Products.AsNoTracking().Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
             var query = _inventoryContext.Inventory.Select(x => new InventoryViewModel
             {
                 Id = x.Id ,
@@ -72,7 +70,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
             if (searchModel.InStock)
                 query = query.Where(x => !x.InStock);
 
-            List<InventoryViewModel> inventory = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+            List<InventoryViewModel> inventory = query.OrderByDescending(x => x.Id).ToList();
 
             inventory.ForEach(item =>
               item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name);

@@ -2,6 +2,7 @@
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Application
 {
@@ -10,12 +11,15 @@ namespace AccountManagement.Application
         private readonly IAccountRepository _accountRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IFileUploader _fileUploader;
+        private readonly IAuthHelper _authHelper;
 
-        public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher , IFileUploader fileUploader)
+        public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher ,
+            IFileUploader fileUploader , IAuthHelper authHelper)
         {
             _accountRepository = accountRepository;
             _passwordHasher = passwordHasher;
             _fileUploader = fileUploader;
+            _authHelper = authHelper;
         }
 
         public OperationResult Create(CreateAccount command)
@@ -74,6 +78,22 @@ namespace AccountManagement.Application
 
         }
 
+        public OperationResult Login(Login command)
+        {
+            var operation = new OperationResult();
+            var account = _accountRepository.GetBy(command.Username);
+            if (account == null)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
+
+            (bool Verfied, bool NeedsUpgrade) result = _passwordHasher.Check(account.Password , command.Password);
+            if (!result.Verfied)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
+
+            var authViewModel = new AuthViewModel(account.Id , account.RoleId , account.FullName , account.Username);
+            _authHelper.SignIn(authViewModel);
+            return operation.Succeeded();
+        }
+
         public EditAccount GetDetails(long id)
         {
             return _accountRepository.GetDetails(id);
@@ -82,6 +102,11 @@ namespace AccountManagement.Application
         public List<AccountViewModel> Search(AccountSearchModel searchModel)
         {
             return _accountRepository.Search(searchModel);
+        }
+
+        public void Logout()
+        {
+            _authHelper.SignOut();
         }
     }
 }

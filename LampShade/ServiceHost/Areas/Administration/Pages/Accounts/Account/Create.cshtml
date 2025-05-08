@@ -4,7 +4,7 @@
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title">ایجاد محصول جدید</h4>
+    <h4 class="modal-title">ایجاد کاربر جدید</h4>
 </div>
 
 <form asp-page="./Index" asp-page-handler="Create"
@@ -50,13 +50,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="RoleId" class="control-label">نقش</label>
-                    @* <select class="form-control" asp-for="RoleId"
+                    <select class="form-control" asp-for="RoleId"
                     asp-items='new SelectList(Model.Roles, "Id", "Name")'>
-                    <option value="0">نقش</option>
-                    </select> *@
-                    <select class="form-control" asp-for="RoleId">
-                        <option value="1">مدیر سیستم</option>
-                        <option value="2">کاربر سیستم</option>
+                    <option value="0">نقش...</option>
                     </select>
                     <span asp-validation-for="RoleId" class="error"></span>
                 </div>

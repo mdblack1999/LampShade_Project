@@ -18,17 +18,19 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
         public List<AccountViewModel> Search(AccountSearchModel searchModel)
         {
-            var query = _context.Accounts.AsNoTracking().Select(x => new AccountViewModel
-            {
-                Id = x.Id ,
-                FullName = x.FullName ,
-                Username = x.Username ,
-                Role = "مدیر سیستم" ,
-                ProfilePhoto = x.ProfilePhoto ,
-                RoleId = 2 ,
-                Mobile = x.Mobile,
-                CreationDate = x.CreationDate.ToFarsi()
-            });
+            var query = _context.Accounts.AsNoTracking()
+                .Include(x => x.Role)
+                .Select(x => new AccountViewModel
+                {
+                    Id = x.Id ,
+                    FullName = x.FullName ,
+                    Username = x.Username ,
+                    Role = x.Role.Name ,
+                    RoleId = x.RoleId ,
+                    ProfilePhoto = x.ProfilePhoto ,
+                    Mobile = x.Mobile ,
+                    CreationDate = x.CreationDate.ToFarsi()
+                });
             if (!string.IsNullOrWhiteSpace(searchModel.FullName))
                 query = query.Where(x => x.FullName.Contains(searchModel.FullName));
 
@@ -42,6 +44,11 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                 query = query.Where(x => x.RoleId == searchModel.RoleId);
 
             return query.OrderByDescending(x => x.Id).ToList();
+        }
+
+        public Account GetBy(string username)
+        {
+            return _context.Accounts.FirstOrDefault(x => x.Username == username);
         }
 
         public EditAccount GetDetails(long id)

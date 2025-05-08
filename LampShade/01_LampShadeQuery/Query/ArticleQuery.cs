@@ -78,7 +78,7 @@ namespace _01_LampShadeQuery.Query
                     Id = x.Id ,
                     Name = x.Name ,
                     Message = x.Message ,
-                    CreationDate = x.CreationDate.ToFarsiFull() ,
+                    CreationDate = " " + x.CreationDate.ToFarsiFull() ,
                     ParentId = x.ParentId ,
                     Status = (CommentStatusDto)x.Status
                 })
@@ -93,7 +93,7 @@ namespace _01_LampShadeQuery.Query
 
             var lookup = comments.ToLookup(c => c.ParentId);
             var ordered = new List<CommentQueryModel>();
-            void AddComments(long parentId)   
+            void AddComments(long parentId)
             {
                 foreach (var child in lookup[parentId].OrderByDescending(c => c.Id))
                 {
