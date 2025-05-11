@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AccountManagement.Application
 {
@@ -12,6 +12,8 @@ namespace AccountManagement.Application
         private readonly IPasswordHasher _passwordHasher;
         private readonly IFileUploader _fileUploader;
         private readonly IAuthHelper _authHelper;
+
+
 
         public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher ,
             IFileUploader fileUploader , IAuthHelper authHelper)
@@ -30,7 +32,17 @@ namespace AccountManagement.Application
 
             var password = _passwordHasher.Hash(command.Password);
             var path = $"profilePhotos";
-            var picturePath = _fileUploader.Upload(command.ProfilePhoto , path);
+            string picturePath;
+            const string pathAvatarPhoto = "/avatar.png";
+
+            if (command.ProfilePhoto != null)
+            {
+                 picturePath = _fileUploader.Upload(command.ProfilePhoto , path);
+            }
+            else
+            {
+                picturePath = pathAvatarPhoto;
+            }
             var account = new Account(command.FullName , command.Username , password , command.Mobile , command.RoleId ,
                 picturePath);
 
@@ -83,11 +95,11 @@ namespace AccountManagement.Application
             if (account == null)
                 return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            var result = _passwordHasher.Check(account.Password, command.Password);
+            var result = _passwordHasher.Check(account.Password , command.Password);
             if (!result.Verified)
                 return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            var authViewModel = new AuthViewModel(account.Id,account.RoleId,account.FullName,account.Username,account.ProfilePhoto);
+            var authViewModel = new AuthViewModel(account.Id , account.RoleId , account.FullName , account.Username , account.ProfilePhoto);
 
             _authHelper.SignIn(authViewModel);
             return operation.Succeeded();

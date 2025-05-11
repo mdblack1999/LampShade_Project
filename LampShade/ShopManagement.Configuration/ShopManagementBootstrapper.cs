@@ -1,4 +1,5 @@
-﻿using _01_LampShadeQuery.Contracts.Product;
+﻿using _0_Framework.Infrastructure;
+using _01_LampShadeQuery.Contracts.Product;
 using _01_LampShadeQuery.Contracts.ProductCategory;
 using _01_LampShadeQuery.Contracts.Slide;
 using _01_LampShadeQuery.Query;
@@ -9,6 +10,7 @@ using ShopManagement.Application.Contracts.Product;
 using ShopManagement.Application.Contracts.ProductCategory;
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagement.Application.Contracts.Slide;
+using ShopManagement.Configuration.Permissions;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -43,10 +45,12 @@ namespace ShopManagement.Configuration
 
             //Query For ProductCategory UI
             services.AddScoped<IProductCategoryQuery , ProductCategoryQuery>();
+
             //Query For Latest Arrivals UI
             services.AddScoped<IProductQuery , ProductQuery>();
 
-
+            //Register Permissions
+            services.AddTransient<IPermissionExposer , ShopPermissionExposer>();
 
             //services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
             services.AddDbContextPool<ShopContext>(options =>

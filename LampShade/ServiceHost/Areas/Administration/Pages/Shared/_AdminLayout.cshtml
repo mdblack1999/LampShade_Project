@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@inject _0_Framework.Application.IAuthHelper AuthHelper;
+@{
+    var currentAccount = AuthHelper.CurrentAccountInfo();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -35,10 +39,12 @@
 
     <!-- Custom Files -->
     <link href="~/AdminTheme/assets/css/persian-datepicker.min.css" rel="stylesheet" />
+
+    @RenderSection("Css" , false)
+
     <link href="~/AdminTheme/assets/css/helper.css" rel="stylesheet" type="text/css" />
     <link href="~/AdminTheme/assets/css/style.css" rel="stylesheet" type="text/css" />
     <script src="~/AdminTheme/assets/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="fixed-left">
@@ -134,7 +140,7 @@
 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
-                                    <img src="~/AdminTheme/assets/images/avatar-1.jpg" alt="user-img" class="img-circle">
+                                    <img src="~/ProductPictures/@currentAccount.Picture" alt="user-img" class="img-circle">
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>

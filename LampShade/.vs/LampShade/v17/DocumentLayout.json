@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.application\\accountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|solutionrelative:accountmanagement.application\\accountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.infrastructure.efcore\\mapping\\rolemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|solutionrelative:accountmanagement.infrastructure.efcore\\mapping\\rolemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.application\\roleapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|solutionrelative:accountmanagement.application\\roleapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\authviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\authviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\iauthhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\iauthhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\accounts\\role\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\accounts\\role\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,66 +47,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountApplication.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\AccountApplication.cs",
-              "RelativeDocumentMoniker": "AccountManagement.Application\\AccountApplication.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\AccountApplication.cs",
-              "RelativeToolTip": "AccountManagement.Application\\AccountApplication.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAD4v1oAAAAAAAAA",
+              "Title": "RoleMapping.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
+              "RelativeDocumentMoniker": "AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
+              "RelativeToolTip": "AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T13:32:25.444Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthViewModel.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthViewModel.cs",
-              "RelativeDocumentMoniker": "0_Framework\\Application\\AuthViewModel.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthViewModel.cs",
-              "RelativeToolTip": "0_Framework\\Application\\AuthViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T13:11:31.854Z",
+              "WhenOpened": "2025-05-11T18:37:02.598Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Menu.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
-              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T13:09:06.06Z",
+              "Title": "RoleApplication.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\RoleApplication.cs",
+              "RelativeDocumentMoniker": "AccountManagement.Application\\RoleApplication.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\RoleApplication.cs",
+              "RelativeToolTip": "AccountManagement.Application\\RoleApplication.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAACoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T18:30:30.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AuthHelper.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthHelper.cs",
-              "RelativeDocumentMoniker": "0_Framework\\Application\\AuthHelper.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthHelper.cs",
-              "RelativeToolTip": "0_Framework\\Application\\AuthHelper.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAAFYAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T13:02:06.724Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IAuthHelper.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\IAuthHelper.cs",
-              "RelativeDocumentMoniker": "0_Framework\\Application\\IAuthHelper.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\IAuthHelper.cs",
-              "RelativeToolTip": "0_Framework\\Application\\IAuthHelper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T12:59:48.396Z",
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
+              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-11T18:29:25.063Z",
               "EditorCaption": ""
             }
           ]
