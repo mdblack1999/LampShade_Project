@@ -5,6 +5,7 @@ using ShopManagement.Application.Contracts.ProductCategory;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
 {
+    //[Authorize(Roles = "1,3")]
     public class IndexModel : PageModel
     {
         public List<ProductCategoryViewModel> ProductCategories;
@@ -28,20 +29,20 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
         public JsonResult OnPostCreate(CreateProductCategory command)
         {
             var result = _productCategoryApplication.Create(command);
-            return  new JsonResult(result);
+            return new JsonResult(result);
         }
 
         public IActionResult OnGetEdit(long id)
         {
             var productCategory = _productCategoryApplication.GetDetails(id);
-            return Partial("Edit", productCategory);
+            return Partial("Edit" , productCategory);
         }
 
         public JsonResult OnPostEdit(EditProductCategory command)
         {
             if (!ModelState.IsValid)
             {
-               
+
             }
             var result = _productCategoryApplication.Edit(command);
             return new JsonResult(result);

@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 using AccountManagement.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configure;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopManagement.Configuration;
+using Roles = _0_Framework.Infrastructure.Roles;
 
 namespace ServiceHost
 {
@@ -50,14 +53,38 @@ namespace ServiceHost
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme ,
+                    op =>
                 {
-                    o.LoginPath = new PathString("/Account");
-                    o.LogoutPath = new PathString("/Account");
-                    o.AccessDeniedPath = new PathString("/AccessDenied");
+                    op.LoginPath = new PathString("/Account");
+                    op.LogoutPath = new PathString("/Account");
+                    op.AccessDeniedPath = new PathString("/AccessDenied");
                 });
 
-            services.AddRazorPages();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminArea" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentUploader }));
+
+                options.AddPolicy("Shop" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+
+                options.AddPolicy("Discount" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+
+                options.AddPolicy("Account" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+            });
+
+
+            services.AddRazorPages()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/" , "AdminArea");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Shop" , "Shop");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Discounts" , "Discount");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Accounts" , "Account");
+                });
         }
 
         public void Configure(IApplicationBuilder app , IWebHostEnvironment env)
@@ -68,7 +95,8 @@ namespace ServiceHost
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
@@ -82,13 +110,17 @@ namespace ServiceHost
 
             app.UseRouting();
 
+            app.UseStatusCodePagesWithReExecute("/NotFound");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-
+                endpoints.MapFallbackToPage("/NotFound");
+                endpoints.MapControllers();
             });
         }
+
     }
 }

@@ -23,11 +23,27 @@
                                 <li class="menu-item-has-children">
                                     <a>محصولات</a>
                                     <ul class="sub-menu">
-
                                         @foreach (var category in Model.ProductCategories)
                                         {
-                                            <li>
-                                                <a asp-page="./ProductCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                            var items = Model.ProductsView.Where(p => p.CategorySlug == category.Slug).ToList();
+
+                                            <li class="@(items.Any() ? "menu-item-has-children" : "")">
+                                                <a asp-page="/ProductCategory" asp-route-id="@category.Slug">
+                                                    @category.Name <span class="counter">(@category.ProductsCount)</span>
+                                                </a>
+                                                @if (items.Any())
+                                                {
+                                                    <ul class="sub-menu">
+                                                        @foreach (var product in items)
+                                                        {
+                                                            <li>
+                                                                <a asp-page="/Product" asp-route-id="@product.Slug">
+                                                                    @product.Name
+                                                                </a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
                                             </li>
                                         }
                                     </ul>
@@ -40,7 +56,10 @@
                                         @foreach (var category in Model.ArticleCategories)
                                         {
                                             <li>
-                                                <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">@category.Name</a>
+                                                <a asp-page="./ArticleCategory" asp-route-id="@category.Slug">
+                                                    @category.Name <span class="counter">(@category.ArticlesCount)</span>
+                                                </a>
+
                                             </li>
                                         }
                                     </ul>
@@ -52,7 +71,7 @@
                                 @if (!AuthHelper.IsAuthenticated())
                                 {
                                     <li>
-                                        <a asp-page="/Account">ورود/ثبت نام</a>
+                                        <a asp-page="/Account">ورود / ثبت نام</a>
                                     </li>
                                 }
                                 else

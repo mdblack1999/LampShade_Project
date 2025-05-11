@@ -1,6 +1,5 @@
 ﻿using _0_Framework.Domain;
 using AccountManagement.Domain.RoleAgg;
-using Microsoft.AspNetCore.Http;
 
 namespace AccountManagement.Domain.AccountAgg
 {
@@ -20,8 +19,13 @@ namespace AccountManagement.Domain.AccountAgg
             FullName = fullName;
             Username = username;
             Password = password;
-            Mobile = mobile;
             RoleId = roleId;
+
+            if (roleId == 0)
+                RoleId = 2;
+
+            Mobile = mobile;
+
             ProfilePhoto = profilePhoto;
         }
         public void Edit(string fullName , string username , string mobile , long roleId ,
@@ -31,7 +35,7 @@ namespace AccountManagement.Domain.AccountAgg
             Username = username;
             Mobile = mobile;
             RoleId = roleId;
-            if (!string.IsNullOrWhiteSpace(ProfilePhoto))
+            if (!string.IsNullOrWhiteSpace(profilePhoto))
                 ProfilePhoto = profilePhoto;
         }
 

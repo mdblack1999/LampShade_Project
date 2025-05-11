@@ -4,15 +4,23 @@
     {
         public long Id { get; set; }
         public long RoleId { get; set; }
+        public string Role { get; set; }
         public string Fullname { get; set; }
+        public string Picture { get; set; } 
         public string Username { get; set; }
 
-        public AuthViewModel(long id, long roleId, string fullname, string username)
+        public AuthViewModel()
+        {
+        }
+
+        public AuthViewModel(long id, long roleId, string fullname, string username,string picture)
         {
             Id = id;
             RoleId = roleId;
             Fullname = fullname;
             Username = username;
+            Picture = picture;
         }
     }
+
 }

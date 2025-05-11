@@ -1,0 +1,30 @@
+﻿@page
+@model ServiceHost.Pages.AccessDeniedModel
+@{
+    ViewData["Title"] = "دسترسی غیر مجاز";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link id="css-access-denied" href="~/Theme/assets/css/AccessDenied403.css" rel="stylesheet" />
+    <title id="title-403">403 Access Denied – دسترسی غیرمجاز</title>
+</head>
+<body id="body-access-denied">
+<div id="container-access-denied" class="container">
+    <div id="shape-circle-one" class="circle one"></div>
+    <div id="shape-circle-two" class="circle two"></div>
+
+    <h1 id="heading-403-warning">Oops!!</h1>
+    <h3 id="subheading-403-message">دوست عزیز، شما مجوز دسترسی به این صفحه را ندارید!</h3>
+    <p id="description-403">
+        برای بازگشت به صفحهٔ اصلی روی دکمهٔ زیر کلیک کنید.
+    </p>
+    <a id="link-return-home" asp-page="/Index" class="btn-home">
+        بازگشت به صفحهٔ اصلی
+    </a>
+</div>
+</body>
+</html>

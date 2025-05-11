@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
-using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Application
 {
@@ -22,18 +22,17 @@ namespace AccountManagement.Application
             _authHelper = authHelper;
         }
 
-        public OperationResult Create(CreateAccount command)
+        public OperationResult Register(RegisterAccount command)
         {
             var operation = new OperationResult();
             if (_accountRepository.Exists(x => x.Username == command.Username || x.Mobile == command.Mobile))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             var password = _passwordHasher.Hash(command.Password);
-            var path = $"ProfilePhotos";
-            var pictureName = _fileUploader.Upload(command.ProfilePhoto , path);
-
+            var path = $"profilePhotos";
+            var picturePath = _fileUploader.Upload(command.ProfilePhoto , path);
             var account = new Account(command.FullName , command.Username , password , command.Mobile , command.RoleId ,
-               pictureName);
+                picturePath);
 
             _accountRepository.Create(account);
             _accountRepository.SaveChanges();
@@ -44,17 +43,16 @@ namespace AccountManagement.Application
         {
             var operation = new OperationResult();
             var account = _accountRepository.Get(command.Id);
-
             if (account == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            if (_accountRepository.Exists(x => (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
+            if (_accountRepository.Exists(x =>
+                    (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var path = $"ProfilePhotos";
-            var pictureName = _fileUploader.Upload(command.ProfilePhoto , path);
-            account.Edit(command.FullName , command.Username , command.Mobile , command.RoleId ,
-                pictureName);
+            var path = $"profilePhotos";
+            var picturePath = _fileUploader.Upload(command.ProfilePhoto , path);
+            account.Edit(command.FullName , command.Username , command.Mobile , command.RoleId , picturePath);
             _accountRepository.SaveChanges();
             return operation.Succeeded();
         }
@@ -85,14 +83,16 @@ namespace AccountManagement.Application
             if (account == null)
                 return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            (bool Verfied, bool NeedsUpgrade) result = _passwordHasher.Check(account.Password , command.Password);
-            if (!result.Verfied)
+            var result = _passwordHasher.Check(account.Password, command.Password);
+            if (!result.Verified)
                 return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            var authViewModel = new AuthViewModel(account.Id , account.RoleId , account.FullName , account.Username);
+            var authViewModel = new AuthViewModel(account.Id,account.RoleId,account.FullName,account.Username,account.ProfilePhoto);
+
             _authHelper.SignIn(authViewModel);
             return operation.Succeeded();
         }
+
 
         public EditAccount GetDetails(long id)
         {

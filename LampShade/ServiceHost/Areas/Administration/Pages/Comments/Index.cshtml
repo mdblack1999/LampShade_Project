@@ -30,11 +30,16 @@
                         <input class="form-control" asp-for="SearchModel.Email" placeholder="ایمیل">
                     </div>
                     <select asp-for="SearchModel.Status" class="form-control">
-                        <option value="">همه وضعیت‌ها</option>
+                        <option value="">همه وضعیت‌ها..</option>
                         <option value="Pending">در انتظار</option>
                         <option value="Confirmed">تایید شده</option>
                         <option value="Canceled">لغو شده</option>
                         <option value="Spam">اسپم</option>
+                    </select>
+                    <select asp-for="SearchModel.Type" class="form-control">
+                        <option value="">همه بخش‌ها..</option>
+                        <option value="product">محصولات</option>
+                        <option value="article">مقالات</option>
                     </select>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
                     <a class="btn btn-primary waves-effect waves-light m-l-10" asp-page="./Index">مشاهده همه</a>

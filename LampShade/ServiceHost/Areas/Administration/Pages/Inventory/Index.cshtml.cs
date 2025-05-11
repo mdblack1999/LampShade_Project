@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
+using _0_Framework.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
+    [Authorize(Roles = Roles.Administrator)]
     public class IndexModel : PageModel
     {
         [TempData]
@@ -58,14 +61,14 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
             return new JsonResult(result);
         }
 
-        public IActionResult OnGetIncrease(long id,string name)
+        public IActionResult OnGetIncrease(long id , string name)
         {
             var command = new IncreaseInventory()
             {
                 InventoryId = id ,
                 Product = name
             };
-            return Partial("Increase",command);
+            return Partial("Increase" , command);
         }
 
         public JsonResult OnPostIncrease(IncreaseInventory command)
@@ -78,11 +81,11 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         {
             var command = new ReduceInventory()
             {
-                InventoryId = id,
+                InventoryId = id ,
                 Product = name
             };
             return Partial("Reduce" , command);
-        }   
+        }
 
         public JsonResult OnPostReduce(ReduceInventory command)
         {

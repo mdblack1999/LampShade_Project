@@ -5,5 +5,6 @@
         public string Name { get; set; }
         public string Email { get; set; }
         public CommentViewModel.CommentStatus? Status { get; set; }
+        public string Type { get; set; }
     }
 }

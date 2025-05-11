@@ -1,0 +1,68 @@
+﻿@page
+@model ServiceHost.Pages.NotFoundModel
+@{
+    ViewData["Title"] = "صفحه مورد نظر یافت نشد";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found – یافت نشد</title>
+    <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    body {
+      background: url('/Theme/assets/img/404-image.jpg') center/cover fixed no-repeat;
+      font-family: 'Shabnam', 'Vazir Round', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .container {
+      max-width: 650px;       /* عرض دلخواه هاله */
+      height: 450px;          /* ارتفاع دلخواه هاله */
+      margin: 130px auto 0;    /* فاصله از بالای صفحه و وسط کردن افقی */
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+
+      /* Flexbox برای چسباندن محتوا به پایین هاله */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* محتوا رو پایین هاله قرار میده */
+      align-items: center;       /* وسط‌چین افقی محتوا */
+      padding-bottom: 50px;      /* فاصله از لبهٔ پایین هاله */
+    }
+
+    .container h1,
+    .container p {
+      margin: 5px 0;
+    }
+
+    .btn-home {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .btn-home:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <h1>متاسفم صفحه ای که دنبالش بودی پیدا نشد!</h1>
+    <p>از طریق دکمه ی زیر میتونی برگردی تو صفحه اصلی</p>
+    <a asp-page="/Index" class="btn-home">صفحه اصلی</a>
+</div>
+</body>
+</html>

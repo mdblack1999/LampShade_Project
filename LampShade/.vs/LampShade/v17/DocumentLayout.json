@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75FBCA63-9C99-4565-A80E-A0A18E894157}|AccountManagement.Application.Contracts\\AccountManagement.Application.Contracts.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.application.contracts\\account\\iaccountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75FBCA63-9C99-4565-A80E-A0A18E894157}|AccountManagement.Application.Contracts\\AccountManagement.Application.Contracts.csproj|solutionrelative:accountmanagement.application.contracts\\account\\iaccountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.application\\accountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|solutionrelative:accountmanagement.application\\accountapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\account.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\account.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\shared\\components\\menu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\shared\\components\\menu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\authviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\authviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\iauthhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\iauthhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 302,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,67 +54,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AccountApplication.cs",
               "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\AccountApplication.cs",
               "RelativeDocumentMoniker": "AccountManagement.Application\\AccountApplication.cs",
               "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\AccountApplication.cs",
               "RelativeToolTip": "AccountManagement.Application\\AccountApplication.cs",
-              "ViewState": "AQIAAGEAAAAAAAAAAAAAAGwAAAAiAAAA",
+              "ViewState": "AQIAAEgAAAAAAAAAAAD4v1oAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T19:54:26.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IAccountApplication.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application.Contracts\\Account\\IAccountApplication.cs",
-              "RelativeDocumentMoniker": "AccountManagement.Application.Contracts\\Account\\IAccountApplication.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application.Contracts\\Account\\IAccountApplication.cs",
-              "RelativeToolTip": "AccountManagement.Application.Contracts\\Account\\IAccountApplication.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T19:54:12.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Account.cshtml.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml.cs",
-              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Account.cshtml.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml.cs",
-              "RelativeToolTip": "ServiceHost\\Pages\\Account.cshtml.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACIAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T19:52:28.683Z",
+              "WhenOpened": "2025-05-11T13:32:25.444Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Default.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Shared\\Components\\Menu\\Default.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Shared\\Components\\Menu\\Default.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Shared\\Components\\Menu\\Default.cshtml",
-              "RelativeToolTip": "ServiceHost\\Pages\\Shared\\Components\\Menu\\Default.cshtml",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAADwAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T19:47:14.819Z",
+              "Title": "AuthViewModel.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthViewModel.cs",
+              "RelativeDocumentMoniker": "0_Framework\\Application\\AuthViewModel.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthViewModel.cs",
+              "RelativeToolTip": "0_Framework\\Application\\AuthViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T13:11:31.854Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "_Menu.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-11T13:09:06.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AuthHelper.cs",
               "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthHelper.cs",
               "RelativeDocumentMoniker": "0_Framework\\Application\\AuthHelper.cs",
               "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\AuthHelper.cs",
               "RelativeToolTip": "0_Framework\\Application\\AuthHelper.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEsAAAAJAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAFYAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T19:42:47.382Z",
+              "WhenOpened": "2025-05-11T13:02:06.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IAuthHelper.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\IAuthHelper.cs",
+              "RelativeDocumentMoniker": "0_Framework\\Application\\IAuthHelper.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\IAuthHelper.cs",
+              "RelativeToolTip": "0_Framework\\Application\\IAuthHelper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T12:59:48.396Z",
               "EditorCaption": ""
             }
           ]

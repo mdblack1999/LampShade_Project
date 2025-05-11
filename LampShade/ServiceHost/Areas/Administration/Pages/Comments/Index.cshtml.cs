@@ -1,7 +1,11 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Linq;
 using CommentManagement.Application.Contracts.Comment;
+using CommentManagement.Infrastructure.EFCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ServiceHost.Areas.Administration.Pages.Comments
 {
@@ -10,6 +14,8 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         [TempData]
         public string Message { get; set; }
         public List<CommentViewModel> Comments;
+        public SelectList StatusOptions { get; set; }
+        public SelectList TypeOptions   { get; set; }
         public CommentSearchModel SearchModel { get; set; }
         private readonly ICommentApplication _commentApplication;
 
@@ -26,7 +32,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
 
         public IActionResult OnGetConfirm(long id)
         {
-            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Confirmed);
+            var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Confirmed);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -35,7 +41,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         }
         public IActionResult OnGetCancel(long id)
         {
-            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Canceled);
+            var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Canceled);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -45,7 +51,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
 
         public IActionResult OnGetSpam(long id)
         {
-            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Spam);
+            var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Spam);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 
@@ -55,7 +61,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
 
         public IActionResult OnGetPending(long id)
         {
-            var result = _commentApplication.ChangeStatus(id, CommentViewModel.CommentStatus.Pending);
+            var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Pending);
             if (result.IsSuccedded)
                 return RedirectToPage("./Index");
 

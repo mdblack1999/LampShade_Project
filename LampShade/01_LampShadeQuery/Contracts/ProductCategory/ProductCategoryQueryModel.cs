@@ -17,5 +17,8 @@ namespace _01_LampShadeQuery.Contracts.ProductCategory
         public string Keywords { get; set; }
         public string MetaDescription { get; set; }
         public List<ProductQueryModel> Products { get; set; }
+        public int ProductsCount { get; set; }
     }
 }
+
+

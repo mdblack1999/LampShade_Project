@@ -1,10 +1,6 @@
 ﻿@font-face {
     font-family: 'IranSans';
-    src: url('../fonts/IranianSans.eot'),
-        url('../fonts/IranianSans.eot') format('embedded-opentype'),
-        url('../fonts/IranianSans.woff') format('woff'),
-        url('../fonts/IranianSans.ttf') format('truetype'),
-        url('../fonts/IranianSans.svg') format('svg');
+    src: url('../fonts/IranianSans.eot'), url('../fonts/IranianSans.eot') format('embedded-opentype'), url('../fonts/IranianSans.woff') format('woff'), url('../fonts/IranianSans.ttf') format('truetype'), url('../fonts/IranianSans.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -213,4 +209,9 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
+}
+.header-area .navigation-menu-wrapper nav > ul > li .sub-menu li a span {
+    color: #e74c3c !important; 
+    font-size: 0.85rem !important;
+    font-weight: bold !important;
 }

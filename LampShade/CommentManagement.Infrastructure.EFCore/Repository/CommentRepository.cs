@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Infrastructure;
@@ -19,19 +18,19 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
 
         public List<CommentViewModel> Search(CommentSearchModel searchModel)
         {
-            var query = _context.Comments
+            var query = _context.Comments.AsNoTracking()
                 .Select(x => new CommentViewModel
                 {
                     Id = x.Id ,
                     Name = x.Name ,
                     Email = x.Email ,
                     Website = x.Website ,
-                    Message = x.Message,
+                    Message = x.Message ,
                     OwnerRecordId = x.OwnerRecordId ,
                     Type = x.Type ,
                     CommentDate = x.CreationDate.ToFarsiFull() ,
-                    Status = (CommentViewModel.CommentStatus)x.Status,
-                    
+                    Status = (CommentViewModel.CommentStatus)x.Status ,
+
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));
@@ -42,7 +41,14 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
             if (searchModel.Status.HasValue)
                 query = query.Where(x => x.Status == searchModel.Status.Value);
 
-            return query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+            query = searchModel.Type switch
+            {
+                "product" => query.Where(x => x.Type == 1),
+                "article" => query.Where(x => x.Type == 2),
+                _ => query
+            };
+
+            return query.OrderByDescending(x => x.Id).ToList();
         }
     }
 }
