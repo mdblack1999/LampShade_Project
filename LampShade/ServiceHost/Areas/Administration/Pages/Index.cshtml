@@ -1,13 +1,15 @@
 ﻿@page
 @model ServiceHost.Areas.Administration.Pages.IndexModel
+@inject _0_Framework.Application.IAuthHelper AuthHelper;
 @{
-    ViewData["Title"] = "پنل ادمین" ;
+    var currentAccount = AuthHelper.CurrentAccountInfo();
+    ViewData["Title"] = "پنل ادمین";
 }
 
 <!-- Page-Title -->
 <div class="row">
     <div class="col-sm-12">
-        <h3 class="pull-left page-title">خوش آمدید !</h3>
+        <h4 class="pull-left page-title">@currentAccount.Fullname عزیز خوش آمدید</h4>
         <ol class="breadcrumb pull-right">
             <li><a asp-page="./Administration/Index">سایت لوازم خانگی لوویز</a></li>
             <li class="active">داشبورد</li>

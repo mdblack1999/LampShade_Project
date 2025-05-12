@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace _0_Framework.Application
 {
@@ -9,5 +10,6 @@ namespace _0_Framework.Application
         void SignOut();
         string CurrentAccountRole();
         AuthViewModel CurrentAccountInfo();
+        List<int> GetPermissions();
     }
 }

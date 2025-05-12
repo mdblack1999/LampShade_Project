@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopManagement.Configuration;
-using Roles = _0_Framework.Infrastructure.Roles;
 
 namespace ServiceHost
 {
@@ -64,26 +63,40 @@ namespace ServiceHost
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminArea" ,
-                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentUploader }));
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentAdmin
+                        ,Roles.DiscountAdmin,Roles.ProductAdmin,Roles.StoreKeeper}));
 
                 options.AddPolicy("Shop" ,
-                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ProductAdmin }));
 
                 options.AddPolicy("Discount" ,
-                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.DiscountAdmin }));
 
                 options.AddPolicy("Account" ,
-                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator}));
+
+                options.AddPolicy("Inventory" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.StoreKeeper }));
+
+                options.AddPolicy("Comment" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentAdmin }));
+
+                options.AddPolicy("Blogs" ,
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentAdmin }));
             });
 
 
             services.AddRazorPages()
+                .AddMvcOptions(options => options.Filters.Add<SecurityPageFilter>())
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/" , "AdminArea");
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Shop" , "Shop");
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Discounts" , "Discount");
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Accounts" , "Account");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Inventory" , "Inventory");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Comments" , "Comment");
+                    options.Conventions.AuthorizeAreaFolder("Administration" , "/Blog" , "Blogs");
                 });
         }
 

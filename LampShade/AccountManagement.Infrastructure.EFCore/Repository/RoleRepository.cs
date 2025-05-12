@@ -10,20 +10,27 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 {
     public class RoleRepository : RepositoryBase<long , Role>, IRoleRepository
     {
-        private readonly AccountContext _context;
+        private readonly AccountContext _accountContext;
         public RoleRepository(AccountContext context) : base(context)
         {
-            _context = context;
+            _accountContext = context;
         }
 
         public EditRole GetDetails(long id)
         {
-            return _context.Roles.AsNoTracking().Select(x => new EditRole
+            var role = _accountContext.Roles.Select(x => new EditRole
             {
                 Id = x.Id ,
                 Name = x.Name ,
                 MappedPermissions = MapPermissions(x.Permissions)
-            }).AsNoTracking().FirstOrDefault(x => x.Id == id);
+            }).AsNoTracking()
+                .FirstOrDefault(x => x.Id == id);
+
+            if (role != null)
+                role.Permissions = role.MappedPermissions.Select(x => x.Code).ToList();
+
+            return role;
+
         }
 
         private static List<PermissionDto> MapPermissions(List<Permission> permissions)
@@ -33,7 +40,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
         public List<RoleViewModel> List()
         {
-            return _context.Roles.AsNoTracking().Select(x => new RoleViewModel()
+            return _accountContext.Roles.AsNoTracking().Select(x => new RoleViewModel()
             {
                 Id = x.Id ,
                 Name = x.Name ,

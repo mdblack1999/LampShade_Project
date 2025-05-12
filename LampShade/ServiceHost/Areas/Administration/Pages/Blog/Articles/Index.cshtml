@@ -1,20 +1,22 @@
 ﻿@page
+@using BlogManagement.Infrastructure.Configuration.Permission
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ServiceHost.Areas.Administration.Pages.Blog.Articles.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
-    ViewData["title"] = "مدیریت مقالات";
+    ViewData["Title"] = "مدیریت مقالات";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["Title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" asp-page="./Create">ایجاد مقاله جدید</a>
+            <a permission="BlogPermission.CreateArticle" class="btn btn-success btn-lg" asp-page="./Create">ایجاد مقاله جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="BlogPermission.SearchArticles">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -44,7 +46,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" permission="BlogPermission.ListArticles">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -78,7 +80,7 @@
                                         <td>@item.ShortDescription</td>
                                         <td>@item.PublishDate</td>
                                         <td class="text-center">
-                                            <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5" asp-page="./Edit" asp-route-id="@item.Id">
+                                            <a permission="BlogPermission.EditArticle" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5" asp-page="./Edit" asp-route-id="@item.Id">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                         </td>

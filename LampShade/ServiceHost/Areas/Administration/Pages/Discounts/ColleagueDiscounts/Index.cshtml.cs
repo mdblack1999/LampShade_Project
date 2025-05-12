@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
+using _0_Framework.Infrastructure;
+using DiscountManagement.Configuration.Permission;
 
 namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
 {
@@ -24,6 +26,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             _colleagueDiscountApplication = colleagueDiscountApplication;
         }
 
+        [NeedsPermission(DiscountPermission.ListColleagueDiscounts)]
         public void OnGet(ColleagueDiscountSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts() , "Id" , "Name");
@@ -39,6 +42,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             return Partial("./Create" , command);
         }
 
+        [NeedsPermission(DiscountPermission.DefineColleagueDiscounts)]
         public JsonResult OnPostCreate(DefineColleagueDiscount command)
         {
             var result = _colleagueDiscountApplication.Define(command);
@@ -52,18 +56,21 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             return Partial("Edit" , colleagueDiscount);
         }
 
+        [NeedsPermission(DiscountPermission.EditColleagueDiscounts)]
         public JsonResult OnPostEdit(EditColleagueDiscount command)
         {
             var result = _colleagueDiscountApplication.Edit(command);
             return new JsonResult(result);
         }
 
+        [NeedsPermission(DiscountPermission.ActiveDeActiveColleagueDiscount)]
         public IActionResult OnGetRemove(long id)
         {
             _colleagueDiscountApplication.Remove(id);
             return RedirectToPage("./Index");
         }
 
+        [NeedsPermission(DiscountPermission.ActiveDeActiveColleagueDiscount)]
         public IActionResult OnGetRestore(long id)
         {
             _colleagueDiscountApplication.Restore(id);

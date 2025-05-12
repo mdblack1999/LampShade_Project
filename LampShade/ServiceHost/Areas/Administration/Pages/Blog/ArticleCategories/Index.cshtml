@@ -1,4 +1,5 @@
 ﻿@page
+@using BlogManagement.Infrastructure.Configuration.Permission
 @model ServiceHost.Areas.Administration.Pages.Blog.ArticleCategories.IndexModel
 @{
 }
@@ -11,12 +12,12 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["Title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد گروه مقاله جدید</a>
+            <a permission="BlogPermission.CreateArticleCategory" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد گروه مقاله جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="BlogPermission.SearchArticleCategories">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -36,7 +37,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" permission="BlogPermission.ListArticleCategories">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -72,7 +73,7 @@
                                         <td>@item.ArticlesCount</td>
                                         <td>@item.CreationDate</td>
                                         <td class="text-center">
-                                            <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
+                                            <a permission="BlogPermission.EditArticleCategory" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
                                                href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>

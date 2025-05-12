@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Domain;
+using _0_Framework.Infrastructure;
 using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Domain.AccountAgg
@@ -22,7 +23,7 @@ namespace AccountManagement.Domain.AccountAgg
             RoleId = roleId;
 
             if (roleId == 0)
-                RoleId = 2;
+                RoleId = int.Parse(Roles.SystemUser);
 
             Mobile = mobile;
 

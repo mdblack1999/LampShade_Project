@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using ShopManagement.Configuration.Permissions
 @model ServiceHost.Areas.Administration.Pages.Shop.ProductPictures.IndexModel
 @{
      Layout = "Shared/_AdminLayout";
@@ -9,12 +11,12 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد عکس محصول جدید</a>
+            <a permission="ShopPermissions.CreateProductPictures" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد عکس محصول جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="ShopPermissions.SearchProductPictures">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -36,7 +38,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" permission="ShopPermissions.ListProductPictures">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -78,20 +80,20 @@
                                         </td>
                                        
                                         <td>
-                                            <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
+                                            <a permission="ShopPermissions.EditProductPictures" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
                                                href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                             @if (!item.IsRemoved)
                                             {
-                                                <a asp-page="./Index" asp-page-handler="IsRemove" asp-route-id="@item.Id"
+                                                <a permission="ShopPermissions.RemoveAndRestoreProductPictures" asp-page="./Index" asp-page-handler="IsRemove" asp-route-id="@item.Id"
                                                    class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
                                                     حذف
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
+                                                <a permission="ShopPermissions.RemoveAndRestoreProductPictures" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
                                                    class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
                                                     فعال سازی
                                                 </a>

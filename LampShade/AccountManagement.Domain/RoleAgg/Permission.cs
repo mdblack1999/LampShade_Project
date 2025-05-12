@@ -13,9 +13,8 @@
             Code = code;
         }
 
-        public Permission(long id , int code , string name)
+        public Permission(int code, string name)
         {
-            Id = id;
             Code = code;
             Name = name;
         }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
+using _0_Framework.Infrastructure;
+using DiscountManagement.Configuration.Permission;
 
 namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscounts
 {
@@ -24,6 +26,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscounts
             _customerDiscountApplication = customerDiscountApplication;
         }
 
+        [NeedsPermission(DiscountPermission.ListCustomerDiscounts)]
         public void OnGet(CustomerDiscountSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts() , "Id" , "Name");
@@ -39,6 +42,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscounts
             return Partial("./Create" , command);
         }
 
+        [NeedsPermission(DiscountPermission.DefineCustomerDiscounts)]
         public JsonResult OnPostCreate(DefineCustomerDiscount command)
         {
             var result = _customerDiscountApplication.Define(command);
@@ -52,6 +56,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscounts
             return Partial("Edit" , customerDiscount);
         }
 
+        [NeedsPermission(DiscountPermission.EditCustomerDiscounts)]
         public JsonResult OnPostEdit(EditCustomerDiscount command)
         {
             var result = _customerDiscountApplication.Edit(command);

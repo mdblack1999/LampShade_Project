@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using _0_Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopManagement.Application.Contracts.ProductCategory;
+using ShopManagement.Configuration.Permissions;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
 {
@@ -17,6 +19,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
             _productCategoryApplication = productCategoryApplication;
         }
 
+        [NeedsPermission(ShopPermissions.ListProductCategories)]
         public void OnGet(ProductCategorySearchModel searchModel)
         {
             ProductCategories = _productCategoryApplication.Search(searchModel);
@@ -26,6 +29,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
             return Partial("./Create" , new CreateProductCategory());
         }
 
+        [NeedsPermission(ShopPermissions.CreateProductCategory)]
         public JsonResult OnPostCreate(CreateProductCategory command)
         {
             var result = _productCategoryApplication.Create(command);
@@ -38,22 +42,25 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductCategories
             return Partial("Edit" , productCategory);
         }
 
+        [NeedsPermission(ShopPermissions.EditProductCategory)]
         public JsonResult OnPostEdit(EditProductCategory command)
         {
-            if (!ModelState.IsValid)
-            {
+            //if (!ModelState.IsValid)
+            //{
 
-            }
+            //}
             var result = _productCategoryApplication.Edit(command);
             return new JsonResult(result);
         }
 
+        [NeedsPermission(ShopPermissions.RemoveAndRestoreProductCategory)]
         public IActionResult OnGetRemove(long id)
         {
             _productCategoryApplication.Remove(id);
             return RedirectToPage("./Index");
         }
 
+        [NeedsPermission(ShopPermissions.RemoveAndRestoreProductCategory)]
         public IActionResult OnGetRestore(long id)
         {
             _productCategoryApplication.Restore(id);

@@ -18,6 +18,7 @@ namespace InventoryManagement.Infrastructure.Configuration
             services.AddScoped<IInventoryRepository , InventoryRepository>();
             services.AddScoped<IInventoryApplication , InventoryApplication>();
 
+            //Register Permission
             services.AddTransient<IPermissionExposer , InventoryPermissionExposer>();
 
             services.AddDbContextPool<InventoryContext>(x => x.UseSqlServer(connectionString));

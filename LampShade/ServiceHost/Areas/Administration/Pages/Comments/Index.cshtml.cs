@@ -1,11 +1,9 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using System.Linq;
+using _0_Framework.Infrastructure;
 using CommentManagement.Application.Contracts.Comment;
-using CommentManagement.Infrastructure.EFCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using CommentManagement.Infrastructure.Configure.Permission;
 
 namespace ServiceHost.Areas.Administration.Pages.Comments
 {
@@ -14,8 +12,6 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         [TempData]
         public string Message { get; set; }
         public List<CommentViewModel> Comments;
-        public SelectList StatusOptions { get; set; }
-        public SelectList TypeOptions   { get; set; }
         public CommentSearchModel SearchModel { get; set; }
         private readonly ICommentApplication _commentApplication;
 
@@ -24,12 +20,14 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
             _commentApplication = commentApplication;
         }
 
+        [NeedsPermission(CommentPermission.ListComments)]
         public void OnGet(CommentSearchModel searchModel)
         {
             Comments = _commentApplication.Search(searchModel);
             SearchModel = searchModel;
         }
 
+        [NeedsPermission(CommentPermission.ChangeStatusComments)]
         public IActionResult OnGetConfirm(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Confirmed);
@@ -39,6 +37,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
             Message = result.Message;
             return RedirectToPage("./Index");
         }
+        [NeedsPermission(CommentPermission.ChangeStatusComments)]
         public IActionResult OnGetCancel(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Canceled);
@@ -49,6 +48,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
             return RedirectToPage("./Index");
         }
 
+        [NeedsPermission(CommentPermission.ChangeStatusComments)]
         public IActionResult OnGetSpam(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Spam);
@@ -59,6 +59,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
             return RedirectToPage("./Index");
         }
 
+        [NeedsPermission(CommentPermission.ChangeStatusComments)]
         public IActionResult OnGetPending(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Pending);

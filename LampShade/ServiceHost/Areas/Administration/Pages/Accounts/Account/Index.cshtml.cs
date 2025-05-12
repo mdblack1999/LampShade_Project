@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using _0_Framework.Infrastructure;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
+using AccountManagement.Configuration.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,6 +26,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             _roleApplication = roleApplication;
         }
 
+        [NeedsPermission(AccountPermission.ListAccounts)]
         public void OnGet(AccountSearchModel searchModel)
         {
             Roles = new SelectList(_roleApplication.List() , "Id" , "Name");
@@ -38,6 +41,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             return Partial("./Create" , command);
         }
 
+        [NeedsPermission(AccountPermission.RegisterAccount)]
         public JsonResult OnPostCreate(RegisterAccount command)
         {
             var result = _accountApplication.Register(command);
@@ -51,6 +55,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             return Partial("Edit" , account);
         }
 
+        [NeedsPermission(AccountPermission.EditAccounts)]
         public JsonResult OnPostEdit(EditAccount command)
         {
             var result = _accountApplication.Edit(command);
@@ -62,6 +67,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             return Partial("ChangePassword" , command);
         }
 
+        [NeedsPermission(AccountPermission.ChangePassword)]
         public JsonResult OnPostChangePassword(ChangePassword command)
         {
             var result = _accountApplication.ChangePassword(command);

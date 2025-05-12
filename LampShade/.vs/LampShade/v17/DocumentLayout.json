@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.infrastructure.efcore\\mapping\\rolemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3B659E67-4443-45DD-B5E4-01B056B862CC}|AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj|solutionrelative:accountmanagement.infrastructure.efcore\\mapping\\rolemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{95C25C0C-E8E6-40D3-ACA7-5553C447ED33}|AccountManagement.Domain\\AccountManagement.Domain.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.domain\\accountagg\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95C25C0C-E8E6-40D3-ACA7-5553C447ED33}|AccountManagement.Domain\\AccountManagement.Domain.csproj|solutionrelative:accountmanagement.domain\\accountagg\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\accountmanagement.application\\roleapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BEB2AE15-BADC-442F-A55C-1343E7D5C290}|AccountManagement.Application\\AccountManagement.Application.csproj|solutionrelative:accountmanagement.application\\roleapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\accounts\\role\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\accounts\\role\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,80 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 302,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RoleMapping.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
-              "RelativeDocumentMoniker": "AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
-              "RelativeToolTip": "AccountManagement.Infrastructure.EFCore\\Mapping\\RoleMapping.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA2AAAA",
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Domain\\AccountAgg\\Account.cs",
+              "RelativeDocumentMoniker": "AccountManagement.Domain\\AccountAgg\\Account.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Domain\\AccountAgg\\Account.cs",
+              "RelativeToolTip": "AccountManagement.Domain\\AccountAgg\\Account.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAABoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T18:37:02.598Z",
+              "WhenOpened": "2025-05-12T21:02:47.522Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RoleApplication.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\RoleApplication.cs",
-              "RelativeDocumentMoniker": "AccountManagement.Application\\RoleApplication.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\AccountManagement.Application\\RoleApplication.cs",
-              "RelativeToolTip": "AccountManagement.Application\\RoleApplication.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAACoAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T18:30:30.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
-              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Accounts\\Role\\Edit.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAtAAAA",
+              "Title": "_Menu.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shared\\_Menu.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-11T18:29:25.063Z",
+              "WhenOpened": "2025-05-12T20:56:53.652Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 98,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
             }
           ]
         }

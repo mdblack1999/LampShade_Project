@@ -1,5 +1,6 @@
 ﻿@page
 @using CommentManagement.Application.Contracts.Comment
+@using CommentManagement.Infrastructure.Configure.Permission
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ServiceHost.Areas.Administration.Pages.Comments.IndexModel
 @{
@@ -13,7 +14,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="CommentPermission.SearchComments">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -50,7 +51,7 @@
 </div>
 
 
-<div class="row">
+<div class="row" permission="CommentPermission.ListComments">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -91,7 +92,7 @@
                                         <td class="text-center">@item.Email</td>
                                         <td class="text-center">@item.Message</td>
                                         <td class="text-center">@item.CommentDate</td>
-                                        <td class="text-center">
+                                        <td class="text-center" permission="CommentPermission.ChangeStatusComments">
                                             @if (item.Status == CommentViewModel.CommentStatus.Canceled)
                                             {
                                                 <span class="text-danger">لغو شده</span>

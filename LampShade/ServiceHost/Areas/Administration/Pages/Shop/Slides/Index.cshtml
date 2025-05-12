@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using ShopManagement.Configuration.Permissions
 @model ServiceHost.Areas.Administration.Pages.Shop.Slides.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
@@ -9,12 +11,12 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد اسلاید جدید</a>
+            <a permission="ShopPermissions.CreateSlide" class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد اسلاید جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="ShopPermissions.ListSlides">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -58,20 +60,20 @@
                                         <td class="text-center">@item.CreationDate</td>
 
                                         <td>
-                                            <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
+                                            <a permission="ShopPermissions.EditSlide" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
                                                href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                             @if (!item.IsRemoved)
                                             {
-                                                <a asp-page="./Index" asp-page-handler="IsRemove" asp-route-id="@item.Id"
+                                                <a permission="ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index" asp-page-handler="IsRemove" asp-route-id="@item.Id"
                                                    class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
                                                     حذف
                                                 </a>
                                             }
                                             else
                                             {
-                                                <a asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
+                                                <a permission="ShopPermissions.RemoveAndRestoreSlide" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
                                                    class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
                                                     فعال سازی
                                                 </a>

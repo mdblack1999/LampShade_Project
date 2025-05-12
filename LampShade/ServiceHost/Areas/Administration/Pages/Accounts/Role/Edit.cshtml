@@ -12,20 +12,20 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <form method="post">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label asp-for="Command.Name" class="control-label">نام</label>
+                                        <label asp-for="Command.Name" class="control-label">نام نقش</label>
                                         <input type="text" class="form-control" asp-for="Command.Name">
                                         <span asp-validation-for="Command.Name" class="error"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="control-label col-md-3">انتخاب دسترسی ها</label>
+                                <div class="col-md-8">
+                                    <label class="control-label col-md-3">انتخاب دسترسی ها:</label>
                                     <div class="col-md-12">
                                         <select asp-for="Command.Permissions" asp-items="Model.Permissions" class="multi-select" multiple="multiple" id="my_multi_select3">
                                         </select>
                                     </div>
-                                    <input type="hidden" asp-for="Command.Id" value="@Model.Command.Id" />
+                                    <input type="hidden" asp-for="Command.Id" value="@Model.Command.Id"/>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
