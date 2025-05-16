@@ -30,7 +30,7 @@ namespace ShopManagement.Infrastructure.EfCore.Migrations
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Keywords = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    MetaDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    MetaDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

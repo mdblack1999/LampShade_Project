@@ -10,6 +10,7 @@ using System.Linq;
 using CommentManagement.Infrastructure.EFCore;
 using ShopManagement.Domain.ProductPictureAgg;
 using _01_LampShadeQuery.Contracts.Comment;
+using ShopManagement.Application.Contracts.Order;
 
 namespace _01_LampShadeQuery.Query
 {
@@ -68,6 +69,7 @@ namespace _01_LampShadeQuery.Query
                 product.IsInStock = productInventory.InStock;
                 var price = productInventory.UnitPrice;
                 product.Price = price.ToMoney();
+                product.DoublePrice = price;
                 var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                 if (discount != null)
                 {
@@ -86,11 +88,11 @@ namespace _01_LampShadeQuery.Query
                 {
                     Id = x.Id ,
                     Name = x.Name ,
-                    Message = x.Message,
-                    CreationDate = x.CreationDate.ToFarsiFull(),
+                    Message = x.Message ,
+                    CreationDate = x.CreationDate.ToFarsiFull() ,
                     Status = (CommentStatusDto)x.Status
                 })
-                .Where(x => x.Status == CommentStatusDto.Confirmed) 
+                .Where(x => x.Status == CommentStatusDto.Confirmed)
                 .OrderByDescending(x => x.Id)
                 .ToList();
 
@@ -194,18 +196,30 @@ namespace _01_LampShadeQuery.Query
                     var discount = discounts
                         .FirstOrDefault(x => x.ProductId == product.Id);
 
-                    if (discount != null)
-                    {
-                        int discountRate = discount.DiscountRate;
-                        product.DiscountRate = discountRate;
-                        product.DiscountExpiredDate = discount.EndDate.ToDiscountFormat();
-                        product.HasDiscount = discountRate > 0;
-                        var discountAmount = Math.Round((price * discountRate) / 100);
-                        product.PriceWithDiscount = (price - discountAmount).ToMoney();
-                    }
+                    if (discount == null) continue;
+                    var discountRate = discount.DiscountRate;
+                    product.DiscountRate = discountRate;
+                    product.DiscountExpiredDate = discount.EndDate.ToDiscountFormat();
+                    product.HasDiscount = discountRate > 0;
+                    var discountAmount = Math.Round((price * discountRate) / 100);
+                    product.PriceWithDiscount = (price - discountAmount).ToMoney();
                 }
             }
             return products;
+        }
+
+        public List<CartItem> CheckInventoryStatus(List<CartItem> cartItems)
+        {
+            var inventory = _inventoryContext.Inventory.ToList();
+
+            foreach (var cartItem in cartItems.Where(cartItem =>
+                         inventory.Any(x => x.ProductId == cartItem.Id && x.InStock)))
+            {
+                var itemInventory = inventory.Find(x => x.ProductId == cartItem.Id);
+                cartItem.IsInStock = itemInventory.CalculateCurrentCount() >= cartItem.Count;
+            }
+
+            return cartItems;
         }
     }
 }

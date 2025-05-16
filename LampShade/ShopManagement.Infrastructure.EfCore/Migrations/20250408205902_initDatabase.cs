@@ -19,7 +19,7 @@ namespace ShopManagement.Infrastructure.EfCore.Migrations
                     PictureAlt = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     PictureTitle = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     keywords = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    MetaDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    MetaDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

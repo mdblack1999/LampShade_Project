@@ -45,7 +45,7 @@ body {
 
 .single-grid-product__price .discounted-price {
     margin-right: unset;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .tab-slider-wrapper .tab-product-navigation .nav .nav-item:last-child {
@@ -210,8 +210,48 @@ body {
     height: 100%;
     width: 100%;
 }
-.header-area .navigation-menu-wrapper nav > ul > li .sub-menu li a span {
-    color: #e74c3c !important; 
-    font-size: 0.85rem !important;
-    font-weight: bold !important;
+/* Amazing Offer Text */
+
+.amazing-offer-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
 }
+
+.amazing-offer-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d32f2f;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    max-width: fit-content;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-right: 10%;
+    animation: pulse-offer 1.6s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse-offer {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+

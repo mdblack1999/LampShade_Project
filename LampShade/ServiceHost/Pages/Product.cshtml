@@ -68,7 +68,7 @@
                                                 {
                                                     <div class="single-image">
                                                         <img src="~/ProductPictures/@product.Picture" class="img-fluid"
-                                                             alt="@product.PictureAlt" title="  @product.PictureTitle">
+                                                             alt="@product.PictureAlt" title="@product.PictureTitle">
                                                     </div>
                                                 }
 
@@ -164,8 +164,12 @@
 
                                         @if (Model.Product.HasDiscount)
                                         {
+                                            <div class="amazing-offer-wrapper">
+                                                <div class="amazing-offer-text">پیشنهاد شگفت‌انگیز</div>
+                                            </div>
                                             <div class="product-countdown" data-countdown="@Model.Product.DiscountExpiredDate" style="direction:ltr"></div>
                                         }
+
                                         <div class="product-actions">
                                             <div class="quantity-selection">
                                                 <label>تعداد</label>
@@ -177,6 +181,7 @@
                                                 </a>
                                             </div>
                                         </div>
+
 
                                         <div class="social-share-buttons mt-20">
                                             <h5>این محصول را به اشتراک بگذارید</h5>
@@ -288,13 +293,13 @@
                                                                 <div class="rating-author">
                                                                     <h3>|@comment.Name</h3>
                                                                     @* <div class="rating-star">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                       <span>(5)</span>
-                                                                       </div> *@
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <span>(5)</span>
+                                                                </div> *@
                                                                 </div>
                                                                 <p>@comment.Message</p>
                                                             </div>

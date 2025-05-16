@@ -9,6 +9,8 @@
         public const string UserAdmin = "5";
         public const string StoreKeeper = "6";
         public const string DiscountAdmin = "7";
+        public const string ColleagueUser = "8";
+
 
         public static string GetRoleBy(long id)
         {
@@ -21,6 +23,7 @@
                 5 => "مدیرکاربران",
                 6 => "مدیرانبارداری",
                 7 => "مدیرتخفیفات",
+                8 => "کاربر همکار",
                 _ => ""
             };
         }

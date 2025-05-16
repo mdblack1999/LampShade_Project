@@ -10,11 +10,12 @@ namespace AccountManagement.Infrastructure.EFCore.Mapping
         {
             builder.ToTable("Accounts");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.FullName).IsRequired().HasMaxLength(150);
-            builder.Property(x => x.Username).IsRequired().HasMaxLength(150);
-            builder.Property(x => x.Password).IsRequired().HasMaxLength(1000);
-            builder.Property(x => x.Mobile).IsRequired().HasMaxLength(20);
-            builder.Property(x => x.ProfilePhoto).HasMaxLength(1000);
+
+            builder.Property(x => x.FullName).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Username).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Password).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.ProfilePhoto).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Mobile).HasMaxLength(20).IsRequired();
 
             builder.HasOne(x => x.Role).WithMany(x => x.Accounts).HasForeignKey(x => x.RoleId);
         }

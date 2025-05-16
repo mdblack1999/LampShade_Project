@@ -1,4 +1,6 @@
 ﻿using _0_Framework.Infrastructure;
+using _01_LampshadeQuery.Contracts;
+using _01_LampshadeQuery.Query;
 using _01_LampShadeQuery.Contracts.Product;
 using _01_LampShadeQuery.Contracts.ProductCategory;
 using _01_LampShadeQuery.Contracts.Slide;
@@ -51,6 +53,10 @@ namespace ShopManagement.Configuration
 
             //Register Permissions
             services.AddTransient<IPermissionExposer , ShopPermissionExposer>();
+
+            //Register Cart Calculator
+            services.AddTransient<ICartCalculatorService , CartCalculatorService>();
+
 
             //services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
             services.AddDbContextPool<ShopContext>(options =>

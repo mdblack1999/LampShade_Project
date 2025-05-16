@@ -73,7 +73,7 @@ namespace ServiceHost
                     builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.DiscountAdmin }));
 
                 options.AddPolicy("Account" ,
-                    builder => builder.RequireRole(new List<string> { Roles.Administrator}));
+                    builder => builder.RequireRole(new List<string> { Roles.Administrator }));
 
                 options.AddPolicy("Inventory" ,
                     builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.StoreKeeper }));

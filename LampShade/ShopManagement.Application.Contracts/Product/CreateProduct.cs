@@ -35,6 +35,7 @@ namespace ShopManagement.Application.Contracts.Product
         public string Keywords { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        [MaxLength(500,ErrorMessage = ValidationMessages.MaxTextSize)]
         public string MetaDescription { get; set; }
         public List<ProductCategoryViewModel> Categories { get; set; }
     }

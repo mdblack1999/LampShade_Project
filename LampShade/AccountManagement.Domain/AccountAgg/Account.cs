@@ -26,7 +26,6 @@ namespace AccountManagement.Domain.AccountAgg
                 RoleId = int.Parse(Roles.SystemUser);
 
             Mobile = mobile;
-
             ProfilePhoto = profilePhoto;
         }
         public void Edit(string fullName , string username , string mobile , long roleId ,

@@ -10,7 +10,7 @@ namespace AccountManagement.Domain.RoleAgg
         public List<Permission> Permissions { get; private set; }
         public List<Account> Accounts { get; private set; }
 
-        protected Role()
+        public Role()
         {
             
         }
