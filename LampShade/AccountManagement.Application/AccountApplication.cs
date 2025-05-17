@@ -27,8 +27,17 @@ namespace AccountManagement.Application
         public OperationResult Register(RegisterAccount command)
         {
             var operation = new OperationResult();
-            if (_accountRepository.Exists(x => x.Username == command.Username || x.Mobile == command.Mobile))
-                return operation.Failed(ApplicationMessages.DuplicatedRecord);
+            if (_accountRepository.Exists(x => x.Username == command.Username))
+                return operation.Failed(ApplicationMessages.DuplicateAccount);
+
+            if (_accountRepository.Exists(x => x.Mobile == command.Mobile))
+                return operation.Failed(ApplicationMessages.DuplicateMobile);
+
+            if (command.Password != command.RePassword)
+                return operation.Failed(ApplicationMessages.PasswordNotMatch);
+
+            if (command.Password.Length < 6 || command.RePassword.Length < 6)
+                return operation.Failed(ApplicationMessages.MinLengthPass);
 
             var password = _passwordHasher.Hash(command.Password);
             var path = $"profilePhotos";
@@ -48,7 +57,7 @@ namespace AccountManagement.Application
 
             _accountRepository.Create(account);
             _accountRepository.SaveChanges();
-            return operation.Succeeded();
+            return operation.Succeeded(ApplicationMessages.SuccessRegister);
         }
 
         public OperationResult Edit(EditAccount command)
@@ -93,7 +102,7 @@ namespace AccountManagement.Application
             var operation = new OperationResult();
             var account = _accountRepository.GetBy(command.Username);
             if (account == null)
-                return operation.Failed(ApplicationMessages.WrongUserPass);
+                return operation.Failed(ApplicationMessages.NotRegister);
 
             var result = _passwordHasher.Check(account.Password , command.Password);
             if (!result.Verified)

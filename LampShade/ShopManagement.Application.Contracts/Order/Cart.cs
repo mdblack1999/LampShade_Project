@@ -22,7 +22,6 @@ namespace ShopManagement.Application.Contracts.Order
             DiscountAmount += cartItem.DiscountAmount;
             PayAmount += cartItem.ItemPayAmount;
         }
-
         public void SetPaymentMethod(int methodId)
         {
             PaymentMethod = methodId;

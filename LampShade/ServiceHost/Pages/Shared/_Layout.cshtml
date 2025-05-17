@@ -54,9 +54,13 @@
     <script src="~/Theme/assets/js/active.js"></script>
     <script src="~/Theme/assets/js/plugins.js"></script>
     <script src="~/Theme/assets/js/custom.js"></script>
+    <script src="~/lib/jquery-Validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-Validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
     <script>
         $(document).ready(function () {
+            $("#registerForm").validate();
+            $("#loginForm").validate();
             updateCart();
         });
     </script>

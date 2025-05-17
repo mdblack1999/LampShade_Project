@@ -2263,6 +2263,8 @@ select {
 .single-grid-product__image {
     position: relative;
     margin-bottom: 20px;
+    min-height: 380px;
+    max-height: 380px;
 }
 
     .single-grid-product__image > a {
@@ -2274,6 +2276,8 @@ select {
             width: 100%;
             -webkit-transition: .6s;
             transition: .6s;
+            min-height: 380px;
+            max-height: 380px;
         }
 
             .single-grid-product__image > a img:nth-child(1) {
@@ -2679,6 +2683,7 @@ select {
 
 .single-slider-post__image {
     position: relative;
+    min-height: 290px;
 }
 
     .single-slider-post__image a {
@@ -2688,6 +2693,7 @@ select {
 
         .single-slider-post__image a img {
             width: 100%;
+            min-height: 290px;
         }
 
         .single-slider-post__image a:hover img {
@@ -2705,7 +2711,7 @@ select {
     flex-direction: column;
     padding: 5px;
     text-align: center;
-    background: #fff;
+    background: #ffffff0d;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -2725,10 +2731,10 @@ select {
     }
 
         .single-slider-post__date-sticker span.month {
-            font-weight: 500;
+            font-weight: 700;
             line-height: 12px;
-            margin-bottom: 10px;
             color: #929292;
+            background-color: transparent;
         }
 
         .single-slider-post__date-sticker span.day {
@@ -3304,9 +3310,9 @@ select {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    padding: 20px 0;
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 8px 0;
+ /* border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0; */
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
@@ -3954,7 +3960,7 @@ select {
 
 .single-product-content-description .single-info {
     line-height: 17px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
     color: #707070;
 }
 
@@ -5442,7 +5448,7 @@ select {
         font-size: 14px;
         line-height: 23px;
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         padding: 10px 20px;
         color: #707070;
         border: 1px solid #999;
@@ -5524,7 +5530,7 @@ select {
     float: left;
     width: 140px;
     height: 36px;
-    margin-top: 20px;
+    margin-top: 60px;
     padding: 6px 20px;
     text-transform: uppercase;
     color: #fff;
@@ -8381,4 +8387,18 @@ h3.comment-counter {
     50% {
         opacity: 1;
     }
+}
+
+/* Zarinpal Logo Style */
+#zarinpal {
+    margin: auto
+}
+
+    #zarinpal img {
+        width: 70px;
+    }
+
+li.menu-item-has-children .counter {
+    color: firebrick;
+    font-weight: bold;
 }

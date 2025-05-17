@@ -29,7 +29,7 @@
 
                                             <li class="@(items.Any() ? "menu-item-has-children" : "")">
                                                 <a asp-page="/ProductCategory" asp-route-id="@category.Slug">
-                                                    @category.Name <span class="counter">(@category.ProductsCount)</span>
+                                                    @category.Name <span class="counter">@(items.Any() ? $"({category.ProductsCount})" : "")</span>
                                                 </a>
                                                 @if (items.Any())
                                                 {
@@ -174,7 +174,7 @@
                                     <ul class="icon-list justify-content-end">
                                         <li>
                                             <div class="header-cart-icon">
-                                                <a href="cart.html">
+                                                <a asp-page="/Cart">
                                                     <i class="ion-bag"></i>
                                                     <span class="counter">3</span>
                                                 </a>
@@ -288,14 +288,8 @@
                     <a href="#" title="Facebook">
                         <i class="fa fa-facebook"></i>
                     </a>
-                    <a href="#" title="Twitter">
-                        <i class="fa fa-twitter"></i>
-                    </a>
                     <a href="#" title="LinkedIn">
                         <i class="fa fa-linkedin"></i>
-                    </a>
-                    <a href="#" title="Youtube">
-                        <i class="fa fa-youtube-play"></i>
                     </a>
                     <a href="#" title="Vimeo">
                         <i class="fa fa-vimeo-square"></i>

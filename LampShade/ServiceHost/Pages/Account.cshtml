@@ -34,17 +34,21 @@
                                 {
                                     <div class="alert alert-danger">@Model.LoginMessage</div>
                                 }
-                                <form method="post" asp-page-handler="Login">
+                                <form id="loginForm" method="post" asp-page-handler="Login">
                                     <div class="login-form">
                                         <h4 class="login-title">ورود</h4>
                                         <div class="row">
                                             <div class="col-md-12 col-12">
                                                 <label>نام کاربری</label>
-                                                <input type="text" name="username" placeholder="نام کاربری">
+                                                <input type="text" name="username" data-val="true" data-val-required="لطفاً نام کاربری را وارد کنید"
+                                                       placeholder="نام کاربری" />
+                                                <span class="error" data-valmsg-for="username" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-12">
                                                 <label>کلمه عبور</label>
-                                                <input type="password" name="password" placeholder="کلمه عبور">
+                                                <input type="password" name="password" data-val="true" data-val-required="لطفاً کلمه عبور را وارد کنید"
+                                                       data-val-minlength="حداقل 6 کاراکتر نیاز است" data-val-minlength-min="6" placeholder="کلمه عبور">
+                                                <span class="error" data-valmsg-for="password" data-valmsg-replace="true"></span>
                                             </div>
 
                                             @*<div class="col-sm-6">
@@ -68,33 +72,49 @@
                                 </form>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+
                                 @if (Model.RegisterMessage != null)
                                 {
                                     <div class="alert alert-danger">@Model.RegisterMessage</div>
                                 }
-                                <form method="post" asp-page-handler="Register">
+                                <form id="registerForm" method="post" asp-page-handler="Register">
                                     <div class="login-form">
                                         <h4 class="login-title">ثبت نام</h4>
                                         <div class="row">
                                             <div class="col-md-6 col-12 mb-20">
                                                 <label>نام کامل</label>
-                                                <input type="text" name="fullname" placeholder="نام کامل">
+                                                <input type="text" name="fullname" value="@Model.RegisterModel?.FullName" placeholder="نام کامل"
+                                                       data-val="true" data-val-required="لطفاً نام کامل را وارد کنید" />
+                                                <span class="error" data-valmsg-for="fullname" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-md-6 col-12 mb-20">
                                                 <label>نام کاربری</label>
-                                                <input type="text" name="username" placeholder="نام کاربری">
+                                                <input type="text" name="username" value="@Model.RegisterModel?.Username" placeholder="نام کاربری"
+                                                       data-val="true" data-val-required="لطفاً نام کاربری را وارد کنید" />
+                                                <span class="error" data-valmsg-for="username" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-md-12 mb-20">
                                                 <label>موبایل</label>
-                                                <input type="number" name="mobile" placeholder="موبایل">
+                                                <input type="text" name="mobile" maxlength="11"
+                                                       pattern="\d{11}" inputmode="numeric"
+                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-val="true"
+                                                       data-val-required="لطفاً شماره موبایل را وارد کنید"
+                                                       data-val-regex="شماره موبایل باید 11 رقم باشد"
+                                                       data-val-regex-pattern="^\d{11}$"
+                                                       placeholder="09123456789" />
+                                                <span class="error" data-valmsg-for="mobile" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-md-6 mb-20">
                                                 <label>کلمه عبور</label>
-                                                <input type="password" name="password" placeholder="کلمه عبور">
+                                                <input type="password" name="password" placeholder="کلمه عبور"
+                                                       data-val="true" data-val-required="لطفاً کلمه عبور را وارد کنید" data-val-minlength="حداقل کلمه عبور 6 کاراکتر است" data-val-minlength-min="6" />
+                                                <span class="error" data-valmsg-for="password" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-md-6 mb-20">
                                                 <label>تایید کلمه عبور</label>
-                                                <input type="password" name="rePassword" placeholder="تایید کلمه عبور">
+                                                <input type="password" name="rePassword" placeholder="تایید کلمه عبور"
+                                                       data-val="true" data-val-required="لطفاً تکرار کلمه عبور را وارد کنید" data-val-equalto="کلمه‌های عبور مطابقت ندارند" data-val-equalto-other="[name='password']" />
+                                                <span class="error" data-valmsg-for="rePassword" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="col-12">
                                                 <button class="register-button mt-0">ثبت نام</button>

@@ -38,6 +38,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             {
                 Roles = _roleApplication.List()
             };
+            command.RePassword = command.Password;
             return Partial("./Create" , command);
         }
 

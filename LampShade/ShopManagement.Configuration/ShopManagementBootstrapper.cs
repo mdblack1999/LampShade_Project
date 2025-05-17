@@ -8,17 +8,20 @@ using _01_LampShadeQuery.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application;
+using ShopManagement.Application.Contracts.Order;
 using ShopManagement.Application.Contracts.Product;
 using ShopManagement.Application.Contracts.ProductCategory;
 using ShopManagement.Application.Contracts.ProductPicture;
 using ShopManagement.Application.Contracts.Slide;
 using ShopManagement.Configuration.Permissions;
+using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Domain.SlideAgg;
 using ShopManagement.Infrastructure.EfCore;
 using ShopManagement.Infrastructure.EfCore.Repository;
+using ShopManagement.Infrastructure.EFCore.Repository;
 
 namespace ShopManagement.Configuration
 {
@@ -41,6 +44,13 @@ namespace ShopManagement.Configuration
             //Register Slide
             services.AddScoped<ISlideApplication , SlideApplication>();
             services.AddScoped<ISlideRepository , SlideRepository>();
+
+            //Register Order
+            services.AddScoped<IOrderRepository , OrderRepository>();
+            services.AddScoped<IOrderApplication , OrderApplication>();
+
+            //Register Cart Service
+            services.AddSingleton<ICartService , CartService>();
 
             //Query For Slider UI
             services.AddScoped<ISlideQuery , SlideQuery>();
