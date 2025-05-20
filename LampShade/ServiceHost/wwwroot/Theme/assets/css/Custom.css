@@ -210,8 +210,8 @@ body {
     height: 100%;
     width: 100%;
 }
-/* Amazing Offer Text */
 
+/* Amazing Offer Text */
 .amazing-offer-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -229,9 +229,10 @@ body {
     padding: 6px 12px;
     border-radius: 5px;
     max-width: fit-content;
+    min-width: 280px;
     margin-bottom: 8px;
     margin-top: 10px;
-    margin-right: 10%;
+    margin-right: 2%;
     animation: pulse-offer 1.6s ease-in-out infinite;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
@@ -259,4 +260,21 @@ span.error {
     font-size: 13px;
     display: block;
     margin-top: 0.02rem;
+}
+
+.bg-light-green {
+    background-color: #bcf3a3 !important;
+}
+
+.bg-light-red {
+    background-color: #f8d7da !important;
+}
+
+.bg-light-yellow {
+    background-color: #fbfd81 !important;
+}
+
+.Role-name{
+    font-size : 17px;
+    margin : 0px 5px;
 }

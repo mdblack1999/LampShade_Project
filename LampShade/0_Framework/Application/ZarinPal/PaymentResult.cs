@@ -6,18 +6,18 @@
         public string Message { get; set; }
         public string IssueTrackingNo { get; set; }
 
-        public PaymentResult Succeeded(string message, string issueTrackingNo)
+        public PaymentResult Succeeded(string message , string issueTrackingNumber)
         {
             IsSuccessful = true;
             Message = message;
-            IssueTrackingNo = issueTrackingNo;
+            IssueTrackingNo = issueTrackingNumber;
             return this;
         }
 
         public PaymentResult Failed(string message)
         {
-            Message = message;
             IsSuccessful = false;
+            Message = message;
             return this;
         }
     }

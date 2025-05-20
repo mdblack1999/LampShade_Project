@@ -18,10 +18,12 @@ using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
+using ShopManagement.Domain.Services;
 using ShopManagement.Domain.SlideAgg;
 using ShopManagement.Infrastructure.EfCore;
 using ShopManagement.Infrastructure.EfCore.Repository;
 using ShopManagement.Infrastructure.EFCore.Repository;
+using ShopManagement.Infrastructure.InventoryAcl;
 
 namespace ShopManagement.Configuration
 {
@@ -66,6 +68,9 @@ namespace ShopManagement.Configuration
 
             //Register Cart Calculator
             services.AddTransient<ICartCalculatorService , CartCalculatorService>();
+
+            //Register Acl(Inventory)
+            services.AddTransient<IShopInventoryAcl , ShopInventoryAcl>();
 
 
             //services.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));

@@ -20,7 +20,6 @@ namespace CommentManagement.Infrastructure.EFCore.Migrations
                     OwnerRecordId = table.Column<long>(type: "bigint" , nullable: false) ,
                     Type = table.Column<int>(type: "int" , nullable: false) ,
                     ParentId = table.Column<long>(type: "bigint" , nullable: false) ,
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2" , nullable: false) ,
                     Status = table.Column<int>(type: "int" , nullable: false) ,
                     CreationDate = table.Column<DateTime>(type: "datetime2" , nullable: false)
                 } ,

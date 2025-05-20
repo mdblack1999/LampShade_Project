@@ -27,6 +27,8 @@ function addToCart(id, name, price, picture) {
 
     saveCartProducts(products);
     updateCart();
+
+    // Effect
 }
 
 // حذف آیتم

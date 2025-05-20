@@ -119,12 +119,18 @@
                                         <div class="single-settings-block">
                                             <h4 class="title">پروفایل من </h4>
                                             <ul>
-                                                <li>
-                                                    <a asp-page="/Account">ثبت نام</a>
-                                                </li>
-                                                <li>
-                                                    <a asp-page="/Account">ورود</a>
-                                                </li>
+                                                @if (!AuthHelper.IsAuthenticated())
+                                                {
+                                                    <li>
+                                                        <a asp-page="/Account">ورود / ثبت نام</a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <a asp-page="/Account" asp-page-handler="Logout">خروج</a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </div>
                                         @*<div class="single-settings-block">

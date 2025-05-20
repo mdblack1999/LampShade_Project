@@ -42,6 +42,12 @@
                         <a asp-page="/Inventory/Index" class="waves-effect"><i class="md md-store"></i><span> انبارداری </span></a>
                     </li>
                 }
+                @if (AuthHelper.CurrentAccountRole() is Roles.Administrator)
+                {
+                    <li>
+                        <a asp-page="/Shop/Orders/Index" class="waves-effect"><i class="md md-receipt"></i><span> سفارشات </span></a>
+                    </li>
+                }
                 @if (AuthHelper.CurrentAccountRole() is Roles.ProductAdmin or Roles.Administrator)
                 {
                     <li class="has_sub">

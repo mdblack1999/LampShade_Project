@@ -5560,7 +5560,7 @@ a.badge-dark:focus {
 .alert {
     position: relative;
     padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     border: 1px solid transparent;
     border-radius: .25rem
 }
@@ -10947,7 +10947,7 @@ a.text-success:hover {
 }
 
 .text-info {
-    color: #17a2b8 !important
+    color: #17A2AA !important
 }
 
 a.text-info:focus,

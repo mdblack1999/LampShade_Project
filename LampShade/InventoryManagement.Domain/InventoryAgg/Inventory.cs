@@ -16,6 +16,7 @@ namespace InventoryManagement.Domain.InventoryAgg
             ProductId = productId;
             UnitPrice = unitPrice;
             InStock = false;
+            Operations = new List<InventoryOperation>();
         }
 
         public void Edit(long productId , double unitPrice)
@@ -36,15 +37,15 @@ namespace InventoryManagement.Domain.InventoryAgg
             var currentCount = CalculateCurrentCount() + count;
             var operation = new InventoryOperation(true , count , operatorId , currentCount , description , 0 , Id);
             Operations.Add(operation);
-            InStock = currentCount > 0;
+            InStock = currentCount >= 1;
         }
 
         public void Reduce(long count , long operatorId , string description , long orderId)
         {
-            var currentCount = CalculateCurrentCount();
+            var currentCount = CalculateCurrentCount() - count;
             var operation = new InventoryOperation(false , count , operatorId , currentCount , description , orderId , Id);
             Operations.Add(operation);
-            InStock = currentCount > 0;
+            InStock = currentCount >= 1;
         }
     }
 }

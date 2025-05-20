@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommentManagement.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(CommentContext))]
-    [Migration("20250504155740_CommentsFixedBugs")]
-    partial class CommentsFixedBugs
+    [Migration("20250518180756_restoreComment")]
+    partial class restoreComment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -3,6 +3,8 @@ using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using AccountManagement.Infrastructure.EFCore;
+using Microsoft.EntityFrameworkCore;
+using ShopManagement.Application.Contracts;
 using ShopManagement.Application.Contracts.Order;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Infrastructure.EfCore;
@@ -57,7 +59,34 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
 
         public List<OrderViewModel> Search(OrderSearchModel searchModel)
         {
-            throw new System.NotImplementedException();
+            var accounts = _accountContext.Accounts.AsNoTracking().Select(x => new {x.Id, x.FullName}).ToList();
+            var query = _context.Orders.Select(x => new OrderViewModel
+            {
+                Id = x.Id,
+                AccountId = x.AccountId,
+                DiscountAmount = x.DiscountAmount,
+                IsCanceled = x.IsCanceled,
+                IsPaid = x.IsPaid,
+                IssueTrackingNo = x.IssueTrackingNo,
+                PayAmount = x.PayAmount,
+                PaymentMethodId = x.PaymentMethod,
+                RefId = x.RefId,
+                TotalAmount = x.TotalAmount,
+                CreationDate = x.CreationDate.ToFarsi()
+            });
+
+            query = query.Where(x => x.IsCanceled == searchModel.IsCanceled);
+
+            if (searchModel.AccountId > 0) query = query.Where(x => x.AccountId == searchModel.AccountId);
+
+            var orders = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+            foreach (var order in orders)
+            {
+                order.AccountFullName = accounts.FirstOrDefault(x => x.Id == order.AccountId)?.FullName;
+                order.PaymentMethod = PaymentMethod.GetBy(order.PaymentMethodId).Name;
+            }
+
+            return orders;
         }
 
     }

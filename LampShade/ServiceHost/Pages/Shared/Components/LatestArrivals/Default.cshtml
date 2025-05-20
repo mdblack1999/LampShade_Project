@@ -70,8 +70,8 @@
                                         <p class="single-grid-product__price">
                                             @if (product.HasDiscount)
                                             {
+                                                <span class="main-price discounted">@product.Price ت</span>
                                                 <span class="discounted-price">@product.PriceWithDiscount تومان</span>
-                                                <span class="main-price discounted">@product.Price تومان</span>
                                             }
                                             else
                                             {

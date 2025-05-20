@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using _01_LampShadeQuery.Contracts.Product;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -22,14 +20,21 @@ namespace ServiceHost.Pages
             _productQuery = productQuery;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             var json = Request.Cookies[CookieName] ?? "[]";
             var cartItems = JsonConvert.DeserializeObject<List<CartItem>>(json);
-            foreach (var item in cartItems)
-                item.CalculateTotalItemPrice();
-
-            CartItems = _productQuery.CheckInventoryStatus(cartItems);
+            if (cartItems != null && cartItems.Any())
+            {
+                foreach (var item in cartItems)
+                    item.CalculateTotalItemPrice();
+                CartItems = _productQuery.CheckInventoryStatus(cartItems);
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("/Index");
+            }
         }
 
         public IActionResult OnGetGoToCheckOut()

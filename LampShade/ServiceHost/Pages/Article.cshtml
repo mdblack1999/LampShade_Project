@@ -1,5 +1,7 @@
 ﻿@page "{id}"
+@using _0_Framework.Infrastructure
 @model ServiceHost.Pages.ArticleModel
+@inject _0_Framework.Application.IAuthHelper AuthHelper;
 @{
     ViewData["Title"] = Model.Article.Title;
     ViewData["Keywords"] = Model.Article.Keywords;
@@ -112,12 +114,12 @@
                                                     </div>
                                                     <div class="content">
                                                         <h3 class="user">
-                                                             @comment.Name  <span class="comment-time"> @comment.CreationDate </span>
+                                                            @comment.Name <span class="comment-time"> @comment.CreationDate </span>
                                                         </h3>
                                                         @if (comment.ParentId > 0)
                                                         {
                                                             <p>
-                                                                <span class="text-info">در پاسخ به:</span> <a href="#comment-@comment.ParentId"> @comment.ParentName</a>
+                                                                <span class="text-info">در پاسخ به:</span> <a href="#comment-@comment.ParentId">@comment.ParentName</a>
                                                             </p>
                                                         }
                                                         <p class="comment-text">@comment.Message</p>
@@ -129,7 +131,7 @@
                                         <div class="comment-form-container">
                                             <h3 class="comment-form-title">نظر خود را با ما به اشتراک بگذارید</h3>
                                             <p>
-                                                *ایمیل وارده شده توسط شما به صورت محرمانه است و به دیگران نمایش داده نخواهد شد.
+                                                * ایمیل وارده شده توسط شما به صورت محرمانه است و به دیگران نمایش داده نخواهد شد.
                                             </p>
                                             <div class="comment-form" id="postComment">
                                                 <form method="post">
@@ -137,7 +139,7 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
                                                                 <label>نظر شما</label>
-                                                                <textarea name="message" id="messaeg" placeholder="نظر خود را بنویسید..."></textarea>
+                                                                <textarea name="message" class="required" id="messaeg" placeholder="نظر خود را بنویسید..."></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -155,7 +157,7 @@
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
                                                                 <label>وبسایت</label>
-                                                                <input type="text" name="website" placeholder="مثال: http://www.nemone.com">
+                                                                <input type="text" name="website" placeholder="مثال: http://www.Domain.com">
                                                             </div>
                                                         </div>
                                                         <input type="hidden" name="ownerRecordId" value="@Model.Article.Id" />

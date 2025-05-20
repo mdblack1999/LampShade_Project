@@ -242,7 +242,7 @@ select {
 }
 
 .section-space--half {
-    margin-bottom: 50px !important;
+    margin-bottom: 20px !important;
 }
 
 .section-space--30 {
@@ -512,7 +512,7 @@ select {
 
         .navigation-menu-wrapper nav > ul > li.menu-item-has-children > a::after {
             font-family: Ionicons;
-            font-size: 11px;
+            font-size: 15px;
             font-weight: 300;
             float: right;
             margin-left: 5px;
@@ -1024,9 +1024,9 @@ select {
     top: 100%;
     right: 0;
     display: none;
-    width: 300px;
+    width: 180px;
     margin-top: 34px;
-    padding: 35px 40px 32px 40px;
+    padding: 20px;
     background-color: #fff;
 }
 
@@ -2389,10 +2389,10 @@ select {
     }
 
 .single-grid-product__price .discounted-price {
-    font-size: 24px;
+    font-size: 23px;
     font-weight: 700;
     line-height: 22px;
-    margin-right: 10px;
+    margin-right: 7px;
     color: #e33;
 }
 
@@ -3181,10 +3181,10 @@ select {
     font-weight: 650;
     position: fixed;
     z-index: 9;
-    right: 4%;
+    right: 1.5%;
     bottom: 200px;
     display: none;
-    padding: 18px 28px;
+    padding: 16px 20px;
     cursor: pointer;
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -3311,7 +3311,7 @@ select {
     display: -ms-flexbox;
     display: flex;
     padding: 8px 0;
- /* border-top: 1px solid #f0f0f0;
+    /* border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0; */
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
@@ -4156,6 +4156,7 @@ select {
 .product-actions .product-buttons {
     line-height: 1;
     margin-left: 15px;
+    direction: rtl;
 }
 
     .product-actions .product-buttons .cart-btn {
@@ -4227,12 +4228,13 @@ select {
         }
 
 .social-share-buttons {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
     .social-share-buttons h5 {
-        line-height: 30px;
+        line-height: 38px;
         text-transform: uppercase;
+        border-top: 1px solid #ddd;
     }
 
     .social-share-buttons ul {
@@ -4559,7 +4561,7 @@ select {
             .cart-table .table thead tr th {
                 font-size: 16px;
                 font-weight: 700;
-                padding: 12px 20px;
+                padding: 12px 18px;
                 text-align: center;
                 text-transform: uppercase;
                 color: #292929;
@@ -4764,7 +4766,7 @@ select {
     width: 100%;
     max-width: 445px;
     margin-left: auto;
-    margin-right: 25px;
+    margin-right: 10px;
 }
 
     .cart-summary .cart-summary-wrap {
@@ -4857,6 +4859,7 @@ select {
 
 .checkout-btn {
     font-weight: 400;
+    min-width: 150px;
     text-transform: uppercase;
     color: #fff;
     border-color: #292929;
@@ -5081,7 +5084,8 @@ select {
 /*-- Checkout Payment Method --*/
 
 .checkout-payment-method {
-    padding: 45px;
+    padding: 35px;
+    margin-right : 10px;
     background-color: #f2f2f2;
 }
 
@@ -5100,7 +5104,8 @@ select {
     }
 
         .single-method input[type='radio'] + label {
-            font-size: 14px;
+            font-size: 16px;
+            cursor: pointer;
             font-weight: 400;
             line-height: 20px;
             position: relative;
@@ -6683,7 +6688,7 @@ h3.comment-counter {
                 }
 
             .comment-container .single-comment .content p.comment-text {
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 20px;
                 color: #999;
             }
