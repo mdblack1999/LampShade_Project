@@ -9,6 +9,7 @@ using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configure;
 using DiscountManagement.Configuration;
 using InventoryManagement.Infrastructure.Configuration;
+using InventoryManagement.Presentation.Api;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServiceHost.Controller;
 using ShopManagement.Configuration;
 
 namespace ServiceHost
@@ -87,6 +89,7 @@ namespace ServiceHost
                     builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentAdmin }));
             });
 
+            services.AddControllers();
 
             services.AddRazorPages()
                 .AddMvcOptions(options => options.Filters.Add<SecurityPageFilter>())
@@ -99,7 +102,9 @@ namespace ServiceHost
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Inventory" , "Inventory");
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Comments" , "Comment");
                     options.Conventions.AuthorizeAreaFolder("Administration" , "/Blog" , "Blogs");
-                });
+                }).AddApplicationPart(typeof(ProductController).Assembly)
+                .AddApplicationPart(typeof(InventoryController).Assembly)
+                .AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app , IWebHostEnvironment env)
@@ -125,14 +130,12 @@ namespace ServiceHost
 
             app.UseRouting();
 
-            app.UseStatusCodePagesWithReExecute("/NotFound");
-
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapFallbackToPage("/NotFound");
                 endpoints.MapControllers();
             });
         }

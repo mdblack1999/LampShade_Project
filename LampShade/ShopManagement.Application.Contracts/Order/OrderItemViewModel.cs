@@ -7,6 +7,7 @@
         public string Product { get; set; }
         public int Count { get; set; }
         public double UnitPrice { get; set; }
+        public double TotalAmount { get; set; }
         public int DiscountRate { get; set; }
         public long OrderId { get; set; }
     }
