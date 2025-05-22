@@ -76,15 +76,16 @@ namespace ServiceHost.Pages
                 var redirectUrl = _zarinPalFactory.GetStartPayUrl(paymentResponse.Data.Authority);
                 return Redirect(redirectUrl);
             }
+            var issueTrackingNo = _orderApplication.PaymentSucceeded(orderId , 0);
+            Response.Cookies.Delete("cart-items");
             var paymentResult = new PaymentResult();
             return RedirectToPage("/PaymentResult" ,
                 paymentResult.Succeeded(
-                    "سفارش شما با موفقیت ثبت شد. پس از تماس کارشناسان ما و پرداخت وجه، سفارش ارسال خواهد شد." ,
-                    null));
+                    "سفارش شما با موفقیت ثبت شد\n پس از تماس کارشناسان ما و پرداخت وجه، سفارش شما تایید و ارسال خواهد شد." ,
+                    issueTrackingNo));
         }
 
-        public IActionResult OnGetCallBack([FromQuery] string authority , [FromQuery] string status ,
-            [FromQuery] long oId)
+        public IActionResult OnGetCallBack([FromQuery] string authority , [FromQuery] string status , [FromQuery] long oId)
         {
             var orderAmount = _orderApplication.GetAmountBy(oId);
             var verificationResponse = _zarinPalFactory.CreateVerificationRequest(authority ,

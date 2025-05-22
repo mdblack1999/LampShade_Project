@@ -25,7 +25,7 @@ namespace _0_Framework.Application
             if (!IsAuthenticated())
                 return result;
 
-            List<Claim> claims = _contextAccessor.HttpContext.User.Claims.ToList();
+            var claims = _contextAccessor.HttpContext.User.Claims.ToList();
 
             result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId")?.Value);
             result.Username = claims.FirstOrDefault(x => x.Type == "Username")?.Value;
@@ -89,7 +89,8 @@ namespace _0_Framework.Application
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
                 new Claim("Username", account.Username),// Or Use ClaimTypes.NameIdentifier
                 new Claim("Picture", account.Picture),
-                new Claim("permissions",permissions)
+                new Claim("permissions",permissions),
+                new Claim("Mobile",account.Mobile)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims , CookieAuthenticationDefaults.AuthenticationScheme);

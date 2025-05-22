@@ -57,8 +57,8 @@
 				};
 				$(nPaging).append(
 					'<ul class="pagination">'+
-						'<li class="prev disabled"><a href="#"><span class="fa fa-chevron-left"></span></a></li>'+
-						'<li class="next disabled"><a href="#"><span class="fa fa-chevron-right"></span></a></li>'+
+						'<li class="prev disabled"><a href="javascript:void(0)"><span class="fa fa-chevron-left"></span></a></li>'+
+						'<li class="next disabled"><a href="javascript:void(0)"><span class="fa fa-chevron-right"></span></a></li>'+
 					'</ul>'
 				);
 				var els = $('a', nPaging);
@@ -88,7 +88,7 @@
 					$('li:gt(0)', an[i]).filter(':not(:last)').remove();
 					for ( j=iStart ; j<=iEnd ; j++ ) {
 						sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
-						$('<li '+sClass+'><a href="#">'+j+'</a></li>')
+						$('<li '+sClass+'><a href="javascript:void(0)">'+j+'</a></li>')
 							.insertBefore( $('li:last', an[i])[0] )
 							.bind('click', function (e) {
 								e.preventDefault();

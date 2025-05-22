@@ -60,8 +60,8 @@
                                     <th>پرداختی</th>
                                     <th>نحوه پرداخت</th>
                                     <th>شماره پیگیری</th>
-                                    <th>شناسه خرید</th>
-                                    <th>تاریخ خرید</th>
+                                    <th>شناسه پرداخت</th>
+                                    <th>تاریخ سفارش</th>
                                     <th>وضعیت</th>
                                     <th>عملیات</th>
                                 </tr>
@@ -98,11 +98,23 @@
                                             }
                                         </td>
                                         <td>
-                                            @if (item.IsPaid == false)
+                                            @if (item.IsPaid == false && !item.IsCanceled)
                                             {
                                                 <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
                                                     <i class="fa fa-check"></i> تایید
                                                 </a>
+                                                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
+                                                    <i class="fa fa-close"></i> لغو
+                                                </a>
+                                            }
+                                            @if (item.IsCanceled)
+                                            {
+                                                <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
+                                                    <i class="fa fa-check"></i> تایید
+                                                </a>
+                                            }
+                                            @if (item.IsPaid && !item.IsCanceled)
+                                            {
                                                 <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
                                                     <i class="fa fa-close"></i> لغو
                                                 </a>

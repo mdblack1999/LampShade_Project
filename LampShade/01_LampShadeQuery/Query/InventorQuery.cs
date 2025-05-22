@@ -3,6 +3,7 @@ using InventoryManagement.Infrastructure.EFCore;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Infrastructure.EfCore;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace _01_LampShadeQuery.Query
 {
@@ -19,8 +20,8 @@ namespace _01_LampShadeQuery.Query
 
         public StockStatus CheckStock(IsInStock command)
         {
-            var inventory = _inventoryContext.Inventory.FirstOrDefault(x => x.ProductId == command.ProductId);
-            var product = _shopContext.Products.Select(x => new {x.Id, x.Name})
+            var inventory = _inventoryContext.Inventory.AsNoTracking().FirstOrDefault(x => x.ProductId == command.ProductId);
+            var product = _shopContext.Products.AsNoTracking().Select(x => new {x.Id, x.Name})
                 .FirstOrDefault(x => x.Id == command.ProductId);
             if (inventory == null || inventory.CalculateCurrentCount() < command.Count)
             {

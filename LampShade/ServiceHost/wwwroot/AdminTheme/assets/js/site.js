@@ -1,6 +1,10 @@
-﻿var SinglePage = {};
+﻿$(document).on("click", 'a[href="javascript:void(0)"]', function (e) {
+    e.preventDefault();
+});
+var SinglePage = {};
 
 SinglePage.LoadModal = function () {
+    var hash = window.location.hash || "";
     var url = window.location.hash.toLowerCase();
     if (!url.startsWith("#showmodal")) {
         return;
@@ -102,7 +106,9 @@ function CallBackHandler(data, action, form) {
         case "setValue":
             {
                 const element = form.data("element");
-                $(`#${element}`).html(data);
+                if (element) {
+                    $(`#${element}`).html(data);
+                }
             }
             break;
         default:
@@ -198,24 +204,27 @@ jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
 
 jQuery.validator.addMethod("FileExtensionLimit",
     function (value, element, params) {
-    var allowedExtensions = ['.jpg', '.jpeg', '.png'];
-    var fileName = element.files[0].name;
-    var extension = fileName.substr(fileName.lastIndexOf('.')).toLowerCase();
+        var allowedExtensions = ['.jpg', '.jpeg', '.png'];
+        var fileName = element.files[0].name;
+        var extension = fileName.substr(fileName.lastIndexOf('.')).toLowerCase();
 
-    if (allowedExtensions.indexOf(extension) === -1) {
-        return false; 
-    }
-    return true;
-}, "فرمت فایل باید jpg، jpeg یا png باشد.");
+        if (allowedExtensions.indexOf(extension) === -1) {
+            return false;
+        }
+        return true;
+    }, "فرمت فایل باید jpg، jpeg یا png باشد.");
 
 jQuery.validator.unobtrusive.adapters.addBool("FileExtensionLimit");
 
-$.notifyDefaults({
-    placement: { from: "top", align: "left" },
-    delay: 4000,
-    animate: {
-        enter: 'animated fadeInDown',
-        exit: 'animated fadeOutUp'
+$.notify(
+    {},
+    {
+        placement: { from: "top", align: "left" },
+        delay: 4000,
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        }
     }
-});
+);
 

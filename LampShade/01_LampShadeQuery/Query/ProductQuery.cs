@@ -164,7 +164,7 @@ namespace _01_LampShadeQuery.Query
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.DiscountRate , x.ProductId , x.EndDate }).AsNoTracking().ToList();
 
-            var query = _context.Products
+            var query = _context.Products.AsNoTracking()
                 .Include(x => x.Category).AsSplitQuery()
                  .Select(product => new ProductQueryModel
                  {
@@ -177,7 +177,7 @@ namespace _01_LampShadeQuery.Query
                      ShortDescription = product.ShortDescription ,
                      PictureTitle = product.PictureTitle ,
                      Slug = product.Slug
-                 }).AsNoTracking();
+                 });
 
             if (!string.IsNullOrWhiteSpace(value))
                 query = query.Where(x => x.Name.Contains(value) || x.ShortDescription.Contains(value));
@@ -210,7 +210,7 @@ namespace _01_LampShadeQuery.Query
 
         public List<CartItem> CheckInventoryStatus(List<CartItem> cartItems)
         {
-            var inventory = _inventoryContext.Inventory.ToList();
+            var inventory = _inventoryContext.Inventory.AsNoTracking().ToList();
 
             foreach (var cartItem in cartItems.Where(cartItem =>
                          inventory.Any(x => x.ProductId == cartItem.Id && x.InStock)))

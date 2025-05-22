@@ -10,18 +10,21 @@ namespace _0_Framework.Application
         public string Fullname { get; set; }
         public string Picture { get; set; }
         public string Username { get; set; }
+        public string Mobile { get; set; }
         public List<int> Permissions { get; set; }
 
         public AuthViewModel()
         {
         }
 
-        public AuthViewModel(long id , long roleId , string fullname , string username , string picture , List<int> permissions)
+        public AuthViewModel(long id , long roleId , string fullname , string username , string mobile , string picture ,
+            List<int> permissions)
         {
             Id = id;
             RoleId = roleId;
             Fullname = fullname;
             Username = username;
+            Mobile = mobile;
             Picture = picture;
             Permissions = permissions;
         }

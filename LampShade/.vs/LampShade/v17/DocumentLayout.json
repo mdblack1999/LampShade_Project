@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\wwwroot\\theme\\assets\\js\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\wwwroot\\theme\\assets\\js\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\01_lampshadequery\\query\\inventorquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|solutionrelative:01_lampshadequery\\query\\inventorquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86AD7C5B-6A86-440B-B644-32F07B269060}|InventoryManagement.Presentation.Api\\InventoryManagement.Presentation.Api.csproj|D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\inventorymanagement.presentation.api\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86AD7C5B-6A86-440B-B644-32F07B269060}|InventoryManagement.Presentation.Api\\InventoryManagement.Presentation.Api.csproj|solutionrelative:inventorymanagement.presentation.api\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\01_lampshadequery\\contracts\\inventory\\iinventorquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{615CB450-E52B-445F-8ED7-58C5AB187E0A}|01_LampShadeQuery\\01_LampShadeQuery.csproj|solutionrelative:01_lampshadequery\\contracts\\inventory\\iinventorquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\0_framework\\application\\email\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B74B661-B8DF-4C64-BF4C-3B73A49BE824}|0_Framework\\0_Framework.csproj|solutionrelative:0_framework\\application\\email\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 302,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,80 +42,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cart.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Cart.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Cart.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Cart.cshtml",
-              "RelativeToolTip": "ServiceHost\\Pages\\Cart.cshtml",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAB4AAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T22:25:53.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "custom.js",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\wwwroot\\Theme\\assets\\js\\custom.js",
-              "RelativeDocumentMoniker": "ServiceHost\\wwwroot\\Theme\\assets\\js\\custom.js",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\wwwroot\\Theme\\assets\\js\\custom.js",
-              "RelativeToolTip": "ServiceHost\\wwwroot\\Theme\\assets\\js\\custom.js",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAAAI0AAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-20T22:18:15.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InventorQuery.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Query\\InventorQuery.cs",
-              "RelativeDocumentMoniker": "01_LampShadeQuery\\Query\\InventorQuery.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Query\\InventorQuery.cs",
-              "RelativeToolTip": "01_LampShadeQuery\\Query\\InventorQuery.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAAAB0AAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T22:09:01.732Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IInventorQuery.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Contracts\\Inventory\\IInventorQuery.cs",
-              "RelativeDocumentMoniker": "01_LampShadeQuery\\Contracts\\Inventory\\IInventorQuery.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\01_LampShadeQuery\\Contracts\\Inventory\\IInventorQuery.cs",
-              "RelativeToolTip": "01_LampShadeQuery\\Contracts\\Inventory\\IInventorQuery.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T22:08:54.531Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Startup.cs",
-              "RelativeDocumentMoniker": "ServiceHost\\Startup.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Startup.cs",
-              "RelativeToolTip": "ServiceHost\\Startup.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAAAG4AAAAJAAAA",
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Index.cshtml.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "ServiceHost\\Pages\\Index.cshtml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T22:06:31.653Z",
+              "WhenOpened": "2025-05-22T12:27:03.041Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InventoryController.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Presentation.Api\\InventoryController.cs",
-              "RelativeDocumentMoniker": "InventoryManagement.Presentation.Api\\InventoryController.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\InventoryManagement.Presentation.Api\\InventoryController.cs",
-              "RelativeToolTip": "InventoryManagement.Presentation.Api\\InventoryController.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAiwB0AAAAMAAAA",
+              "DocumentIndex": 1,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\Email\\EmailService.cs",
+              "RelativeDocumentMoniker": "0_Framework\\Application\\Email\\EmailService.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\0_Framework\\Application\\Email\\EmailService.cs",
+              "RelativeToolTip": "0_Framework\\Application\\Email\\EmailService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T18:02:02.54Z",
+              "WhenOpened": "2025-05-22T12:10:03.683Z",
               "EditorCaption": ""
             }
           ]

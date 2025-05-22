@@ -14,73 +14,86 @@
     };
 
     //creates plot graph
-    Dashboard.prototype.createPlotGraph = function(selector, data1, data2, labels, colors, borderColor, bgColor) {
-      //shows tooltip
-      function showTooltip(x, y, contents) {
-        $('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
-          position: 'absolute',
-          top: y + 5,
-          left: x + 5
-        }).appendTo("body").fadeIn(200);
-      }
+    Dashboard.prototype.createPlotGraph = function (selector, data1, data2, labels, colors, borderColor, bgColor) {
+        // shows tooltip
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css({
+                position: 'absolute',
+                top: y + 5,
+                left: x + 5
+            }).appendTo("body").fadeIn(200);
+        }
 
-      $.plot($(selector),
-          [ { data: data1,
-            label: labels[0],
-            color: colors[0]
-          },
-          { data: data2,
-            label: labels[1],
-            color: colors[1]
-          }
-        ],
-        {
-            series: {
-               lines: {
-              show: true,
-              fill: true,
-              lineWidth: 1,
-              fillColor: {
-                colors: [ { opacity: 0.0 },
-                          { opacity: 0.7 }
-                        ]
-              }
-            },
-            points: {
-              show: true
-            },
-            shadowSize: 0
-            },
-            legend: {
-            position: 'nw'
-          },
-          grid: {
-            hoverable: true,
-            clickable: true,
-            borderColor: borderColor,
-            borderWidth: 0,
-            labelMargin: 10,
-            backgroundColor: bgColor
-          },
-          yaxis: {
-            min: 0,
-            max: 15,
-            color: 'rgba(0,0,0,0)'
-          },
-          xaxis: {
-            color: 'rgba(0,0,0,0)'
-          },
-          tooltip: true,
-          tooltipOpts: {
-              content: '%s: Value of %x is %y',
-              shifts: {
-                  x: -60,
-                  y: 25
-              },
-              defaultTheme: false
-          }
-      });
-    },
+        if (
+            selector && $(selector).length &&
+            Array.isArray(data1) && Array.isArray(data2) &&
+            Array.isArray(labels) && labels.length >= 2 &&
+            Array.isArray(colors) && colors.length >= 2
+        ) {
+            $.plot($(selector),
+                [
+                    {
+                        data: data1,
+                        label: labels[0],
+                        color: colors[0]
+                    },
+                    {
+                        data: data2,
+                        label: labels[1],
+                        color: colors[1]
+                    }
+                ],
+                {
+                    series: {
+                        lines: {
+                            show: true,
+                            fill: true,
+                            lineWidth: 1,
+                            fillColor: {
+                                colors: [
+                                    { opacity: 0.0 },
+                                    { opacity: 0.7 }
+                                ]
+                            }
+                        },
+                        points: {
+                            show: true
+                        },
+                        shadowSize: 0
+                    },
+                    legend: {
+                        position: 'nw'
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        borderColor: borderColor,
+                        borderWidth: 0,
+                        labelMargin: 10,
+                        backgroundColor: bgColor
+                    },
+                    yaxis: {
+                        min: 0,
+                        max: 15,
+                        color: 'rgba(0,0,0,0)'
+                    },
+                    xaxis: {
+                        color: 'rgba(0,0,0,0)'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%s: Value of %x is %y',
+                        shifts: {
+                            x: -60,
+                            y: 25
+                        },
+                        defaultTheme: false
+                    }
+                });
+        } else {
+            console.warn('createPlotGraph: ورودی‌های نامعتبر – نمودار رسم نشد.');
+        }
+    };
     //end plot graph
 
     //creates Pie Chart

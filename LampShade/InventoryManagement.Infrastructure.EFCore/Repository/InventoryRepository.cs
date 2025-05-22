@@ -40,8 +40,17 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
 
         public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
         {
-            var account = _accountContext.Accounts.Select(x => new { x.Id , x.FullName }).ToList();
+            var account = _accountContext.Accounts.AsNoTracking().Select(x => new { x.Id , x.FullName }).ToList();
             var inventory = _inventoryContext.Inventory.AsNoTracking().FirstOrDefault(x => x.Id == inventoryId);
+            if (inventory == null)
+                return new List<InventoryOperationViewModel>
+                {
+                   new InventoryOperationViewModel
+                   {
+                       Count = 0,
+                       Description = "متاسفانه با مشخصات فعلی هیچ عملیاتی یافت نشد"
+                   }
+                };
             var operations = inventory.Operations.Select(x => new InventoryOperationViewModel
             {
                 Id = x.Id ,
@@ -89,7 +98,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
             }
 
-            var inventory = query.OrderByDescending(x => x.Id).ToList();
+            var inventory = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
 
             inventory.ForEach(item =>
               item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name);

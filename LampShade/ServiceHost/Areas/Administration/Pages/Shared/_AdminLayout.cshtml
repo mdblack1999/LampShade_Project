@@ -59,7 +59,7 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a asp-page="/Index" class="logo"><i class="md md-terrain"></i> <span>لوازم خانگی لوویز </span></a>
+                    <a asp-page="/Index" class="logo"><i class="md md-terrain"></i> <span>فروشگاه لوویز </span></a>
                 </div>
             </div>
             <!-- Button mobile view to collapse sidebar menu -->
@@ -81,7 +81,7 @@
 
                         <ul class="nav navbar-nav navbar-left pull-left">
                             <li class="dropdown hidden-xs">
-                                <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                <a href="javascript:void(0)" data-target="javascript:void(0)" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
                                     <i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg">
@@ -142,14 +142,14 @@
 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle profile pull-left" data-toggle="dropdown" aria-expanded="true">
-                                    <span class="Role-name"> @currentAccount.Role </span>
+                                    <span class="Role-name"> @currentAccount.Role <span class="caret"></span> </span>
                                     <img src="~/ProductPictures/@currentAccount.Picture" alt="user-img" class="img-circle">
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
-                                    <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
-                                    <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
-                                    <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                                    <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> پروفایل</a></li>
+                                    <li><a href="javascript:void(0)"><i class="md md-settings"></i> تنظیمات</a></li>
+                                    <li><a href="javascript:void(0)"><i class="md md-lock"></i> قفل صفحه</a></li>
+                                    <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> خروج</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -254,6 +254,8 @@
             initialValueType: "persian"
         });
     </script>
+
+    @* Tiny Mce *@
     <script src="https://cdn.tiny.cloud/1/i8lzpgfxdcm92ukkzyp08p796bel9ic1mqdh903l8luhayz5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
