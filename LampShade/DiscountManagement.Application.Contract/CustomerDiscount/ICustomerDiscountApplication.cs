@@ -9,5 +9,6 @@ namespace DiscountManagement.Application.Contract.CustomerDiscount
         OperationResult Edit(EditCustomerDiscount command);
         EditCustomerDiscount GetDetails(long id);
         List<CustomerDiscountViewModel> Search(CustomerDiscountSearchModel searchModel);
-    }
+        List<CustomerDiscountViewModel> GetAllCustomerDiscount();
+    }   
 }

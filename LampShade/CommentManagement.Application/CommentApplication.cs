@@ -58,5 +58,10 @@ namespace CommentManagement.Application
         {
             return _commentRepository.Search(searchModel);
         }
+
+        public List<CommentViewModel> GetAllComment()
+        {
+            return _commentRepository.GetAllComment();
+        }
     }
 }

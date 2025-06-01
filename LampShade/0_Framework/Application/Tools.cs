@@ -56,6 +56,9 @@ namespace _0_Framework.Application
 
         public static string ToEnglishNumber(this string strNum)
         {
+            if (string.IsNullOrWhiteSpace(strNum))
+                return string.Empty; 
+
             var cash = strNum;
             for (var i = 0; i < 10; i++)
                 cash = cash.Replace(Pn[i], En[i]);
@@ -94,6 +97,9 @@ namespace _0_Framework.Application
 
         public static DateTime ToGeorgianDateTime(this string persianDate)
         {
+            if (string.IsNullOrWhiteSpace(persianDate))
+                return DateTime.MinValue; 
+
             persianDate = persianDate.ToEnglishNumber();
             var year = Convert.ToInt32(persianDate.Substring(0, 4));
             var month = Convert.ToInt32(persianDate.Substring(5, 2));

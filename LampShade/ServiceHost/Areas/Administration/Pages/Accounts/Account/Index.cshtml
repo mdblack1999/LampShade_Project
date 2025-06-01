@@ -51,27 +51,30 @@
 
 <div class="row" permission="AccountPermission.ListAccounts">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <dikv class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">لیست کاربران (@Model.Accounts.Count)</h3>
             </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-striped table-bordered">
-                            <thead>
+            <form method="post">
+                <input type="hidden" id="TableJson" name="TableJson" />
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>عکس</th>
                                     <th>نام</th>
                                     <th>نام کاربری</th>
                                     <th>موبایل</th>
+                                    <th style="display:none">شناسه نقش</th>
                                     <th>نقش</th>
                                     <th>تاریخ ثبت نام</th>
                                     <th>عملیات</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 @foreach (var item in Model.Accounts)
                                 {
                                     <tr>
@@ -82,6 +85,7 @@
                                         <td class="text-center">@item.FullName</td>
                                         <td class="text-center">@item.Username</td>
                                         <td class="text-center">@item.Mobile</td>
+                                        <td style="display:none">@item.RoleId</td>
                                         <td class="text-center">@item.Role</td>
                                         <td class="text-center">@item.CreationDate</td>
                                         <td>
@@ -96,12 +100,14 @@
                                         </td>
                                     </tr>
                                 }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary">خروجی اکسل</button>
+            </form>
+        </dikv>
     </div>
 </div>
 
@@ -111,7 +117,27 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').dataTable();
+            var table = $('#datatable').DataTable();
+
+            $('form').on('submit', function () {
+                var raw = table.rows({ search: 'applied' }).data().toArray();
+
+                var data = raw.map(function (row) {
+                    return {
+                        Id:            parseInt(row[0]),
+                        ProfilePhoto:  $(row[1]).attr('src'),
+                        FullName:      row[2],
+                        Username:      row[3],
+                        Mobile:        row[4],
+                        RoleId:        parseInt(row[5]),
+                        Role:          row[6],
+                        CreationDate:  row[7]
+                    };
+                });
+
+                $('#TableJson').val(JSON.stringify(data));
+            });
         });
     </script>
 }
+

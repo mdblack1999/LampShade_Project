@@ -6,6 +6,8 @@ using _0_Framework.Application.Email;
 using _0_Framework.Application.Sms;
 using _0_Framework.Application.ZarinPal;
 using _0_Framework.Infrastructure;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Export;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
 using AccountManagement.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configure;
@@ -52,6 +54,7 @@ namespace ServiceHost
             services.AddTransient<IZarinPalFactory , ZarinPalFactory>();
             services.AddTransient<ISmsService , SmsService>();
             services.AddTransient<IEmailService , EmailService>();
+            services.AddTransient<IReportExporter, ReportExporter>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

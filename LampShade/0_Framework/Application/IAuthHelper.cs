@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace _0_Framework.Application
 {
@@ -13,5 +12,8 @@ namespace _0_Framework.Application
         List<int> GetPermissions();
         long CurrentAccountId();
         string CurrentAccountMobile();
+        void MarkArticleAsViewed(long articleId);
+        bool HasViewedArticle(long articleId);
+        string GetClientIp();
     }
 }

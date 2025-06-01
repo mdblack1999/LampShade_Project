@@ -50,6 +50,11 @@ namespace InventoryManagement.Application
             return _inventoryRepository.GetDetails(id);
         }
 
+        public List<InventoryViewModel> GetAllInventories()
+        {
+            return _inventoryRepository.GetAllInventories();
+        }
+
         public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
         {
             return _inventoryRepository.GetOperationsLog(inventoryId);

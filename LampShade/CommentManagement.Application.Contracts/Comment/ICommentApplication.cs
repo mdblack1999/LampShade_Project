@@ -8,5 +8,7 @@ namespace CommentManagement.Application.Contracts.Comment
         OperationResult Add(AddComment command);
         OperationResult ChangeStatus(long id , CommentViewModel.CommentStatus status);
         List<CommentViewModel> Search(CommentSearchModel searchModel);
+        List<CommentViewModel> GetAllComment();
+
     }
 }

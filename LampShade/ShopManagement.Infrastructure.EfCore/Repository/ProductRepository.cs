@@ -18,7 +18,10 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
 
         public Product GetProductWithCategory(long id)
         {
-            return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+            return _context.Products
+                           .Include(x => x.Category)
+                           .AsNoTracking()
+                           .FirstOrDefault(x => x.Id == id);
         }
 
         public EditProduct GetDetails(long id)
@@ -42,11 +45,15 @@ namespace ShopManagement.Infrastructure.EfCore.Repository
 
         public List<ProductViewModel> GetProducts()
         {
-            return _context.Products.Select(x => new ProductViewModel
+            return _context.Products.AsNoTracking().Select(x => new ProductViewModel
             {
                 Id = x.Id ,
                 Name = x.Name ,
-
+                Category = x.Category.Name ,
+                CategoryId = x.CategoryId ,
+                Code = x.Code ,
+                Picture = x.Picture ,
+                CreationDate = x.CreationDate.ToFarsi()
             }).ToList();
         }
 

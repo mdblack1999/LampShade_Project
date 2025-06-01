@@ -8,5 +8,7 @@ namespace DiscountManagement.Domain.ColleagueDiscountAgg
     {
         EditColleagueDiscount GetDetails(long id);
         List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel);
+        List<ColleagueDiscountViewModel> GetColleagueDiscount();
+
     }
 }

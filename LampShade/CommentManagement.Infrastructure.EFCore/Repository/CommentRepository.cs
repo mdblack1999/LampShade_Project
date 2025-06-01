@@ -18,7 +18,8 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
 
         public List<CommentViewModel> Search(CommentSearchModel searchModel)
         {
-            var query = _context.Comments.AsNoTracking()
+            searchModel ??= new CommentSearchModel();
+            var query = _context.Comments
                 .Select(x => new CommentViewModel
                 {
                     Id = x.Id ,
@@ -49,6 +50,32 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
             };
 
             return query.OrderByDescending(x => x.Id).ToList();
+        }
+
+        public List<CommentViewModel> GetAllComment()
+        {
+            var query = _context.Comments
+                .Select(x => new CommentViewModel
+                {
+                    Id = x.Id ,
+                    Name = x.Name ,
+                    Email = x.Email ,
+                    Website = x.Website ,
+                    Message = x.Message ,
+                    OwnerRecordId = x.OwnerRecordId ,
+                    Type = x.Type ,
+                    CommentDate = x.CreationDate.ToFarsiFull() ,
+                    Status = (CommentViewModel.CommentStatus)x.Status ,
+
+                }).OrderByDescending(x => x.Id).ToList();
+            foreach (var item in query)
+            {
+                if (item.Type == 1)
+                    item.OwnerName = "Product";
+                else if(item.Type ==2)
+                    item.OwnerName = "article";
+            }
+            return query;
         }
     }
 }

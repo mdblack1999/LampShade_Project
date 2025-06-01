@@ -13,6 +13,7 @@ namespace _0_Framework.Application
     public class AuthHelper : IAuthHelper
     {
         private readonly IHttpContextAccessor _contextAccessor;
+        private const string ViewedCookieName = "ViewedArticles";
 
         public AuthHelper(IHttpContextAccessor contextAccessor)
         {
@@ -61,6 +62,56 @@ namespace _0_Framework.Application
                 : "";
         }
 
+        public void MarkArticleAsViewed(long articleId)
+        {
+            var http = _contextAccessor.HttpContext;
+            var existing = http.Request.Cookies[ViewedCookieName] ?? "";
+            var viewedList = new List<string>();
+            if (!string.IsNullOrWhiteSpace(existing))
+                viewedList = existing.Split(',').Select(x => x.Trim()).ToList();
+
+            var idStr = articleId.ToString();
+            if (!viewedList.Contains(idStr))
+                viewedList.Add(idStr);
+
+            var secureCookieValue = string.Join(",", viewedList);
+
+            http.Response.Cookies.Append(
+                ViewedCookieName,
+                secureCookieValue,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    Expires = DateTimeOffset.UtcNow.AddDays(2)
+                });
+        }
+
+        public bool HasViewedArticle(long articleId)
+        {
+            var http = _contextAccessor.HttpContext;
+            var cookieValue = http.Request.Cookies[ViewedCookieName] ?? "";
+            if (string.IsNullOrWhiteSpace(cookieValue))
+                return false;
+
+            var viewedList = cookieValue.Split(',').Select(x => x.Trim()).ToList();
+            return viewedList.Contains(articleId.ToString());
+        }
+
+        public string GetClientIp()
+        {
+            var http = _contextAccessor.HttpContext;
+
+            var forwarded = http.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(forwarded))
+            {
+                var ip = forwarded.Split(',').First().Trim();
+                return ip;
+            }
+
+            return http.Connection.RemoteIpAddress?.ToString() ?? "";
+        }
+
         public string CurrentAccountRole()
         {
             if (IsAuthenticated())
@@ -102,7 +153,21 @@ namespace _0_Framework.Application
 
             _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme ,
                 new ClaimsPrincipal(claimsIdentity) ,
-                authProperties);
+                authProperties).Wait();
+
+            var ip = GetClientIp();
+            if (!string.IsNullOrWhiteSpace(ip))
+            {
+                _contextAccessor.HttpContext.Response.Cookies.Append(
+                    "UserIP",
+                    ip,
+                    new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Secure = true,
+                        Expires = DateTimeOffset.UtcNow.AddDays(2)
+                    });
+            }
         }
 
         public void SignOut()

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BlogManagement.Infrastructure.EFCore.Mappings
 {
-    internal class ArticleMapping : IEntityTypeConfiguration<Article>
+    public class ArticleMapping : IEntityTypeConfiguration<Article>
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {

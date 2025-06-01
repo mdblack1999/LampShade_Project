@@ -5,8 +5,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
 using _0_Framework.Infrastructure;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
+using BlogManagement.Application.Contracts.Article;
 using InventoryManagement.Infrastructure.Configuration.Permission;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
@@ -19,13 +22,18 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         public List<InventoryViewModel> Inventory;
         public SelectList Products;
 
+        [BindProperty]
+        public string TableJson { get; set; }
+
         private readonly IProductApplication _productApplication;
         private readonly IInventoryApplication _inventoryApplication;
+        private readonly IReportExporter _reportExporter;
 
-        public IndexModel(IProductApplication productApplication , IInventoryApplication inventoryApplication)
+        public IndexModel(IProductApplication productApplication , IInventoryApplication inventoryApplication, IReportExporter reportExporter)
         {
             _productApplication = productApplication;
             _inventoryApplication = inventoryApplication;
+            _reportExporter = reportExporter;
         }
 
         [NeedsPermission(InventoryPermissions.ListInventory)]
@@ -103,6 +111,15 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         {
             var log = _inventoryApplication.GetOperationsLog(id);
             return Partial("OperationLog" , log);
+        }
+
+        public IActionResult OnPostExportToExcel()
+        {
+            var data = JsonConvert.DeserializeObject<List<InventoryViewModel>>(TableJson);
+            var fileContent = _reportExporter.ExportToExcel(data, "Inventory.xlsx");
+            return File(fileContent,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "InventoryReport.xlsx");
         }
     }
 }

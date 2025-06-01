@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using _0_Framework.Infrastructure;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
 using AccountManagement.Configuration.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
 {
@@ -16,14 +18,18 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
         public List<AccountViewModel> Accounts;
         public AccountSearchModel SearchModel;
         public SelectList Roles;
+        [BindProperty]
+        public string TableJson { get; set; }
 
         private readonly IAccountApplication _accountApplication;
         private readonly IRoleApplication _roleApplication;
+        private readonly IReportExporter _reportExporter;
 
-        public IndexModel(IAccountApplication accountApplication , IRoleApplication roleApplication)
+        public IndexModel(IAccountApplication accountApplication , IRoleApplication roleApplication, IReportExporter reportExporter)
         {
             _accountApplication = accountApplication;
             _roleApplication = roleApplication;
+            _reportExporter = reportExporter;
         }
 
         [NeedsPermission(AccountPermission.ListAccounts)]
@@ -73,6 +79,14 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
         {
             var result = _accountApplication.ChangePassword(command);
             return new JsonResult(result);
+        }
+        public IActionResult OnPostExportToExcel()
+        {
+            var data = JsonConvert.DeserializeObject<List<AccountViewModel>>(TableJson);
+            var fileContent = _reportExporter.ExportToExcel(data, "Accounts.xlsx");
+            return File(fileContent,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "AccountsReport.xlsx");
         }
     }
 }

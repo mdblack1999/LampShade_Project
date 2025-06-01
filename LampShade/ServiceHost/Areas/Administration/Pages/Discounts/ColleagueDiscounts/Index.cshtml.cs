@@ -6,6 +6,9 @@ using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
 using _0_Framework.Infrastructure;
 using DiscountManagement.Configuration.Permission;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
+using BlogManagement.Application.Contracts.Article;
+using Newtonsoft.Json;
 
 namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
 {
@@ -13,24 +16,29 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
     {
         [TempData]
         public string Message { get; set; }
-        public ColleagueDiscountSearchModel SearchModel;
+        public ColleagueDiscountSearchModel SearchModel { get; set; }
         public List<ColleagueDiscountViewModel> ColleagueDiscounts;
         public SelectList Products;
 
+        [BindProperty]
+        public string TableJson { get; set; }
+
         private readonly IProductApplication _productApplication;
         private readonly IColleagueDiscountApplication _colleagueDiscountApplication;
+        private readonly IReportExporter _reportExporter;
 
-        public IndexModel(IProductApplication productApplication , IColleagueDiscountApplication colleagueDiscountApplication)
+        public IndexModel(IProductApplication productApplication, IColleagueDiscountApplication colleagueDiscountApplication, IReportExporter reportExporter)
         {
             _productApplication = productApplication;
             _colleagueDiscountApplication = colleagueDiscountApplication;
+            _reportExporter = reportExporter;
         }
 
         [NeedsPermission(DiscountPermission.ListColleagueDiscounts)]
-        public void OnGet(ColleagueDiscountSearchModel searchModel)
+        public void OnGet()
         {
-            Products = new SelectList(_productApplication.GetProducts() , "Id" , "Name");
-            ColleagueDiscounts = _colleagueDiscountApplication.Search(searchModel);
+            Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
+            ColleagueDiscounts = _colleagueDiscountApplication.Search(SearchModel);
         }
 
         public IActionResult OnGetCreate()
@@ -77,6 +85,14 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscounts
             return RedirectToPage("./Index");
         }
 
+        public IActionResult OnPostExportToExcel()
+        {
+            var data = JsonConvert.DeserializeObject<List<ColleagueDiscountViewModel>>(TableJson);
+            var fileContent = _reportExporter.ExportToExcel(data, "ColleagueDis.xlsx");
+            return File(fileContent,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "ColleagueDiscountReport.xlsx");
+        }
     }
 
 }

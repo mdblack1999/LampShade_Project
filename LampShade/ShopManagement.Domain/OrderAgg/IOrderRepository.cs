@@ -9,5 +9,6 @@ namespace ShopManagement.Domain.OrderAgg
         double GetAmountBy(long id);
         List<OrderItemViewModel> GetItems(long orderId);
         List<OrderViewModel> Search(OrderSearchModel searchModel);
+        List<OrderViewModel> GetAllOrders();
     }
 }

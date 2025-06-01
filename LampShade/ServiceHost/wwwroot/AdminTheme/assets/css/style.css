@@ -62,7 +62,7 @@ Date: Jun 2015
 /******** 1. General ********/
 
 body {
-    background: #f5f5f5;
+    background: #f2f2f2;
     margin: 0;
     -webkit-text-size-adjust: 100%;
     font-family: IranSans;
@@ -872,7 +872,7 @@ a:focus {
 
 .nav.nav-tabs + .tab-content, .tabs-vertical-env .tab-content {
     background: #FFF;
-    padding: 30px;
+    padding: 20px;
     margin-bottom: 30px;
 }
 
@@ -1210,11 +1210,11 @@ a:focus {
     }
 
         .portlet .portlet-heading .portlet-title {
-            float: left;
-            font-size: 16px;
+            float: right;
+            font-size: 19px;
             font-weight: 600;
-            margin-bottom: 0;
-            margin-top: 0;
+            margin-bottom: 15px;
+            margin-top: 5px;
             color: #fff;
         }
 
@@ -1222,7 +1222,7 @@ a:focus {
             position: relative;
             text-align: right;
             float: right;
-            padding-left: 15px;
+            padding-left: 16px;
             display: inline-block;
             font-size: 15px;
             line-height: 30px;
@@ -1858,7 +1858,7 @@ body.fixed-left .side-menu.left {
 .user-details {
     position: relative;
     min-height: 80px;
-    margin-bottom: 22px;
+    margin-bottom: 6px;
     padding: 20px;
 }
 
@@ -2371,13 +2371,13 @@ body.fixed-left .side-menu.left {
     padding: 20px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
-    margin-bottom: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
 }
 
 .mini-stat-icon {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     display: inline-block;
     line-height: 60px;
     text-align: center;
@@ -2386,17 +2386,18 @@ body.fixed-left .side-menu.left {
     -moz-border-radius: 100%;
     border-radius: 100%;
     float: left;
-    margin-right: 10px;
     color: #fff;
 }
 
 .mini-stat-info {
     padding-top: 2px;
+    font-size: 15px;
+    margin-bottom : 22px;
 }
 
     .mini-stat-info span {
         display: block;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 600;
         color: #555;
     }

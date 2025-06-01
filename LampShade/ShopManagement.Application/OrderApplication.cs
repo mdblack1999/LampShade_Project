@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Application.Sms;
 using Microsoft.Extensions.Configuration;
@@ -81,6 +82,11 @@ namespace ShopManagement.Application
         public List<OrderViewModel> Search(OrderSearchModel searchModel)
         {
             return _orderRepository.Search(searchModel);
+        }
+
+        public List<OrderViewModel> GetAllOrders()
+        {
+            return _orderRepository.GetAllOrders();
         }
 
         public List<OrderItemViewModel> GetItems(long orderId)

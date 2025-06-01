@@ -1,7 +1,10 @@
 ﻿@page "{id}"
-@using _0_Framework.Infrastructure
 @model ServiceHost.Pages.ArticleModel
 @inject _0_Framework.Application.IAuthHelper AuthHelper;
+
+@section Head {
+    <link rel="canonical" href="@Model.Article.CanonicalAddress" />
+}
 @{
     ViewData["Title"] = Model.Article.Title;
     ViewData["Keywords"] = Model.Article.Keywords;

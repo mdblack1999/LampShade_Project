@@ -83,5 +83,10 @@ namespace DiscountManagement.Application
         {
             return _colleagueDiscountRepository.Search(searchModel);
         }
+
+        public List<ColleagueDiscountViewModel> GetColleagueDiscount()
+        {
+            return _colleagueDiscountRepository.GetColleagueDiscount();
+        }
     }
 }

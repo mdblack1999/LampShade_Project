@@ -1,6 +1,9 @@
 ﻿@page
+@using _0_Framework.Application
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Newtonsoft.Json
 @model ServiceHost.Areas.Administration.Pages.IndexModel
-@inject _0_Framework.Application.IAuthHelper AuthHelper;
+@inject IAuthHelper AuthHelper;
 @{
     var currentAccount = AuthHelper.CurrentAccountInfo();
     ViewData["Title"] = "پنل ادمین";
@@ -9,7 +12,7 @@
 <!-- Page-Title -->
 <div class="row">
     <div class="col-sm-12">
-        <h4 class="pull-left page-title">@currentAccount.Fullname عزیز خوش آمدید</h4>
+        <h4 class="pull-left page-title"><strong>@currentAccount.Fullname</strong> عزیز خوش آمدید</h4>
         <ol class="breadcrumb pull-right">
             <li><a asp-page="./Administration/Index">سایت لوازم خانگی لوویز</a></li>
             <li class="active">داشبورد</li>
@@ -19,38 +22,75 @@
 
 <!-- Start Widget -->
 <div class="row">
-    <div class="col-md-6 col-sm-6 col-lg-3">
+    <div class="col-md-6 col-sm-6 col-lg-2">
         <div class="mini-stat clearfix bx-shadow">
             <span class="mini-stat-icon bg-info"><i class="ion-social-usd"></i></span>
             <div class="mini-stat-info text-right text-muted">
-                <span class="counter">15852</span>
-                Total Sales
+                <span class="counter">@Model.TotalSales.ToMoney()</span>
+                فروش کل
             </div>
             <div class="tiles-progress">
                 <div class="m-t-20">
-                    <h5 class="text-uppercase">Sales <span class="pull-right">60%</span></h5>
+                    <div class="mini-stat-info text-right text-muted">
+                        <span class="counter">@Model.TodaySales.ToMoney()</span>
+                        فروش امروز
+                    </div>
+                    <h6 class="text-uppercase">
+                        تغییر نسبت به دیروز
+                        <span class="pull-right">
+                            @Model.SalesChangePercent%
+                            @if (Model.SalesChangePercent > 0)
+                            {
+                                <i class="fa fa-arrow-up text-success"></i>
+                            }
+                            else if (Model.SalesChangePercent < 0)
+                            {
+                                <i class="fa fa-arrow-down text-danger"></i>
+                            }
+                        </span>
+                    </h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            <span class="sr-only">60% Complete</span>
+                        <div class="progress-bar @(Model.SalesChangePercent >= 0 ? "progress-bar-success" : "progress-bar-danger")"
+                             role="progressbar"
+                             style="width:@Math.Abs(Model.SalesChangePercent)%">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-6 col-lg-3">
+    <!--  New Orders -->
+    <div class="col-md-6 col-sm-6 col-lg-2">
         <div class="mini-stat clearfix bx-shadow">
             <span class="mini-stat-icon bg-purple"><i class="ion-ios7-cart"></i></span>
             <div class="mini-stat-info text-right text-muted">
-                <span class="counter">956</span>
-                New Orders
+                <span class="counter">@Model.AllOrderCount</span>
+                کل سفارشات
             </div>
             <div class="tiles-progress">
                 <div class="m-t-20">
-                    <h5 class="text-uppercase">Orders <span class="pull-right">90%</span></h5>
+                    <div class="mini-stat-info text-right text-muted">
+                        <span class="counter">@Model.TodayOrdersCount</span>
+                        سفارشات امروز
+                    </div>
+                    <h6 class="text-uppercase">
+                        تغییر نسبت به دیروز
+                        <span class="pull-right">
+                            @Model.OrdersChangePercent%
+                            @if (Model.OrdersChangePercent > 0)
+                            {
+                                <i class="fa fa-arrow-up text-success"></i>
+                            }
+                            else if (Model.OrdersChangePercent < 0)
+                            {
+                                <i class="fa fa-arrow-down text-danger"></i>
+                            }
+                        </span>
+                    </h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-                            <span class="sr-only">90% Complete</span>
+                        <div class="progress-bar @(Model.OrdersChangePercent >= 0 ? "progress-bar-purple" : "progress-bar-danger")"
+                             role="progressbar"
+                             style="width:@Math.Abs(Model.OrdersChangePercent)%">
                         </div>
                     </div>
                 </div>
@@ -58,19 +98,38 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-sm-6 col-lg-3">
+    <!-- Products -->
+    <div class="col-md-6 col-sm-6 col-lg-2">
         <div class="mini-stat clearfix bx-shadow">
-            <span class="mini-stat-icon bg-success"><i class="ion-eye"></i></span>
+            <span class="mini-stat-icon bg-warning"><i class="ion-bag"></i></span>
             <div class="mini-stat-info text-right text-muted">
-                <span class="counter">20544</span>
-                Unique Visitors
+                <span class="counter">@Model.AllProductCount</span>
+                کل محصولات
             </div>
             <div class="tiles-progress">
                 <div class="m-t-20">
-                    <h5 class="text-uppercase">Visitors <span class="pull-right">60%</span></h5>
+                    <div class="mini-stat-info text-right text-muted">
+                        <span class="counter">@Model.TodayProductsCount</span>
+                        محصولات امروز
+                    </div>
+                    <h6 class="text-uppercase">
+                        تغییر نسبت به دیروز
+                        <span class="pull-right">
+                            @Model.ProductsChangePercent%
+                            @if (Model.ProductsChangePercent > 0)
+                            {
+                                <i class="fa fa-arrow-up text-success"></i>
+                            }
+                            else if (Model.ProductsChangePercent < 0)
+                            {
+                                <i class="fa fa-arrow-down text-danger"></i>
+                            }
+                        </span>
+                    </h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            <span class="sr-only">60% Complete</span>
+                        <div class="progress-bar @(Model.ProductsChangePercent >= 0 ? "progress-bar-warning" : "progress-bar-danger")"
+                             role="progressbar"
+                             style="width:@Math.Abs(Model.ProductsChangePercent)%">
                         </div>
                     </div>
                 </div>
@@ -78,300 +137,1278 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-sm-6 col-lg-3">
+    <!-- New Articles -->
+    <div class="col-md-6 col-sm-6 col-lg-2">
+        <div class="mini-stat clearfix bx-shadow">
+            <span class="mini-stat-icon bg-success"><i class="ion-compose"></i></span>
+            <div class="mini-stat-info text-right text-muted">
+                <span class="counter">@Model.AllArticleCount</span>
+                کل مقالات
+            </div>
+            <div class="tiles-progress">
+                <div class="m-t-20">
+                    <div class="mini-stat-info text-right text-muted">
+                        <span class="counter">@Model.TodayArticlesCount</span>
+                        مقالات امروز
+                    </div>
+                    <h6 class="text-uppercase">
+                        تغییر نسبت به دیروز
+                        <span class="pull-right">
+                            @Model.ArticlesChangePercent%
+                            @if (Model.ArticlesChangePercent > 0)
+                            {
+                                <i class="fa fa-arrow-up text-success"></i>
+                            }
+                            else if (Model.ArticlesChangePercent < 0)
+                            {
+                                <i class="fa fa-arrow-down text-danger"></i>
+                            }
+                        </span>
+                    </h6>
+                    <div class="progress progress-sm m-0">
+                        <div class="progress-bar @(Model.ArticlesChangePercent >= 0 ? "progress-bar-success" : "progress-bar-danger")"
+                             role="progressbar"
+                             style="width:@Math.Abs(Model.ArticlesChangePercent)%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Accounts -->
+    <div class="col-md-6 col-sm-6 col-lg-2">
         <div class="mini-stat clearfix bx-shadow">
             <span class="mini-stat-icon bg-primary"><i class="ion-android-contacts"></i></span>
             <div class="mini-stat-info text-right text-muted">
-                <span class="counter">5210</span>
-                New Users
+                <span class="counter">@Model.AllUserCount</span>
+                کل کاربران
             </div>
             <div class="tiles-progress">
                 <div class="m-t-20">
-                    <h5 class="text-uppercase">Users <span class="pull-right">57%</span></h5>
+                    <div class="mini-stat-info text-right text-muted">
+                        <span class="counter">@Model.TodayUsersCount</span>
+                        کاربران امروز
+                    </div>
+                    <h6 class="text-uppercase">
+                        تغییر نسبت به دیروز
+                        <span class="pull-right">
+                            @Model.UsersChangePercent%
+                            @if (Model.UsersChangePercent > 0)
+                            {
+                                <i class="fa fa-arrow-up text-success"></i>
+                            }
+                            else if (Model.UsersChangePercent < 0)
+                            {
+                                <i class="fa fa-arrow-down text-danger"></i>
+                            }
+                        </span>
+                    </h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%;">
-                            <span class="sr-only">57% Complete</span>
+                        <div class="progress-bar @(Model.UsersChangePercent >= 0 ? "progress-bar-primary" : "progress-bar-danger")"
+                             role="progressbar"
+                             style="width:@Math.Abs(Model.UsersChangePercent)%">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 <!-- End row-->
 
 
+<!-- Start Chart -->
 <div class="row">
-    <div class="col-lg-8">
+    <!-- درآمد ماهانه -->
+    <div class="col-sm-12">
         <div class="portlet">
-            <!-- /portlet heading -->
             <div class="portlet-heading">
-                <h3 class="portlet-title text-dark text-uppercase">
-                    Website Stats
-                </h3>
-                <div class="portlet-widgets">
-                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
-                    <span class="divider"></span>
-                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i class="ion-minus-round"></i></a>
-                    <span class="divider"></span>
-                    <a href="javascript:void(0)" data-toggle="remove"><i class="ion-close-round"></i></a>
-                </div>
-                <div class="clearfix"></div>
+                <h3 class="portlet-title text-dark text-uppercase">درآمد ماهانه</h3>
+                <canvas id="incomeChart" width="250" height="120"></canvas>
             </div>
-            <div id="portlet1" class="panel-collapse collapse in">
-                <div class="portlet-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="website-stats" style="position: relative;height: 320px;"></div>
-                            <div class="row text-center m-t-30">
-                                <div class="col-sm-4">
-                                    <h4 class="counter">86,956</h4>
-                                    <small class="text-muted"> Weekly Report</small>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h4 class="counter">86,69</h4>
-                                    <small class="text-muted">Monthly Report</small>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h4 class="counter">948,16</h4>
-                                    <small class="text-muted">Yearly Report</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- /Portlet -->
-    </div> <!-- end col -->
-
-    <div class="col-lg-4">
-        <div class="portlet">
-            <!-- /portlet heading -->
-            <div class="portlet-heading">
-                <h3 class="portlet-title text-dark text-uppercase">
-                    Website Stats
-                </h3>
-                <div class="portlet-widgets">
-                    <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
-                    <span class="divider"></span>
-                    <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
-                    <span class="divider"></span>
-                    <a href="javascript:void(0)" data-toggle="remove"><i class="ion-close-round"></i></a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div id="portlet2" class="panel-collapse collapse in">
-                <div class="portlet-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="pie-chart">
-                                <div id="pie-chart-container" class="flot-chart" style="height: 320px;">
-                                </div>
-                            </div>
-
-                            <div class="row text-center m-t-30">
-                                <div class="col-sm-6">
-                                    <h4 class="counter">86,956</h4>
-                                    <small class="text-muted"> Weekly Report</small>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 class="counter">86,69</h4>
-                                    <small class="text-muted">Monthly Report</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- /Portlet -->
-    </div> <!-- end col -->
-</div> <!-- End row -->
-
+        </div>
+    </div>
+</div>
 
 <div class="row">
-    <!-- INBOX -->
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Inbox</h4>
-            </div>
-            <div class="panel-body">
-                <div class="inbox-widget nicescroll mx-box">
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-1.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Chadengle</p>
-                            <p class="inbox-item-text">Hey! there I'm available...</p>
-                            <p class="inbox-item-date">13:40 PM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-2.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Tomaslau</p>
-                            <p class="inbox-item-text">I've finished it! See you so...</p>
-                            <p class="inbox-item-date">13:34 PM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-3.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Stillnotdavid</p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                            <p class="inbox-item-date">13:17 PM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-4.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Kurafire</p>
-                            <p class="inbox-item-text">Nice to meet you</p>
-                            <p class="inbox-item-date">12:20 PM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-5.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Shahedk</p>
-                            <p class="inbox-item-text">Hey! there I'm available...</p>
-                            <p class="inbox-item-date">10:15 AM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-6.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Adhamdannaway</p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                            <p class="inbox-item-date">9:56 AM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-8.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Arashasghari</p>
-                            <p class="inbox-item-text">Hey! there I'm available...</p>
-                            <p class="inbox-item-date">10:15 AM</p>
-                        </div>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="~/AdminTheme/assets/images/users/avatar-9.jpg" class="img-circle" alt=""></div>
-                            <p class="inbox-item-author">Joshaustin</p>
-                            <p class="inbox-item-text">I've finished it! See you so...</p>
-                            <p class="inbox-item-date">9:56 AM</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> <!-- end col -->
-    <!-- CHAT -->
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Chat</h3>
-            </div>
-            <div class="panel-body">
-                <div class="chat-conversation">
-                    <ul class="conversation-list nicescroll">
-                        <li class="clearfix">
-                            <div class="chat-avatar">
-                                <img src="~/AdminTheme/assets/images/avatar-1.jpg" alt="male">
-                                <i>10:00</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>John Deo</i>
-                                    <p>
-                                        Hello!
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="~/AdminTheme/assets/images/users/avatar-5.jpg" alt="Female">
-                                <i>10:01</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>Smith</i>
-                                    <p>
-                                        Hi, How are you? What about our next meeting?
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="chat-avatar">
-                                <img src="~/AdminTheme/assets/images/avatar-1.jpg" alt="male">
-                                <i>10:01</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>John Deo</i>
-                                    <p>
-                                        Yeah everything is fine
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="~/AdminTheme/assets/images/users/avatar-5.jpg" alt="male">
-                                <i>10:02</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>Smith</i>
-                                    <p>
-                                        Wow that's great
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="row">
-                        <div class="col-sm-9 chat-inputbar">
-                            <input type="text" class="form-control chat-input" placeholder="Enter your text">
-                        </div>
-                        <div class="col-sm-3 chat-send">
-                            <button type="submit" class="btn btn-info btn-block waves-effect waves-light">Send</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- end col-->
-    <!-- TODO -->
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Todo</h3>
-            </div>
-            <div class="panel-body todoapp">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4 id="todo-message"><span id="todo-remaining"></span> of <span id="todo-total"></span> remaining</h4>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="" class="pull-right btn btn-primary btn-sm waves-effect waves-light" id="btn-archive">Archive</a>
-                    </div>
-                </div>
 
-                <ul class="list-group no-margn nicescroll todo-list" style="max-height: 288px;" id="todo-list"></ul>
-
-                <form name="todo-form" id="todo-form" role="form" class="m-t-20">
-                    <div class="row">
-                        <div class="col-sm-9 todo-inputbar">
-                            <input type="text" id="todo-input-text" name="todo-input-text" class="form-control" placeholder="Add new todo">
-                        </div>
-                        <div class="col-sm-3 todo-send">
-                            <button class="btn-primary btn-block btn waves-effect waves-light" type="button" id="todo-btn-submit">Add</button>
-                        </div>
-                    </div>
-                </form>
+    <!-- پرفروش ‌ترین محصولات -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">پرفروش‌ترین محصولات</h3>
+                <canvas id="topProductsLine" width="250" height="150"></canvas>
             </div>
         </div>
-    </div> <!-- end col -->
-</div> <!-- end row -->
+    </div>
+
+    <!-- تعداد سفارشات ماهانه -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">تعداد سفارشات ماهانه</h3>
+                <canvas id="ordersChart" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- دسته‌بندی‌های پرفروش -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">دسته‌بندی‌های پرفروش</h3>
+                <canvas id="topCategoryDoughnut"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- توزیع محصولات -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">توزیع محصولات</h3>
+                <canvas id="productDistribution"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- موجودی کالاها -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">موجودی محصولات</h3>
+                <canvas id="lowStockBar" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ثبت ‌نام ماهانه کاربران -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">وضعیت ثبت‌نام کاربران(ماهانه)</h3>
+                <canvas id="monthlyUsers" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- نمودار تخفیف‌ها بر اساس محصول -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">محصولات دارای تخفیف فعال</h3>
+                <canvas id="discountByProductChart" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- فروش بر حسب دسته‌بندی -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">فروش بر حسب دسته‌بندی</h3>
+                <canvas id="categorySalesBar" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- انتشار مقالات ماهانه -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">انتشار مقالات ماهانه</h3>
+                <canvas id="monthlyArticlesLine" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- نمودار تعداد کامنت‌های تأییدنشده -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">
+                    کامنت های درانتظار تأیید
+                </h3>
+                <canvas id="unapprovedCommentsChart" width="250" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- توزیع نقش‌های کاربران -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">توزیع نقش‌های کاربران</h3>
+                <canvas id="userRolesDonut" width="250" height="240"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- وضعیت نحوه پرداخت سفارشات -->
+    <div class="col-sm-6">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">وضعیت نحوه پرداخت سفارشات</h3>
+                <canvas id="paymentMethodBar" width="250" height="240"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">
+                    ۱۰ مقالهٔ پربازدید اخیر
+                </h3>
+                <canvas id="mostViewedArticles" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">
+                    وضعیت سفارشات در سال جاری
+                </h3>
+                <canvas id="orderStatusChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const monthLabels = @Html.Raw(JsonConvert.SerializeObject(Model.MonthLabels));
+        const monthlyRevenue = @Html.Raw(JsonConvert.SerializeObject(Model.MonthlyRevenue));
+        const monthlyOrdersCount = @Html.Raw(JsonConvert.SerializeObject(Model.MonthlyOrdersCount));
+
+        new Chart(document.getElementById('ordersChart'), {
+            type: 'bar',
+            data: {
+                labels: monthLabels,
+                datasets: [{
+                    label: 'سفارشات ماهانه',
+                    data: monthlyOrdersCount,
+                    backgroundColor: '#28a745',      // رنگ ستون‌ها
+                    borderColor: '#1e7e34',          // رنگ کادر ستون‌ها
+                    borderWidth: 2,                  // ضخامت کادر
+                    borderRadius: 3,                 // گرد کردن گوشه‌ها
+                    borderSkipped: false,            // تمامی چهار طرف کادر را بکش
+                    hoverBackgroundColor: '#218838', // رنگ ستون‌ها در حالت Hover
+                    hoverBorderColor: '#1c7430'      // رنگ کادر ستون‌ها در Hover
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 15, weight: 'bold', family: 'Iransans' },
+                        bodyFont: { size: 13, family: 'Iransans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        display: false // چون فقط یک دیتاست داریم، می‌توانیم لِجند را مخفی کنیم یا نمایش دهیم
+                    }
+                }
+            }
+        });
+
+        const pendingData = @Html.Raw(JsonConvert.SerializeObject(Model.PendingOrdersCount));
+        const paidData = @Html.Raw(JsonConvert.SerializeObject(Model.PaidOrdersCount));
+        const canceledData = @Html.Raw(JsonConvert.SerializeObject(Model.CanceledOrdersCount));
+
+        const ctxStatus = document.getElementById('orderStatusChart').getContext('2d');
+
+        const gradientPending = ctxStatus.createLinearGradient(0, 0, 0, 300);
+        gradientPending.addColorStop(0, 'rgba(245, 250, 18, 1)');
+        gradientPending.addColorStop(1, 'rgba(220, 200, 40, 0.7)');
+
+        const gradientPaid = ctxStatus.createLinearGradient(0, 0, 0, 300);
+        gradientPaid.addColorStop(0, 'rgba(60, 255, 25,1)');
+        gradientPaid.addColorStop(1, 'rgba(50, 200, 80,0.7)');
+
+        const gradientCanceled = ctxStatus.createLinearGradient(0, 0, 0, 300);
+        gradientCanceled.addColorStop(0, 'rgba(255, 50, 40, 1)');
+        gradientCanceled.addColorStop(1, 'rgba(220, 50, 50, 0.7)');
+
+        // ۶) چارت «وضعیت سفارشات در سال جاری» (Line Chart با خطوطِ گرادیانت)
+        new Chart(ctxStatus, {
+            type: 'line',
+            data: {
+                labels: monthLabels,
+                datasets: [
+                    {
+                        label: 'در انتظار پرداخت',
+                        data: pendingData,
+                        borderColor: gradientPending,   // گرادیانت برای دورِ خط
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(210, 210, 30, 1)',
+                        pointRadius: 3,
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'پرداخت‌شده',
+                        data: paidData,
+                        borderColor: gradientPaid,
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(90, 240, 25,1)',
+                        pointRadius: 3,
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'لغو شده',
+                        data: canceledData,
+                        borderColor: gradientCanceled,
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(240, 55, 65, 1)',
+                        pointRadius: 3,
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'ماه',
+                            font: {
+                                family: 'Iransans',
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'تعداد سفارشات',
+                            font: {
+                                family: 'Iransans',
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 16, family: 'Iransans', weight: 'bold' },
+                        bodyFont: { size: 14, family: 'Iransans', weight: 'bold' },
+                        padding: 10,
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.dataset.label || '';
+                                const val = context.parsed.y;
+                                return `${label}: ${val.toLocaleString('fa-IR')}`;
+                            }
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // درآمد ماهانه
+        const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+        const gradientLine = ctxIncome.createLinearGradient(0, 0, 0, 400);
+        gradientLine.addColorStop(0, 'rgba(0, 123, 255, 0.8)');   // رنگ آبی پررنگ در بالا
+        gradientLine.addColorStop(1, 'rgba(0, 123, 255, 0.2)');   // آبی کم‌رنگ در پایین
+        const gradientFill = ctxIncome.createLinearGradient(0, 0, 0, 400);
+        gradientFill.addColorStop(0, 'rgba(0, 123, 255, 0.4)');
+        gradientFill.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+        new Chart(ctxIncome, {
+            type: 'line',
+            data: {
+                labels: monthLabels,
+                datasets: [{
+                    label: 'درآمد ماهانه (تومان)',        // عنوان در لگند
+                    data: monthlyRevenue,
+                    borderColor: gradientLine,           // رنگ خط با گرادیان
+                    backgroundColor: gradientFill,       // رنگ ناحیهٔ زیرخط (fill)
+                    pointBackgroundColor: '#007bff',     // رنگ نقطه‌ها
+                    pointBorderColor: '#ffffff',         // حاشیهٔ سفید دور نقطه‌ها
+                    pointBorderWidth: 2,
+                    pointRadius: 4,                      // اندازهٔ نقطه‌ها
+                    pointHoverRadius: 6,                 // اندازهٔ نقطه‌ها هنگام هاور
+                    fill: true,                          // فعال کردن پرکردن زیر خط
+                    borderWidth: 2,                      // ضخامت خط
+                    tension: 0.4                         // انحنای ملایم بین نقاط
+                }]
+            },
+            options: {
+                responsive: true,
+                layout: {
+                    padding: {
+                        top: 10,
+                        right: 20,
+                        bottom: 10,
+                        left: 10
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'ماه',
+                            font: {
+                                family: 'IranSans',
+                                size: 15,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            },
+                            color: '#444'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'درآمد',
+                            font: {
+                                family: 'Iransans',
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        },
+                        ticks: {
+                            font: {
+                                size: 13,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            },
+                            color: '#444',
+                            callback: function (value) {
+                                return value.toLocaleString('fa-IR') + ' تومان';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(200,200,200,0.2)', // رنگ روشن برای خطوط افقی
+                            borderDash: [5, 5]             // نقطه‌چین کردن خطوط
+                        },
+                        beginAtZero: true
+                    }
+                },
+                animation: {
+                    duration: 1200, // زمان انیمیشن در میلی‌ثانیه
+                    easing: 'easeOutQuart'
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                elements: {
+                    line: {
+                        tension: 0.4
+                    },
+                    point: {
+                        hoverRadius: 6
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 15, weight: 'bold', family: 'Iransans' },
+                        bodyFont: { size: 13, weight: 'bold', family: 'Iransans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        cornerRadius: 5,
+                        callbacks: {
+                            title: function (context) {
+                                const idx = context[0].dataIndex;
+                                return 'ماه: ' + monthLabels[idx];
+                            },
+                            label: function (context) {
+                                const val = context.parsed.y;
+                                return 'درآمد: ' + val.toLocaleString('fa-IR') + ' تومان';
+                            }
+                        },
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // دسته‌بندی‌های پرفروش (Donut)
+        new Chart(document.getElementById('topCategoryDoughnut'), {
+            type: 'doughnut',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.TopCategoryLabels)),
+                datasets: [{
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.TopCategoryCount)),
+                    label: 'تعداد فروخته شده',
+                    backgroundColor: ['#ffc107', '#dc3545', '#17a2b8', '#6f42c1', '#fd7e14', '#20c997', '#e83e8c']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans' },
+                        bodyFont: { size: 12, family: 'Iransans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // توزیع محصولات (Pie)
+        new Chart(document.getElementById('productDistribution'), {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.ProductDistLabels)),
+                datasets: [{
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.ProductDistCounts)),
+                    label: 'تعداد محصول',
+                    backgroundColor: ['#6610f2', '#ff6f61', '#3f51b5', '#955149', '#f802f0']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans' },
+                        bodyFont: { size: 12, weight: 'bold', family: 'Iransans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        // موجودی کالا (افقی)
+        new Chart(document.getElementById('lowStockBar'), {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.LowStockProductNames)),
+                datasets: [{
+                    label: 'موجودی کالا',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.LowStockCounts)),
+                    backgroundColor: '#dc3545',      // رنگ پرشدگی ستون‌ها
+                    borderColor: '#6f1d1b',         // رنگ قاب دور ستون‌ها
+                    borderWidth: 2,                 // ضخامت قاب
+                    borderRadius: 2,                // گوشه‌های گرد
+                    borderSkipped: false,           // آیا بخشی از قاب حذف شود یا کل دور ستون باشد
+                    hoverBackgroundColor: '#ff1100',// رنگ هنگام هاور
+                    hoverBorderColor: '#802d3f'   // رنگ قاب هنگام هاور
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'IranSans' },
+                        bodyFont: { size: 12, family: 'IranSans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // ثبت‌نام ماهانه کاربران (Line)
+        new Chart(document.getElementById('monthlyUsers'), {
+            type: 'line',
+            data: {
+                labels: monthLabels,
+                datasets: [{
+                    label: 'تعداد نفرات',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.MonthlyUserCount)),
+                    borderColor: '#20c997',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, family: 'IranSans', },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // توزیع نقش‌های کاربران (Donut)
+        new Chart(document.getElementById('userRolesDonut'), {
+            type: 'doughnut',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.RoleNames)),
+                datasets: [{
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.RoleCounts)),
+                    label: 'تعداد نفرات',
+                    backgroundColor: ['#6f42c1', '#17a2b8', '#ffc107', '#e83e8c']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, family: 'Iransans', },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        //  نمودار گروه کد تخفیف بر اساس محصول
+        const prodLabels = @Html.Raw(JsonConvert.SerializeObject(Model.DiscountRadarLabels));
+        const custRates = @Html.Raw(JsonConvert.SerializeObject(Model.DiscountCustomerData));
+        const collRates = @Html.Raw(JsonConvert.SerializeObject(Model.DiscountPartnerData));
+
+        new Chart(document.getElementById('discountByProductChart'), {
+            type: 'bar',
+            data: {
+                labels: prodLabels,
+                datasets: [
+                    {
+                        label: 'درصد تخفیف مشتری',
+                        data: custRates,
+                        backgroundColor: '#007bff',
+                        borderColor: '#0056b3',
+                        borderWidth: 2,
+                        borderRadius: 2,
+                        borderSkipped: false,
+                        hoverBackgroundColor: '#557eea',
+                        hoverBorderColor: '#5756b3'
+                    },
+                    {
+                        label: 'درصد تخفیف همکار',
+                        data: collRates,
+                        backgroundColor: '#28a745',
+                        borderColor: '#1e7e34',
+                        borderWidth: 2,                 // ضخامت قاب
+                        borderRadius: 2,                // گوشه‌های گرد
+                        borderSkipped: false,           // آیا بخشی از قاب حذف شود یا کل دور ستون باشد
+                        hoverBackgroundColor: '#3ace51',// رنگ هنگام هاور
+                        hoverBorderColor: '#90ad54'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        },
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'درصد تخفیف',
+                            font: {
+                                family: 'Iransans',
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            callback: v => v + '%',
+                            font: {
+                                size: 15,
+                                family: 'Iranans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { size: 14, weight: 'bold' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%'
+                        },
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, family: 'Iransans', },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    }
+                }
+            }
+        });
+
+        // نمودار فروش بر حسب دسته‌بندی
+        const categoryLabels = @Html.Raw(JsonConvert.SerializeObject(Model.CategorySalesLabels));
+        const categoryVolumes = @Html.Raw(JsonConvert.SerializeObject(Model.CategorySalesVolumes));
+        const categoryCounts = @Html.Raw(JsonConvert.SerializeObject(Model.CategorySalesCounts));
+        const ctxCat = document.getElementById('categorySalesBar').getContext('2d');
+
+        new Chart(ctxCat, {
+            type: 'bar',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    label: 'حجم فروش (تومان)',
+                    data: categoryVolumes,
+                    backgroundColor: '#ffc107',
+                    borderColor: '#de810c',
+                    borderWidth: 2,
+                    borderRadius: 3,
+                    borderSkipped: false,
+                    hoverBackgroundColor: '#e7bd0c',
+                    hoverBorderColor: '#e8a922',
+                    maxBarThickness: 55
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value.toLocaleString('fa-IR') + ' تومان';
+                            },
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'میزان فروش (تومان)',
+                            font: {
+                                family: 'Iransans',
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, family: 'Iransans', weight: 'bold' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function (context) {
+                                const idx = context.dataIndex;
+                                const vol = categoryVolumes[idx];
+                                const cnt = categoryCounts[idx];
+                                const cntText = cnt.toLocaleString('fa-IR') + ' عدد';
+                                const volText = vol.toLocaleString('fa-IR') + ' تومان';
+                                return [`حجم: ${volText}`, `تعداد آیتم: ${cntText}`];
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        font: {
+                            family: 'Iransans',
+                            size: 12,
+                            weight: 'bold'
+                        },
+                        formatter: function (value) {
+                            return (value / 1000000).toFixed(1) + 'M';
+                        }
+                    }
+                }
+            }
+        });
+
+        // پرفروش‌ترین محصولات (Line)
+        new Chart(document.getElementById('topProductsLine'), {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.TopProductNames)),
+                datasets: [{
+                    label: 'تعداد',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.TopProductSales)),
+                    borderColor: '#6f42c1',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans' },
+                        bodyFont: { size: 12, family: 'Iransans' },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // انتشار مقالات ماهانه (Line)
+        new Chart(document.getElementById('monthlyArticlesLine'), {
+            type: 'line',
+            data: {
+                labels: monthLabels,
+                datasets: [{
+                    label: 'انتشار مقالات',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.MonthlyArticleCount)),
+                    borderColor: '#fd7e14',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 14, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, family: 'Iransans', },
+                        padding: 10,
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function (context) {
+                                const index = context.dataIndex;
+                                const categoryNames = @Html.Raw(JsonConvert.SerializeObject(Model.MonthlyArticleCategories));
+                                const value = context.dataset.data[index];
+                                const cat = categoryNames[index] ?? "نامشخص";
+                                return `تعداد: ${value} | گروه: ${cat}`;
+                            }
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // نمودار تعداد کامنت‌های تأییدنشده
+        new Chart(document.getElementById('unapprovedCommentsChart'), {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.CommentLabels)),
+                datasets: [{
+                    label: 'کامنت‌های درانتظار تأیید',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.CommentCounts)),
+                    backgroundColor: ['#dc3545', '#ffc107', '#17a2b8'],
+                    maxBarThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 13, weight: 'bold', family: 'Iransans', },
+                        bodyFont: { size: 12, weight: 'bold', family: 'Iransans', },
+                        padding: 12,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        //نمودار نحوه پرداخت سفارشات
+        new Chart(document.getElementById('paymentMethodBar'), {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(JsonConvert.SerializeObject(Model.PaymentMethodNames)),
+                datasets: [{
+                    label: 'تعداد سفارش',
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.PaymentMethodCounts)),
+                    backgroundColor: ['#007bff', '#ffc107'],
+                    borderColor: ['#0056b3', '#e0a800'],
+                    borderWidth: 2,
+                    borderRadius: 3,
+                    borderSkipped: false,
+                    maxBarThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 15, family: 'Iransans', weight: 'bold' },
+                        bodyFont: { size: 14, family: 'Iransans' },
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        padding: 10
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: { family: 'Iransans', weight: 'bold', size: 12 }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: { family: 'Iransans', weight: 'bold', size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+
+        //10 مقاله پربازدید اخیر
+        const mostViewedTitles = @Html.Raw(JsonConvert.SerializeObject(Model.MostVisitedArticleTitles));
+        const mostViewedCounts = @Html.Raw(JsonConvert.SerializeObject(Model.MostVisitedArticleViews));
+        const quotedTitles = mostViewedTitles.map(t => `"${t}"`);
+
+        new Chart(document.getElementById('mostViewedArticles'), {
+            type: 'bar', 
+            data: {
+                labels: quotedTitles,
+                datasets: [{
+                    label: 'تعداد بازدید',
+                    data: mostViewedCounts,
+                    backgroundColor: '#20c997',
+                    borderColor: '#138c72',
+                    borderWidth: 2,
+                    borderRadius: 3,
+                    borderSkipped: false,
+                    hoverBackgroundColor: '#1ca57a',
+                    hoverBorderColor: '#0f5436',
+                    maxBarThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                            font: {
+                                size: 12,
+                                family: 'Iransans',
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: { size: 15, family: 'Iransans', weight: 'bold' },
+                        bodyFont: { size: 14, family: 'Iransans' },
+                        padding: 10,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+    </script>
+}

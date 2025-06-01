@@ -34,8 +34,10 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
 
         public List<OrderItemViewModel> GetItems(long orderId)
         {
-            var products = _context.Products.Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
-            var order = _context.Orders.FirstOrDefault(x => x.Id == orderId);
+            var products = _context.Products.AsNoTracking().Select(x => new { x.Id , x.Name }).ToList();
+            var order = _context.Orders
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == orderId);
             if (order == null)
                 return new List<OrderItemViewModel>();
             var items = order.Items.Select(x => new OrderItemViewModel
@@ -90,5 +92,23 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             return orders;
         }
 
+        public List<OrderViewModel> GetAllOrders()
+        {
+            return _context.Orders.Include(x=>x.Items).AsNoTracking().Select(x => new OrderViewModel
+            {
+                Id = x.Id ,
+                AccountId = x.AccountId ,
+                DiscountAmount = x.DiscountAmount ,
+                IsCanceled = x.IsCanceled ,
+                IsPaid = x.IsPaid ,
+                IssueTrackingNo = x.IssueTrackingNo ,
+                PayAmount = x.PayAmount ,
+                PaymentMethodId = x.PaymentMethod ,
+                RefId = x.RefId ,
+                TotalAmount = x.TotalAmount ,
+                CreationDate = x.CreationDate.ToFarsi(),
+                
+            }).ToList();
+        }
     }
 }

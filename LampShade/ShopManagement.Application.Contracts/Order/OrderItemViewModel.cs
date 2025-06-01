@@ -10,5 +10,6 @@
         public double TotalAmount { get; set; }
         public int DiscountRate { get; set; }
         public long OrderId { get; set; }
+        public int PaymentMethod { get; set; }
     }
 }

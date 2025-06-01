@@ -1,4 +1,6 @@
-﻿namespace ShopManagement.Application.Contracts.Order
+﻿using System.Collections.Generic;
+
+namespace ShopManagement.Application.Contracts.Order
 {
     public class OrderViewModel
     {
@@ -15,5 +17,7 @@
         public string IssueTrackingNo { get;  set; }
         public long RefId { get;  set; }
         public string CreationDate { get; set; }
+        public List<OrderItemViewModel> Items { get; private set; }
+
     }
 }

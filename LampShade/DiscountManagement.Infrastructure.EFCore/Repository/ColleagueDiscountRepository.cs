@@ -43,13 +43,31 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                 IsRemoved = x.IsRemoved
             });
 
-            if (searchModel.ProductId > 0)
+            if (searchModel != null && searchModel.ProductId > 0)
                 query = query.Where(x => x.ProductId == searchModel.ProductId);
 
             var discounts = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
             discounts.ForEach(discount =>
                 discount.Product = products.FirstOrDefault(x => x.Id == discount.ProductId)?.Name);
             return discounts;
+        }
+
+        public List<ColleagueDiscountViewModel> GetColleagueDiscount()
+        {
+            var products = _shopContext.Products.Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
+            var query = _context.ColleagueDiscounts.Select(x => new ColleagueDiscountViewModel
+            {
+                Id = x.Id ,
+                CreationDate = x.CreationDate.ToFarsi() ,
+                DiscountRate = x.DiscountRate ,
+                ProductId = x.ProductId ,
+                IsRemoved = x.IsRemoved
+            }).OrderByDescending(x => x.Id).ToList();
+
+
+            query.ForEach(discount =>
+                discount.Product = products.FirstOrDefault(x => x.Id == discount.ProductId)?.Name);
+            return query;
         }
     }
 }

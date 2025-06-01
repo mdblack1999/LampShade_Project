@@ -15,6 +15,8 @@
     <meta name="Keywords" content="@ViewData["Keywords"]" />
     <meta name="description" content="@ViewData["MetaDescription"]" />
 
+    @(await RenderSectionAsync("Head" , false))
+
     <link href="~/Theme/assets/css/vendors.css" rel="stylesheet">
     <link href="~/Theme/assets/css/style.css" rel="stylesheet">
     <link href="~/Theme/assets/css/Custom.css" rel="stylesheet">

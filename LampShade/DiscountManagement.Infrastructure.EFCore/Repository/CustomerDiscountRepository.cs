@@ -69,5 +69,26 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
             return discount;
 
         }
+
+        public List<CustomerDiscountViewModel> GetAllCustomerDiscount()
+        {
+            var product = _shopContext.Products.Select(x => new { x.Id , x.Name }).AsNoTracking().ToList();
+            var query = _context.CustomerDiscounts.Select(x => new CustomerDiscountViewModel
+            {
+                Id = x.Id ,
+                StartDate = x.StartDate.ToFarsi() ,
+                EndDate = x.EndDate.ToFarsi() ,
+                StartDateGr = x.StartDate ,
+                EndDateGr = x.EndDate ,
+                DiscountRate = x.DiscountRate ,
+                ProductId = x.ProductId ,
+                Reason = x.Reason ,
+                CreationDate = x.CreationDate.ToFarsi()
+            }).OrderByDescending(x => x.Id).ToList();
+
+            query.ForEach(discount => discount.Product = product.FirstOrDefault(x => x.Id == discount.Id)?.Name);
+
+            return query;
+        }
     }
 }

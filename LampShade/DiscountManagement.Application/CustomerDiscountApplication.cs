@@ -57,5 +57,10 @@ namespace DiscountManagement.Application
         {
            return _customerDiscountRepository.Search(searchModel);
         }
+
+        public List<CustomerDiscountViewModel> GetAllCustomerDiscount()
+        {
+            return _customerDiscountRepository.GetAllCustomerDiscount();
+        }
     }
 }

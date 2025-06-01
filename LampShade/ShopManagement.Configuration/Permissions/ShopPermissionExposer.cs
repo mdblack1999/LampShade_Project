@@ -46,6 +46,15 @@ namespace ShopManagement.Configuration.Permissions
                         new PermissionDto(ShopPermissions.EditSlide, "ویرایش اسلایدر"),
                         new PermissionDto(ShopPermissions.RemoveAndRestoreSlide, "حذف و بازگردانی اسلایدر"),
                     }
+                },
+                {
+                    "ORDERS", new List<PermissionDto>
+                    {
+                        new PermissionDto(ShopPermissions.ListOrders,"مشاهده سفارشات"),
+                        new PermissionDto(ShopPermissions.ConfirmOrders,"تایید سفارشات"),
+                        new PermissionDto(ShopPermissions.CancelOrders, "لغو سفارشات"),
+                        new PermissionDto(ShopPermissions.ListItemOrder, "مشاهده آیتم های سفارشات"),
+                    }
                 }
             };
         }

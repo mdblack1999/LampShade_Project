@@ -50,7 +50,6 @@
     </div>
 </div>
 
-
 <div class="row" permission="CommentPermission.ListComments">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -58,117 +57,121 @@
                 <h3 class="panel-title">لیست کامنت ها</h3>
             </div>
             <div class="panel-body">
+                <form method="post">
+                <input type="hidden" id="TableJson" name="TableJson" />
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <table id="datatable" class="table table-striped table-bordered">
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>نام</th>
-                                    <th>بخش</th>
-                                    <th>ایمیل</th>
-                                    <th>پیام</th>
-                                    <th>تاریخ و ساعت</th>
-                                    <th>وضعیت</th>
-                                    <th>عملیات</th>
-                                </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>نام</th>
+                                <th>بخش</th>
+                                <th>ایمیل</th>
+                                <th>پیام</th>
+                                <th>تاریخ و ساعت</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.Comments)
-                                {
-                                    <tr>
-                                        <td class="text-center">@item.Id</td>
-                                        <td class="text-center">@item.Name</td>
-                                        <td class="text-center">
-                                            @if (item.Type == 1)
-                                            {
-                                                <span class="text-success">محصولات</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="text-success">مقالات</span>
-                                            }
-                                        </td>
-                                        <td class="text-center">@item.Email</td>
-                                        <td class="text-center">@item.Message</td>
-                                        <td class="text-center">@item.CommentDate</td>
-                                        <td class="text-center" permission="CommentPermission.ChangeStatusComments">
-                                            @if (item.Status == CommentViewModel.CommentStatus.Canceled)
-                                            {
-                                                <span class="text-danger">لغو شده</span>
-                                                <i class="fa fa-times-circle"></i>
-                                            }
-                                            @if (item.Status == CommentViewModel.CommentStatus.Pending)
-                                            {
-                                                <span class="text-warning">در انتظار</span>
-                                                <i class="fa fa-info-circle"></i>
-                                            }
-                                            @if (item.Status == CommentViewModel.CommentStatus.Confirmed)
-                                            {
-                                                <span class="text-success">تایید شده</span>
-                                                <i class="fa fa-check"></i>
-                                            }
-                                            @if (item.Status == CommentViewModel.CommentStatus.Spam)
-                                            {
-                                                <span class="text-danger">اسپم</span>
-                                                <i class="fa fa-trash"></i>
-                                            }
-                                        </td>
-                                        <td class="text-center">
-                                            @switch (item.Status)
-                                            {
-                                                case CommentViewModel.CommentStatus.Pending:
-                                                    <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
-                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
-                                                        لغو
-                                                    </a>
-                                                    <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
-                                                       class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
-                                                    </a>
-                                                    <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
-                                                        اسپم
-                                                    </a>
-                                                    break;
-                                                case CommentViewModel.CommentStatus.Confirmed:
-                                                    <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
-                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
-                                                        لغو
-                                                    </a>
-                                                    <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
-                                                        اسپم
-                                                    </a>
-                                                    break;
-                                                case CommentViewModel.CommentStatus.Canceled:
-                                                    <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
-                                                       class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
-                                                    </a>
-                                                    <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
-                                                       class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
-                                                        اسپم
-                                                    </a>
-                                                    break;
-                                                case CommentViewModel.CommentStatus.Spam:
-                                                    <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
-                                                       class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
-                                                        تایید
-                                                    </a>
-                                                    <a asp-page="./Index" asp-page-handler="Pending" asp-route-id="@item.Id"
-                                                       class="btn btn-warning btn-rounded waves-effect waves-light m-b-5">
-                                                        در انتظار
-                                                    </a>
-                                                    break;
-                                            }
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var item in Model.Comments)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.Id</td>
+                                    <td class="text-center">@item.Name</td>
+                                    <td class="text-center">
+                                        @if (item.Type == 1)
+                                        {
+                                            <span class="text-success">محصولات</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">مقالات</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">@item.Email</td>
+                                    <td class="text-center">@item.Message</td>
+                                    <td class="text-center">@item.CommentDate</td>
+                                    <td class="text-center" permission="CommentPermission.ChangeStatusComments">
+                                        @if (item.Status == CommentViewModel.CommentStatus.Canceled)
+                                        {
+                                            <span class="text-danger">لغو شده</span>
+                                            <i class="fa fa-times-circle"></i>
+                                        }
+                                        @if (item.Status == CommentViewModel.CommentStatus.Pending)
+                                        {
+                                            <span class="text-warning">در انتظار</span>
+                                            <i class="fa fa-info-circle"></i>
+                                        }
+                                        @if (item.Status == CommentViewModel.CommentStatus.Confirmed)
+                                        {
+                                            <span class="text-success">تایید شده</span>
+                                            <i class="fa fa-check"></i>
+                                        }
+                                        @if (item.Status == CommentViewModel.CommentStatus.Spam)
+                                        {
+                                            <span class="text-danger">اسپم</span>
+                                            <i class="fa fa-trash"></i>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @switch (item.Status)
+                                        {
+                                            case CommentViewModel.CommentStatus.Pending:
+                                                <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
+                                                   class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
+                                                    لغو
+                                                </a>
+                                                <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
+                                                   class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
+                                                    تایید
+                                                </a>
+                                                <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
+                                                   class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
+                                                    اسپم
+                                                </a>
+                                                break;
+                                            case CommentViewModel.CommentStatus.Confirmed:
+                                                <a asp-page="./Index" asp-page-handler="Cancel" asp-route-id="@item.Id"
+                                                   class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">
+                                                    لغو
+                                                </a>
+                                                <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
+                                                   class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
+                                                    اسپم
+                                                </a>
+                                                break;
+                                            case CommentViewModel.CommentStatus.Canceled:
+                                                <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
+                                                   class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
+                                                    تایید
+                                                </a>
+                                                <a asp-page="./Index" asp-page-handler="Spam" asp-route-id="@item.Id"
+                                                   class="btn btn-inverse btn-rounded waves-effect waves-light m-b-5">
+                                                    اسپم
+                                                </a>
+                                                break;
+                                            case CommentViewModel.CommentStatus.Spam:
+                                                <a asp-page="./Index" asp-page-handler="Confirm" asp-route-id="@item.Id"
+                                                   class="btn btn-success btn-rounded waves-effect waves-light m-b-5">
+                                                    تایید
+                                                </a>
+                                                <a asp-page="./Index" asp-page-handler="Pending" asp-route-id="@item.Id"
+                                                   class="btn btn-warning btn-rounded waves-effect waves-light m-b-5">
+                                                    در انتظار
+                                                </a>
+                                                break;
+                                        }
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>
                 </div>
+                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">خروجی اکسل</button>
+                </form>
             </div>
         </div>
     </div>
@@ -180,7 +183,24 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').dataTable();
+            var table = $('#datatable').DataTable();
+
+            //export excel
+            $('form').on('submit', function () {
+                var raw = table.rows({ search: 'applied' }).data().toArray();
+                var data = raw.map(function (row) {
+                    return {
+                        Id: parseInt(row[0]),
+                        Name: row[1],
+                        Type: row[2],
+                        Email: row[3],
+                        Message: row[4],
+                        CreationDate: row[5],
+                        Status: row[6],
+                    };
+                });
+                $('#TableJson').val(JSON.stringify(data));
+            });
         });
     </script>
 }

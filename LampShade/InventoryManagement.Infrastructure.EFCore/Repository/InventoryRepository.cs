@@ -38,6 +38,27 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
             }).FirstOrDefault(x => x.Id == id);
         }
 
+        public List<InventoryViewModel> GetAllInventories()
+        {
+            var products = _shopContext.Products.AsNoTracking()
+                .Select(x => new { x.Id , x.Name , x.Category }).ToList();
+
+            var query = _inventoryContext.Inventory.AsNoTracking().Select(x => new InventoryViewModel
+            {
+                Id = x.Id ,
+                ProductId = x.ProductId ,
+                UnitPrice = x.UnitPrice ,
+                InStock = x.InStock ,
+                CurrentCount = x.CalculateCurrentCount() ,
+                CreationDate = x.CreationDate.ToFarsi()
+            }).OrderByDescending(x => x.Id).ToList();
+
+            query.ForEach(item =>
+                item.Product = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name);
+
+            return query;
+        }
+
         public List<InventoryOperationViewModel> GetOperationsLog(long inventoryId)
         {
             var account = _accountContext.Accounts.AsNoTracking().Select(x => new { x.Id , x.FullName }).ToList();

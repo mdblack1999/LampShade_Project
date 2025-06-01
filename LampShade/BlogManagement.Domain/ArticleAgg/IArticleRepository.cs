@@ -9,5 +9,7 @@ namespace BlogManagement.Domain.ArticleAgg
         EditArticle GetDetails(long id);
         Article GetWitCategory(long id);
         List<ArticleViewModel> Search(ArticleSearchModel searchModel);
+        List<ArticleViewModel> GetAllArticles();
+        Article GetForUpdate(long id);
     }
 }

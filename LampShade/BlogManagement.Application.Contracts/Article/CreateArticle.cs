@@ -36,6 +36,8 @@ namespace BlogManagement.Application.Contracts.Article
         [MaxLength(500,ErrorMessage = ValidationMessages.MaxTextSize)]
         public string MetaDescription { get; set; }
 
+        [MaxLength(1000, ErrorMessage = ValidationMessages.MaxTextSize)]
+        [Url(ErrorMessage = ValidationMessages.InvalidUrl)]
         public string CanonicalAddress { get; set; }
 
         [Range(1,long.MaxValue,ErrorMessage = ValidationMessages.IsInvalid)]

@@ -48,89 +48,93 @@
                 <h3 class="panel-title">لیست سفارشات</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>خریدار</th>
-                                    <th>کل</th>
-                                    <th>کل تخفیف</th>
-                                    <th>پرداختی</th>
-                                    <th>نحوه پرداخت</th>
-                                    <th>شماره پیگیری</th>
-                                    <th>شناسه پرداخت</th>
-                                    <th>تاریخ سفارش</th>
-                                    <th>وضعیت</th>
-                                    <th>عملیات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Orders)
-                                {
-                                    var rowClass = item.IsCanceled ? "bg-light-red"
-                                    : item.IsPaid ? "bg-light-green"
-                                    : "bg-light-yellow";
-
-                                    <tr class="@rowClass">
-                                        <td>@item.Id</td>
-                                        <td>@item.AccountFullName</td>
-                                        <td>@item.TotalAmount.ToMoney()</td>
-                                        <td>@item.DiscountAmount.ToMoney()</td>
-                                        <td>@item.PayAmount.ToMoney()</td>
-                                        <td>@item.PaymentMethod</td>
-                                        <td>@item.IssueTrackingNo</td>
-                                        <td>@item.RefId</td>
-                                        <td>@item.CreationDate</td>
-                                        <td>
-                                            @if (item.IsCanceled)
-                                            {
-                                                <span class="text-danger">کنسل شده</span>
-                                            }
-                                            @if (item.IsPaid)
-                                            {
-                                                <span class="text-success">پرداخت شده</span>
-                                            }
-                                            @if (!item.IsCanceled && !item.IsPaid)
-                                            {
-                                                <span class="text-warning">در انتظار پرداخت</span>
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.IsPaid == false && !item.IsCanceled)
-                                            {
-                                                <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
-                                                    <i class="fa fa-check"></i> تایید
-                                                </a>
-                                                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
-                                                    <i class="fa fa-close"></i> لغو
-                                                </a>
-                                            }
-                                            @if (item.IsCanceled)
-                                            {
-                                                <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
-                                                    <i class="fa fa-check"></i> تایید
-                                                </a>
-                                            }
-                                            @if (item.IsPaid && !item.IsCanceled)
-                                            {
-                                                <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
-                                                    <i class="fa fa-close"></i> لغو
-                                                </a>
-                                            }
-                                            <a class="btn btn-primary btn-rounded waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Items", new {id = item.Id})"
-                                               onclick="$('.modal-dialog').css('width', '50%')">
-                                                <i class="fa fa-id-card"></i> آیتم ها
-                                            </a>
-                                        </td>
+                <form method="post">
+                    <input type="hidden" id="TableJson" name="TableJson" />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>خریدار</th>
+                                        <th>کل</th>
+                                        <th>کل تخفیف</th>
+                                        <th>پرداختی</th>
+                                        <th>نحوه پرداخت</th>
+                                        <th>شماره پیگیری</th>
+                                        <th>شناسه پرداخت</th>
+                                        <th>تاریخ سفارش</th>
+                                        <th>وضعیت</th>
+                                        <th>عملیات</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Orders)
+                                    {
+                                        var rowClass = item.IsCanceled ? "bg-light-red"
+                                        : item.IsPaid ? "bg-light-green"
+                                        : "bg-light-yellow";
+
+                                        <tr class="@rowClass">
+                                            <td>@item.Id</td>
+                                            <td>@item.AccountFullName</td>
+                                            <td>@item.TotalAmount.ToMoney()</td>
+                                            <td>@item.DiscountAmount.ToMoney()</td>
+                                            <td>@item.PayAmount.ToMoney()</td>
+                                            <td>@item.PaymentMethod</td>
+                                            <td>@item.IssueTrackingNo</td>
+                                            <td>@item.RefId</td>
+                                            <td>@item.CreationDate</td>
+                                            <td>
+                                                @if (item.IsCanceled)
+                                                {
+                                                    <span class="text-danger">کنسل شده</span>
+                                                }
+                                                @if (item.IsPaid)
+                                                {
+                                                    <span class="text-success">پرداخت شده</span>
+                                                }
+                                                @if (!item.IsCanceled && !item.IsPaid)
+                                                {
+                                                    <span class="text-warning">در انتظار پرداخت</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.IsPaid == false && !item.IsCanceled)
+                                                {
+                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
+                                                        <i class="fa fa-check"></i> تایید
+                                                    </a>
+                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
+                                                        <i class="fa fa-close"></i> لغو
+                                                    </a>
+                                                }
+                                                @if (item.IsCanceled)
+                                                {
+                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
+                                                        <i class="fa fa-check"></i> تایید
+                                                    </a>
+                                                }
+                                                @if (item.IsPaid && !item.IsCanceled)
+                                                {
+                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
+                                                        <i class="fa fa-close"></i> لغو
+                                                    </a>
+                                                }
+                                                <a class="btn btn-primary btn-rounded waves-effect waves-light m-b-5"
+                                                   href="#showmodal=@Url.Page("./Index", "Items", new { id = item.Id })"
+                                                   onclick="$('.modal-dialog').css('width', '50%')">
+                                                    <i class="fa fa-id-card"></i> آیتم ها
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">خروجی اکسل</button>
+                </form>
             </div>
         </div>
     </div>
@@ -142,7 +146,25 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').dataTable();
+            var table = $('#datatable').DataTable();
+
+            //export excel
+            $('form').on('submit', function () {
+                var raw = table.rows({ search: 'applied' }).data().toArray();
+                var data = raw.map(function (row) {
+                    return {
+                        Id: parseInt(row[0]),
+                        AccountFullName: row[1],
+                        TotalAmount: parseInt(row[2]),
+                        DiscountAmount: row[3],
+                        PaymentMethod: parseInt(row[4]),
+                        IssueTrackingNo: parseInt(row[5]),
+                        RefId: row[6],
+                        CreationDate: row[7],
+                    };
+                });
+                $('#TableJson').val(JSON.stringify(data));
+            });
         });
-    </script>
+    </script>>
 }

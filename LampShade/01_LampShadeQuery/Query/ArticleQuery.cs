@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using _0_Framework.Application;
 using _01_LampShadeQuery.Contracts.Article;
@@ -35,7 +34,8 @@ namespace _01_LampShadeQuery.Query
                     PictureAlt = x.PictureAlt ,
                     PictureTitle = x.PictureTitle ,
                     PublishDate = x.PublishDate.ToFarsi() ,
-                    VisitCount = x.VisitCount
+                    VisitCount = x.VisitCount,
+                    CanonicalAddress = x.CanonicalAddress
                 }).AsNoTracking().ToList();
         }
 

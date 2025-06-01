@@ -55,21 +55,42 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 Title = x.Title ,
                 CategoryId = x.CategoryId
             });
-
-            if (!string.IsNullOrWhiteSpace(searchModel.Title))
-                query = query.Where(x => x.Title.Contains(searchModel.Title));
-
-            if (searchModel.CategoryId > 0)
-                query = query.Where(x => x.CategoryId == searchModel.CategoryId);
-
-            if (!string.IsNullOrWhiteSpace(searchModel.PublishDate))
+            if (searchModel != null)
             {
-                var date = searchModel.PublishDate.ToGeorgianDateTime().Date;
-                var dateStr = date.ToFarsi();
-                query = query.AsEnumerable().Where(x => x.PublishDate == dateStr).AsQueryable();
-            }
+                if (!string.IsNullOrWhiteSpace(searchModel.Title))
+                    query = query.Where(x => x.Title.Contains(searchModel.Title));
 
+                if (searchModel.CategoryId > 0)
+                    query = query.Where(x => x.CategoryId == searchModel.CategoryId);
+
+                if (!string.IsNullOrWhiteSpace(searchModel.PublishDate))
+                {
+                    var date = searchModel.PublishDate.ToGeorgianDateTime().Date;
+                    var dateStr = date.ToFarsi();
+                    query = query.AsEnumerable().Where(x => x.PublishDate == dateStr).AsQueryable();
+                }
+            }
             return query.OrderByDescending(x => x.Id).AsNoTracking().ToList();
+        }
+
+        public List<ArticleViewModel> GetAllArticles()
+        {
+            return _context.Articles.AsNoTracking().Select(x => new ArticleViewModel
+            {
+                Id = x.Id ,
+                Picture = x.Picture ,
+                PublishDate = x.PublishDate.ToFarsi() ,
+                Category = x.Category.Name ,
+                ShortDescription = x.ShortDescription ,
+                Title = x.Title ,
+                CategoryId = x.CategoryId,
+                VisitCount = x.VisitCount
+            }).ToList();
+        }
+
+        public Article GetForUpdate(long id)
+        {
+            return _context.Articles.FirstOrDefault(x => x.Id == id);
         }
     }
 }

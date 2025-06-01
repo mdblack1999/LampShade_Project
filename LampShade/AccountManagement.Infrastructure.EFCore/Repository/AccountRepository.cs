@@ -18,10 +18,16 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
         public List<AccountViewModel> GetAccounts()
         {
-            return _context.Accounts.Select(x => new AccountViewModel
+            return _context.Accounts.AsNoTracking().Select(x => new AccountViewModel
             {
-                Id= x.Id,
-                FullName = x.FullName,
+                Id = x.Id ,
+                FullName = x.FullName ,
+                Username = x.Username ,
+                Role = x.Role.Name ,
+                RoleId = x.RoleId ,
+                ProfilePhoto = x.ProfilePhoto ,
+                Mobile = x.Mobile ,
+                CreationDate = x.CreationDate.ToFarsi()
             }).ToList();
         }
 

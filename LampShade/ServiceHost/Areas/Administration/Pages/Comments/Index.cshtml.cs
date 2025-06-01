@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using _0_Framework.Infrastructure;
 using CommentManagement.Application.Contracts.Comment;
 using CommentManagement.Infrastructure.Configure.Permission;
+using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
+using Newtonsoft.Json;
 
 namespace ServiceHost.Areas.Administration.Pages.Comments
 {
@@ -12,19 +14,25 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         [TempData]
         public string Message { get; set; }
         public List<CommentViewModel> Comments;
-        public CommentSearchModel SearchModel { get; set; }
-        private readonly ICommentApplication _commentApplication;
 
-        public IndexModel(ICommentApplication commentApplication)
+        [BindProperty]
+        public string TableJson { get; set; }
+
+        public CommentSearchModel SearchModel { get; set; }
+
+        private readonly ICommentApplication _commentApplication;
+        private readonly IReportExporter _reportExporter;
+
+        public IndexModel(ICommentApplication commentApplication, IReportExporter reportExporter)
         {
             _commentApplication = commentApplication;
+            _reportExporter = reportExporter;
         }
 
         [NeedsPermission(CommentPermission.ListComments)]
-        public void OnGet(CommentSearchModel searchModel)
+        public void OnGet()
         {
-            Comments = _commentApplication.Search(searchModel);
-            SearchModel = searchModel;
+            Comments = _commentApplication.Search(SearchModel);
         }
 
         [NeedsPermission(CommentPermission.ChangeStatusComments)]
@@ -68,6 +76,15 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
 
             Message = result.Message;
             return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnPostExportToExcel()
+        {
+            var data = JsonConvert.DeserializeObject<List<CommentViewModel>>(TableJson);
+            var fileContent = _reportExporter.ExportToExcel(data, "Comments.xlsx");
+            return File(fileContent,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "CommentsReport.xlsx");
         }
     }
 }

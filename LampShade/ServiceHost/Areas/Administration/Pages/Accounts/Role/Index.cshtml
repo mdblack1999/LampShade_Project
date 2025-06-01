@@ -21,35 +21,39 @@
                 <h3 class="panel-title">لیست نقش ها (@Model.Roles.Count)</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>نام نقش</th>
-                                    <th>تاریخ ایجاد</th>
-                                    <th>عملیات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Roles)
-                                {
+                <form method="post">
+                    <input type="hidden" id="TableJson" name="TableJson" />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
                                     <tr>
-                                        <td class="text-center">@item.Id</td>
-                                        <td class="text-center">@item.Name</td>
-                                        <td class="text-center">@item.CreationDate</td>
-                                        <td>
-                                            <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5" asp-page="Edit" asp-route-id="@item.Id">
-                                                <i class="fa fa-edit"></i> ویرایش
-                                            </a>
-                                        </td>
+                                        <th>#</th>
+                                        <th>نام نقش</th>
+                                        <th>تاریخ ایجاد</th>
+                                        <th>عملیات</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Roles)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Id</td>
+                                            <td class="text-center">@item.Name</td>
+                                            <td class="text-center">@item.CreationDate</td>
+                                            <td>
+                                                <a class="btn btn-warning btn-rounded waves-effect waves-light m-b-5" asp-page="Edit" asp-route-id="@item.Id">
+                                                    <i class="fa fa-edit"></i> ویرایش
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">خروجی اکسل</button>
+                </form>
             </div>
         </div>
     </div>
@@ -61,7 +65,19 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').dataTable();
+            var table = $('#datatable').DataTable();
+            // Export Excel
+            $('form').on('submit', function () {
+                var raw = table.rows({ search: 'applied' }).data().toArray();
+                var data = raw.map(function (row) {
+                    return {
+                        Id: parseInt(row[0]),
+                        Name: row[1],
+                        CreationDate: row[2]
+                    };
+                });
+                $('#TableJson').val(JSON.stringify(data));
+            });
         });
     </script>
 }

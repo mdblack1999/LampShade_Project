@@ -44,62 +44,66 @@
                 <h3 class="panel-title">لیست تخفیفات همکاران (@Model.ColleagueDiscounts.Count)</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>محصول</th>
-                                    <th>درصد تخفیف</th>
-                                    <th>وضعیت</th>
-                                    <th>تاریخ ایجاد</th>
-                                    <th>عملیات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.ColleagueDiscounts)
-                                {
+                <form method="post">
+                    <input type="hidden" id="TableJson" name="TableJson" />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
                                     <tr>
-                                        <td class="text-center">@item.Id</td>
-                                        <td class="text-center">@item.Product</td>
-                                        <td class="text-center">@item.DiscountRate</td>
-                                        <td class="text-center">
-                                            @if (item.IsRemoved)
-                                            {
-                                                <i class="fa fa-times fa-3x text-danger"></i>
-                                            }
-                                            else
-                                            {
-                                                <i class="fa fa-check fa-3x text-success"></i>
-                                            }
-                                        </td>
-
-                                        <td class="text-center">@item.CreationDate</td>
-                                        <td class="text-center">
-                                            <a permission="DiscountPermission.EditColleagueDiscounts" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
-                                               href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
-                                                <i class="fa fa-edit"></i> ویرایش
-                                            </a>
-                                            @if (item.IsRemoved)
-                                            {
-                                                <a permission="DiscountPermission.ActiveDeActiveColleagueDiscount" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
-                                                   class="btn btn-success btn-rounded waves-effect waves-light m-b-5">فعال سازی</a>
-                                            }
-                                            else
-                                            {
-                                                <a permission="DiscountPermission.ActiveDeActiveColleagueDiscount" asp-page="./Index" asp-page-handler="Remove" asp-route-id="@item.Id"
-                                                   class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">غیرفعال</a>
-                                            }
-                                        </td>
-
-
+                                        <th>#</th>
+                                        <th>محصول</th>
+                                        <th>درصد تخفیف</th>
+                                        <th>وضعیت</th>
+                                        <th>تاریخ ایجاد</th>
+                                        <th>عملیات</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ColleagueDiscounts)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Id</td>
+                                            <td class="text-center">@item.Product</td>
+                                            <td class="text-center">@item.DiscountRate</td>
+                                            <td class="text-center">
+                                                @if (item.IsRemoved)
+                                                {
+                                                    <i class="fa fa-times fa-3x text-danger"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check fa-3x text-success"></i>
+                                                }
+                                            </td>
+
+                                            <td class="text-center">@item.CreationDate</td>
+                                            <td class="text-center">
+                                                <a permission="DiscountPermission.EditColleagueDiscounts" class="btn btn-warning btn-rounded waves-effect waves-light m-b-5"
+                                                   href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
+                                                    <i class="fa fa-edit"></i> ویرایش
+                                                </a>
+                                                @if (item.IsRemoved)
+                                                {
+                                                    <a permission="DiscountPermission.ActiveDeActiveColleagueDiscount" asp-page="./Index" asp-page-handler="Restore" asp-route-id="@item.Id"
+                                                       class="btn btn-success btn-rounded waves-effect waves-light m-b-5">فعال سازی</a>
+                                                }
+                                                else
+                                                {
+                                                    <a permission="DiscountPermission.ActiveDeActiveColleagueDiscount" asp-page="./Index" asp-page-handler="Remove" asp-route-id="@item.Id"
+                                                       class="btn btn-danger btn-rounded waves-effect waves-light m-b-5">غیرفعال</a>
+                                                }
+                                            </td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">خروجی اکسل</button>
+                </form>
             </div>
         </div>
     </div>
@@ -111,7 +115,22 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').dataTable();
+            var table = $('#datatable').DataTable();
+
+            //export excel
+            $('form').on('submit', function () {
+                var raw = table.rows({ search: 'applied' }).data().toArray();
+                var data = raw.map(function (row) {
+                    return {
+                        Id: parseInt(row[0]),
+                        Product: row[1],
+                        DiscountRate: parseInt(row[2]),
+                        Status: row[3],
+                        CreationDate: row[4],
+                    };
+                });
+                $('#TableJson').val(JSON.stringify(data));
+            });
         });
     </script>
 }
