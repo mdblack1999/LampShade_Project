@@ -35,7 +35,7 @@ namespace BlogManagement.Application
             var categorySlug = _articleCategoryRepository.GetSlugBy(command.CategoryId);
             var path = $"{categorySlug}/{slug}";
             var pictureName = _fileUploader.Upload(command.Picture , path);
-            var publishDate = command.PublishDate.ToGeorgianDateTime().Date;
+            var publishDate = command.PublishDate.ToGregorianDateTime().Date;
 
             string canonical = command.CanonicalAddress?.Trim();
             if (!string.IsNullOrWhiteSpace(canonical))
@@ -69,7 +69,7 @@ namespace BlogManagement.Application
             var slug = command.Slug.Slugify();
             var path = $"{article.Category.Slug}/{slug}";
             var pictureName = _fileUploader.Upload(command.Picture , path);
-            var publishDate = command.PublishDate.ToGeorgianDateTime().Date;
+            var publishDate = command.PublishDate.ToGregorianDateTime().Date;
 
             string canonical = command.CanonicalAddress?.Trim();
             if (!string.IsNullOrWhiteSpace(canonical))

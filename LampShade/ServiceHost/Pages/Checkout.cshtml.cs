@@ -4,7 +4,6 @@ using ShopManagement.Application.Contracts.Order;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using _0_Framework.Application;
 using _0_Framework.Application.ZarinPal;
 using _01_LampshadeQuery.Contracts;
 using _01_LampShadeQuery.Contracts.Product;
@@ -17,7 +16,6 @@ namespace ServiceHost.Pages
     public class CheckoutModel : PageModel
     {
         public Cart Cart { get; set; }
-        private readonly IAuthHelper _authHelper;
         private readonly ICartService _cartService;
         private readonly IProductQuery _productQuery;
         public const string CookieName = "cart-items";
@@ -25,14 +23,14 @@ namespace ServiceHost.Pages
         private readonly IOrderApplication _orderApplication;
         private readonly ICartCalculatorService _cartCalculatorService;
 
-        public CheckoutModel(ICartCalculatorService cartCalculatorService , ICartService cartService , IProductQuery productQuery , IOrderApplication orderApplication , IZarinPalFactory zarinPalFactory , IAuthHelper authHelper)
+        public CheckoutModel(ICartCalculatorService cartCalculatorService , ICartService cartService , IProductQuery productQuery
+            , IOrderApplication orderApplication , IZarinPalFactory zarinPalFactory)
         {
             _cartCalculatorService = cartCalculatorService;
             _cartService = cartService;
             _productQuery = productQuery;
             _orderApplication = orderApplication;
             _zarinPalFactory = zarinPalFactory;
-            _authHelper = authHelper;
             Cart = new Cart();
         }
 
@@ -64,6 +62,7 @@ namespace ServiceHost.Pages
                 return RedirectToPage("/Cart");
 
             var orderId = _orderApplication.PlaceOrder(cart);
+            //Online Pay
             if (paymentMethod == 1)
             {
                 var paymentResponse = _zarinPalFactory.CreatePaymentRequest(
@@ -76,6 +75,7 @@ namespace ServiceHost.Pages
                 var redirectUrl = _zarinPalFactory.GetStartPayUrl(paymentResponse.Data.Authority);
                 return Redirect(redirectUrl);
             }
+            //Cash Pay
             var issueTrackingNo = _orderApplication.PaymentSucceeded(orderId , 0);
             Response.Cookies.Delete("cart-items");
             var paymentResult = new PaymentResult();

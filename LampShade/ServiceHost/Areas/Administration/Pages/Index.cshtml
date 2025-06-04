@@ -218,6 +218,70 @@
 </div>
 <!-- End row-->
 
+<!-- Start Latest SMS Section -->
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <div class="portlet">
+            <div class="portlet-heading">
+                <h3 class="portlet-title text-dark text-uppercase">آخرین پیامک‌های ارسالی</h3>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">شماره گیرنده</th>
+                            <th scope="col">نام گیرنده</th>
+                            <th scope="col">متن پیام</th>
+                            <th scope="col">وضعیت دلیوری</th>
+                            <th scope="col">زمان ارسال</th>
+                            <th scope="col">زمان تحویل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.RecentSms != null && Model.RecentSms.Any())
+                        {
+                            var index = 1;
+                            foreach (var sms in Model.RecentSms)
+                            {
+                                <tr>
+                                    <th scope="row">@index</th>
+                                    <td class="text-nowrap">@sms.RecipientNumber</td>
+                                    <td>@sms.RecipientName</td>
+                                    <td class="text-truncate" style="max-width:250px;">@sms.MessageText</td>
+                                    <td>
+                                        @if (sms.DeliveryStatus == true)
+                                        {
+                                            <span class="badge badge-success">تحویل شده</span>
+                                        }
+                                        else if (sms.DeliveryStatus == false)
+                                        {
+                                            <span class="badge badge-danger">ناموفق</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-secondary">در انتظار</span>
+                                        }
+                                    </td>
+                                    <td class="text-nowrap">@sms.SentAt</td>
+                                    <td class="text-nowrap">@sms.DeliveryAt</td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">هیچ پیامکی برای نمایش وجود ندارد.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Latest SMS Section -->
 
 <!-- Start Chart -->
 <div class="row">

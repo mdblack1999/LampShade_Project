@@ -95,7 +95,7 @@ namespace _0_Framework.Application
         }
 
 
-        public static DateTime ToGeorgianDateTime(this string persianDate)
+        public static DateTime ToGregorianDateTime(this string persianDate)
         {
             if (string.IsNullOrWhiteSpace(persianDate))
                 return DateTime.MinValue; 

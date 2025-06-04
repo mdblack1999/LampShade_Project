@@ -1,8 +1,6 @@
 ﻿@page
-@using _0_Framework.Application
 @model ServiceHost.Areas.Administration.Pages.Shop.Orders.IndexModel
-@{
-}
+@using _0_Framework.Application
 
 @{
     Layout = "Shared/_AdminLayout";
@@ -64,16 +62,45 @@
                                         <th>شماره پیگیری</th>
                                         <th>شناسه پرداخت</th>
                                         <th>تاریخ سفارش</th>
-                                        <th>وضعیت</th>
+                                        <th>وضعیت پرداخت</th>
+                                        <th>وضعیت محموله</th>
                                         <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.Orders)
                                     {
-                                        var rowClass = item.IsCanceled ? "bg-light-red"
-                                        : item.IsPaid ? "bg-light-green"
-                                        : "bg-light-yellow";
+                                        // منطق وضعیت پرداخت و محموله
+                                        bool paymentFailure = !item.IsPaid && string.IsNullOrWhiteSpace(item.IssueTrackingNo);
+                                        string paymentStatus;
+                                        string shipmentStatus;
+
+                                        if (paymentFailure)
+                                        {
+                                            paymentStatus = "در انتظار پرداخت";
+                                            shipmentStatus = "در انتظار بررسی";
+                                        }
+                                        else if (item.IsCanceled)
+                                        {
+                                            // کنسل دستی
+                                            paymentStatus = item.IsPaid ? "پرداخت شده" : "در انتظار پرداخت";
+                                            shipmentStatus = "لغو شده";
+                                        }
+                                        else
+                                        {
+                                            paymentStatus = item.IsPaid ? "پرداخت شده" : "در انتظار پرداخت";
+
+                                            if (item.Delivered)
+                                                shipmentStatus = "تحویل شد";
+                                            else if (item.Checked && item.IsPaid)
+                                                shipmentStatus = "بررسی شد";
+                                            else if (item.IsPaid)
+                                                shipmentStatus = "در انتظار بررسی";
+                                            else
+                                                shipmentStatus = "";
+                                        }
+
+                                        var rowClass = shipmentStatus == "لغو شده" ? "bg-light-red" : "";
 
                                         <tr class="@rowClass">
                                             <td>@item.Id</td>
@@ -86,41 +113,89 @@
                                             <td>@item.RefId</td>
                                             <td>@item.CreationDate</td>
                                             <td>
-                                                @if (item.IsCanceled)
+                                                @if (paymentStatus == "پرداخت شده")
                                                 {
-                                                    <span class="text-danger">کنسل شده</span>
+                                                    <span class="text-success">@paymentStatus</span>
                                                 }
-                                                @if (item.IsPaid)
+                                                else if (paymentStatus == "در انتظار پرداخت")
                                                 {
-                                                    <span class="text-success">پرداخت شده</span>
+                                                    <span class="text-warning">@paymentStatus</span>
                                                 }
-                                                @if (!item.IsCanceled && !item.IsPaid)
+                                                else
                                                 {
-                                                    <span class="text-warning">در انتظار پرداخت</span>
+                                                    @paymentStatus
                                                 }
                                             </td>
                                             <td>
-                                                @if (item.IsPaid == false && !item.IsCanceled)
+                                                @switch (shipmentStatus)
                                                 {
-                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
+                                                    case "لغو شده":
+                                                        <span class="text-danger">@shipmentStatus</span>
+                                                        break;
+                                                    case "در انتظار بررسی":
+                                                        <span style="color:#fff3cd;border-radius:4px;padding:2px 6px;">@shipmentStatus</span>
+                                                        break;
+                                                    case "بررسی شد":
+                                                        <span style="color:#d1ecf1;border-radius:4px;padding:2px 6px;">@shipmentStatus</span>
+                                                        break;
+                                                    case "تحویل شد":
+                                                        <span style="color:#d4edda;border-radius:4px;padding:2px 6px;">@shipmentStatus</span>
+                                                        break;
+                                                    default:
+                                                        @shipmentStatus
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                @* تایید پرداخت *@
+                                                @if (!item.IsPaid && !item.IsCanceled)
+                                                {
+                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Confirm" asp-route-id="@item.Id">
                                                         <i class="fa fa-check"></i> تایید
                                                     </a>
-                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
+                                                    <span>|</span>
+                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Cancel" asp-route-id="@item.Id">
                                                         <i class="fa fa-close"></i> لغو
                                                     </a>
                                                 }
-                                                @if (item.IsCanceled)
+                                                else if (item.IsCanceled)
                                                 {
-                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Confirm" asp-route-id="@item.Id">
+                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Confirm" asp-route-id="@item.Id">
                                                         <i class="fa fa-check"></i> تایید
                                                     </a>
                                                 }
-                                                @if (item.IsPaid && !item.IsCanceled)
+                                                else if (item.IsPaid && !item.IsCanceled)
                                                 {
-                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" asp-page-handler="Cancel" asp-route-id="@item.Id">
+                                                    <a class="btn btn-danger btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Cancel" asp-route-id="@item.Id">
                                                         <i class="fa fa-close"></i> لغو
                                                     </a>
                                                 }
+
+                                                @* دکمه بررسی شد *@
+                                                @if (item.IsPaid && !item.IsCanceled && !item.Checked)
+                                                {
+                                                    <span>|</span>
+                                                    <a class="btn btn-info btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Checked" asp-route-id="@item.Id">
+                                                        <i class="fa fa-search"></i> بررسی شد
+                                                    </a>
+                                                }
+
+                                                @* دکمه تحویل شد *@
+                                                @if (item.Checked && !item.Delivered && !item.IsCanceled)
+                                                {
+                                                    <span>|</span>
+                                                    <a class="btn btn-success btn-rounded waves-effect waves-light m-b-5"
+                                                       asp-page-handler="Deliver" asp-route-id="@item.Id">
+                                                        <i class="fa fa-truck"></i> تحویل شد
+                                                    </a>
+                                                }
+
+                                                <span>|</span>
                                                 <a class="btn btn-primary btn-rounded waves-effect waves-light m-b-5"
                                                    href="#showmodal=@Url.Page("./Index", "Items", new { id = item.Id })"
                                                    onclick="$('.modal-dialog').css('width', '50%')">
@@ -133,7 +208,9 @@
                             </table>
                         </div>
                     </div>
-                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">خروجی اکسل</button>
+                    <button type="submit" asp-page-handler="ExportToExcel" class="btn btn-primary m-t-15">
+                        خروجی اکسل
+                    </button>
                 </form>
             </div>
         </div>
@@ -148,7 +225,7 @@
         $(document).ready(function () {
             var table = $('#datatable').DataTable();
 
-            //export excel
+            // export to excel
             $('form').on('submit', function () {
                 var raw = table.rows({ search: 'applied' }).data().toArray();
                 var data = raw.map(function (row) {
@@ -160,11 +237,11 @@
                         PaymentMethod: parseInt(row[4]),
                         IssueTrackingNo: parseInt(row[5]),
                         RefId: row[6],
-                        CreationDate: row[7],
+                        CreationDate: row[8]
                     };
                 });
                 $('#TableJson').val(JSON.stringify(data));
             });
         });
-    </script>>
+    </script>
 }

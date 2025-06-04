@@ -2823,7 +2823,7 @@ table td[class*=col-], table th[class*=col-] {
 }
 
 .table-hover > tbody > tr.danger:hover > td, .table-hover > tbody > tr.danger:hover > th, .table-hover > tbody > tr:hover > .danger, .table-hover > tbody > tr > td.danger:hover, .table-hover > tbody > tr > th.danger:hover {
-    background-color: #ebcccc
+    background-color: #d1ecf1
 }
 
 .table-responsive {
@@ -5832,7 +5832,7 @@ a.list-group-item-danger, button.list-group-item-danger {
 
     a.list-group-item-danger:focus, a.list-group-item-danger:hover, button.list-group-item-danger:focus, button.list-group-item-danger:hover {
         color: #a94442;
-        background-color: #ebcccc
+        background-color: #d1ecf1
     }
 
     a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-group-item-danger.active:hover, button.list-group-item-danger.active, button.list-group-item-danger.active:focus, button.list-group-item-danger.active:hover {
@@ -5853,7 +5853,7 @@ a.list-group-item-danger, button.list-group-item-danger {
 
 .panel {
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: #e4cdcd;
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);

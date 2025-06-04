@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
+using _0_Framework.Application.Sms;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
@@ -11,17 +12,21 @@ namespace AccountManagement.Application
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IRoleRepository _roleRepository;
         private readonly IFileUploader _fileUploader;
         private readonly IAuthHelper _authHelper;
-        private readonly IRoleRepository _roleRepository;
+        private readonly ISmsService _smsService;
+
+        public const string SiteName = "فروشگاه لوویز";
         public AccountApplication(IAccountRepository accountRepository , IPasswordHasher passwordHasher ,
-            IFileUploader fileUploader , IAuthHelper authHelper , IRoleRepository roleRepository)
+            IFileUploader fileUploader , IAuthHelper authHelper , IRoleRepository roleRepository , ISmsService smsService)
         {
             _accountRepository = accountRepository;
             _passwordHasher = passwordHasher;
             _fileUploader = fileUploader;
             _authHelper = authHelper;
             _roleRepository = roleRepository;
+            _smsService = smsService;
         }
 
         public AccountViewModel GetAccountBy(long id)
@@ -29,10 +34,23 @@ namespace AccountManagement.Application
             var account = _accountRepository.Get(id);
             return new AccountViewModel
             {
-                FullName = account.FullName,
-                Mobile = account.Mobile,
+                FullName = account.FullName ,
+                Mobile = account.Mobile ,
                 Username = account.Username
             };
+        }
+
+        public AccountViewModel GetAccountBy(string phoneNumber)
+        {
+            var account = _accountRepository.GetAccounts().Select(x =>
+                new AccountViewModel
+                {
+                    FullName = x.FullName ,
+                    Mobile = x.Mobile ,
+                    Username = x.Username
+                }).FirstOrDefault(x => x.Mobile == phoneNumber);
+
+            return account;
         }
 
         public OperationResult Register(RegisterAccount command)
@@ -68,6 +86,9 @@ namespace AccountManagement.Application
 
             _accountRepository.Create(account);
             _accountRepository.SaveChanges();
+
+            _smsService.Send(command.Mobile ,
+                $"{command.FullName} عزیز به {SiteName} خوش آمدید.\nثبت نام شما با موفقیت انجام شد.");
             return operation.Succeeded(ApplicationMessages.SuccessRegister);
         }
 
@@ -149,5 +170,52 @@ namespace AccountManagement.Application
         {
             _authHelper.SignOut();
         }
+
+        public EditProfileViewModel GetProfile(long userId)
+        {
+            var account = _accountRepository.Get(userId);
+            if (account == null) return null;
+
+            return new EditProfileViewModel
+            {
+                Id = account.Id ,
+                FullName = account.FullName ,
+                Mobile = account.Mobile ,
+                CurrentPhotoPath = account.ProfilePhoto
+            };
+        }
+
+        public OperationResult EditProfile(EditProfileViewModel command)
+        {
+            var operation = new OperationResult();
+            var account = _accountRepository.Get(command.Id);
+            if (account == null)
+                return operation.Failed(ApplicationMessages.RecordNotFound);
+
+            var picturePath = account.ProfilePhoto;
+            if (command.ProfilePhoto != null)
+            {
+                var path = $"profilePhotos";
+                picturePath = _fileUploader.Upload(command.ProfilePhoto , path);
+            }
+
+            account.Edit(command.FullName , account.Username , command.Mobile , account.RoleId , picturePath);
+
+            if (!string.IsNullOrWhiteSpace(command.Password))
+            {
+                if (command.Password != command.RePassword)
+                    return operation.Failed(ApplicationMessages.PasswordNotMatch);
+
+                if (command.Password.Length < 6)
+                    return operation.Failed(ApplicationMessages.MinLengthPass);
+
+                var hashed = _passwordHasher.Hash(command.Password);
+                account.ChangePassword(hashed);
+            }
+
+            _accountRepository.SaveChanges();
+            return operation.Succeeded();
+        }
+
     }
 }

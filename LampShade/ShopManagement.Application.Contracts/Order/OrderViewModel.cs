@@ -14,10 +14,13 @@ namespace ShopManagement.Application.Contracts.Order
         public double PayAmount { get;  set; }
         public bool IsPaid { get;  set; }
         public bool IsCanceled { get;  set; }
+        public bool Pending { get;  set; }
+        public bool Checked { get;  set; }
+        public bool Delivered { get;  set; }
         public string IssueTrackingNo { get;  set; }
         public long RefId { get;  set; }
         public string CreationDate { get; set; }
-        public List<OrderItemViewModel> Items { get; private set; }
+        public List<OrderItemViewModel> Items { get; set; }
 
     }
 }

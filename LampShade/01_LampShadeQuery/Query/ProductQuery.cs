@@ -99,6 +99,24 @@ namespace _01_LampShadeQuery.Query
             return product;
         }
 
+        public ProductQueryModel GetProductForCart(long id)
+        {
+            var product = _context.Products
+                .Include(x => x.Category)
+                .Include(x => x.ProductPictures).AsNoTracking()
+                .Select(x => new ProductQueryModel
+                {
+                    Id = x.Id ,
+                    Category = x.Category.Name ,
+                    Name = x.Name ,
+                    Picture = x.Picture ,
+                    Code = x.Code ,
+                    Pictures = MapProductPictures(x.ProductPictures)
+                }).FirstOrDefault(x => x.Id == id);
+
+            return product ?? new ProductQueryModel();
+        }
+
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
         {
             return pictures.Select(x => new ProductPictureQueryModel

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Application.Sms;
 using Microsoft.Extensions.Configuration;
@@ -57,6 +56,20 @@ namespace ShopManagement.Application
             _orderRepository.SaveChanges();
         }
 
+        public void Checked(long id)
+        {
+            var order = _orderRepository.Get(id);
+            order.MarkAsChecked();
+            _orderRepository.SaveChanges();
+        }
+
+        public void Deliverd(long id)
+        {
+            var order = _orderRepository.Get(id);
+            order.MarkAsDelivered();
+            _orderRepository.SaveChanges();
+        }
+
         public string PaymentSucceeded(long orderId , long refId)
         {
             var order = _orderRepository.Get(orderId);
@@ -71,9 +84,12 @@ namespace ShopManagement.Application
             _orderRepository.SaveChanges();
             
             // Send SMS
-            var (name, mobile) = _shopAccountAcl.GetAccountBy(order.AccountId);
-            _smsService.Send(mobile ,
-                $"{name} عزیز سفارش شما با شماره پیگیری {issueTrackingNo} با موفقیت پرداخت شد و در فرایند ارسال قرار گرفت.");
+            if (order != null)
+            {
+                var (name, mobile) = _shopAccountAcl.GetAccountBy(order.AccountId);
+                _smsService.Send(mobile,
+                    $"{name} عزیز سفارش شما با شماره پیگیری {issueTrackingNo} با موفقیت پرداخت شد و در فرایند ارسال قرار گرفت.");
+            }
 
             return issueTrackingNo;
 
@@ -87,6 +103,11 @@ namespace ShopManagement.Application
         public List<OrderViewModel> GetAllOrders()
         {
             return _orderRepository.GetAllOrders();
+        }
+
+        public OrderViewModel GetOrderBy(long id)
+        {
+            return _orderRepository.GetOrderBy(id);
         }
 
         public List<OrderItemViewModel> GetItems(long orderId)

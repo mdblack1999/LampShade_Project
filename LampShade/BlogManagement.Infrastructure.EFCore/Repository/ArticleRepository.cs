@@ -65,7 +65,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
                 if (!string.IsNullOrWhiteSpace(searchModel.PublishDate))
                 {
-                    var date = searchModel.PublishDate.ToGeorgianDateTime().Date;
+                    var date = searchModel.PublishDate.ToGregorianDateTime().Date;
                     var dateStr = date.ToFarsi();
                     query = query.AsEnumerable().Where(x => x.PublishDate == dateStr).AsQueryable();
                 }

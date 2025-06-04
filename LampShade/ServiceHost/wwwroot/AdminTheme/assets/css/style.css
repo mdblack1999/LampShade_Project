@@ -62,7 +62,7 @@ Date: Jun 2015
 /******** 1. General ********/
 
 body {
-    background: #f2f2f2;
+    background: #f5f5f5;
     margin: 0;
     -webkit-text-size-adjust: 100%;
     font-family: IranSans;
@@ -419,7 +419,7 @@ a:focus {
     .panel-fill.panel-default .panel-heading {
         background-color: transparent;
         color: #333;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important;
     }
 
     .panel-fill.panel-primary {
@@ -3780,12 +3780,12 @@ div.dataTables_info {
 /* 17.3 Log-in */
 
 .wrapper-page {
-    width: 420px;
+    width: 500px;
     margin: 7.5% auto;
 }
 
 .panel-pages .panel-body {
-    padding: 30px;
+    padding: 25px;
 }
 
 .panel-pages {

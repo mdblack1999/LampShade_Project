@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopManagement.Infrastructure.EfCore;
 
 namespace ShopManagement.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20250602131850_PendingAndDeliverd_AddedToOrder")]
+    partial class PendingAndDeliverd_AddedToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace ShopManagement.Infrastructure.EfCore.Migrations
 
                     b.Property<long>("AccountId")
                         .HasColumnType("bigint");
-
-                    b.Property<bool>("Checked")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");

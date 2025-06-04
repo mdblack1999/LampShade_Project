@@ -55,6 +55,7 @@ body {
 .header-cart-icon .counter {
     left: 0;
     right: 100%;
+    margin-right: -10px;
 }
 
 .header-icon-wrapper > ul > li {
@@ -274,7 +275,7 @@ span.error {
     background-color: #fbfd81 !important;
 }
 
-.Role-name{
-    font-size : 17px;
-    margin : 0px 5px;
+.Role-name {
+    font-size: 17px;
+    margin: 0px 5px;
 }

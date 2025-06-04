@@ -1,0 +1,346 @@
+﻿@page
+@model ServiceHost.Pages.OrderInfoModel
+@using _0_Framework.Application
+
+@{
+    ViewData["Title"] = "سفارشات من";
+    Layout = "_Layout";
+}
+
+@section Css
+{
+    <link href="~/Theme/assets/css/order-info.css" rel="stylesheet" />
+}
+
+<div class="breadcrumb-area section-space--half">
+    <div class="container wide">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-wrapper breadcrumb-bg">
+                    <div class="breadcrumb-content">
+                        <h2 id="page-title" class="breadcrumb-content__title">سفارشات من</h2>
+                        <ul class="breadcrumb-content__page-map">
+                            <li>
+                                <a asp-page="./Index" class="breadcrumb-link">صفحه اصلی</a>
+                            </li>
+                            <li class="active">سفارشات من</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content-area">
+    <div class="container" id="orders-container">
+        @if ((Model.PendingOrders == null || !Model.PendingOrders.Any())
+        && (Model.DeliveredOrders == null || !Model.DeliveredOrders.Any())
+        && (Model.CanceledOrders == null || !Model.CanceledOrders.Any()))
+        {
+            <div id="no-orders-msg" class="text-center">
+                هنوز سفارشی ثبت نشده است.<br />
+                <a asp-page="/Product">اولین سفارش را ثبت کنید</a>
+            </div>
+        }
+        else
+        {
+            <ul class="nav nav-tabs mb-4" id="order-status-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#tabPending"
+                       role="tab" aria-controls="tabPending" aria-selected="true">
+                        در حال آماده‌سازی (@Model.PendingOrders.Count)
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#tabDelivered"
+                       role="tab" aria-controls="tabDelivered" aria-selected="false">
+                        تحویل شده (@Model.DeliveredOrders.Count)
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="canceled-tab" data-toggle="tab" href="#tabCanceled"
+                       role="tab" aria-controls="tabCanceled" aria-selected="false">
+                        لغو شده (@Model.CanceledOrders.Count)
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="order-status-tabsContent">
+
+                <!-- تب «در حال آماده‌سازی» -->
+                <div class="tab-pane fade show active" id="tabPending" role="tabpanel" aria-labelledby="pending-tab">
+                    @if (Model.PendingOrders == null || !Model.PendingOrders.Any())
+                    {
+                        <div class="empty-tab-msg">
+                            هیچ سفارشی در وضعیت «در حال آماده‌سازی» وجود ندارد.
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var owc in Model.PendingOrders)
+                        {
+                            var order = owc.Order;
+                            var cart = owc.Cart;
+                            var orderDate = order.CreationDate.ToGregorianDateTime();
+                            var hoursSince = (DateTime.Now - orderDate).TotalHours;
+                            bool canCancel =
+                            hoursSince <= 24
+                            && order.Pending
+                            && !order.Delivered
+                            && !order.IsCanceled
+                            && order.IsPaid
+                            && !order.Checked;
+
+                            <div class="order-card pending" id="order-@order.Id">
+                                <div class="card-header">
+                                    <span class="order-number">
+                                        سفارش شماره:
+                                        <strong>@order.Id.ToString().PadLeft(6 , '0')</strong>
+                                    </span>
+                                    <span class="order-date">
+                                        تاریخ ثبت: @order.CreationDate
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table order-items-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>عکس</th>
+                                                    <th>محصول</th>
+                                                    <th>قیمت واحد</th>
+                                                    <th>تعداد</th>
+                                                    <th>مبلغ کل بدون تخفیف</th>
+                                                    <th>درصد تخفیف</th>
+                                                    <th>مبلغ کل تخفیف</th>
+                                                    <th>مبلغ پس از تخفیف</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in cart.Items)
+                                                {
+                                                    <tr>
+                                                        <td class="item-picture">
+                                                            <img src="~/ProductPictures/@item.Picture"
+                                                                 alt="@item.Name"
+                                                                 class="img-fluid item-img" />
+                                                        </td>
+                                                        <td class="item-name">@item.Name</td>
+                                                        <td class="item-unitprice">@item.UnitPrice.ToMoney() تومان</td>
+                                                        <td class="item-count">@item.Count</td>
+                                                        <td class="item-total">@item.TotalItemPrice.ToMoney() تومان</td>
+                                                        <td class="item-discountrate">@item.DiscountRate %</td>
+                                                        <td class="item-discount">@item.DiscountAmount.ToMoney() تومان</td>
+                                                        <td class="item-final">@item.ItemPayAmount.ToMoney() تومان</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="order-meta-summary mt-3">
+                                        <span><strong>مبلغ کل:</strong> @order.TotalAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ تخفیف:</strong> @order.DiscountAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ پرداختی:</strong> @order.PayAmount.ToString("N0") تومان</span>
+                                        <span>
+                                            <strong>کد پیگیری:</strong>
+                                            @(string.IsNullOrEmpty(order.IssueTrackingNo) ? "—" : order.IssueTrackingNo)
+                                        </span>
+                                        <span><strong>تعداد اقلام:</strong> @cart.Items.Count</span>
+                                    </div>
+
+                                    <div class="order-actions mt-2">
+                                        @if (order.Checked)
+                                        {
+                                            <div class="text-success small">
+                                                سفارش شما بررسی شده و در حال آماده‌سازی می‌باشد...
+                                            </div>
+                                        }
+                                        else if (canCancel)
+                                        {
+                                            <form method="post" class="cancel-form d-inline-block">
+                                                <button type="submit"
+                                                        asp-page-handler="Cancel"
+                                                        asp-route-orderId="@order.Id"
+                                                        class="btn btn-danger btn-cancel">
+                                                    لغو سفارش
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-danger btn-cancel disabled mt-1" disabled>
+                                                لغو سفارش
+                                            </button>
+                                            <div class="cannot-cancel-msg text-danger small">
+                                                در این بازه زمانی امکان لغو سفارش شما وجود ندارد.
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- تب «تحویل شده» -->
+                <div class="tab-pane fade" id="tabDelivered" role="tabpanel" aria-labelledby="delivered-tab">
+                    @if (Model.DeliveredOrders == null || !Model.DeliveredOrders.Any())
+                    {
+                        <div class="empty-tab-msg">
+                            هیچ سفارشی در وضعیت «تحویل شده» وجود ندارد.
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var owc in Model.DeliveredOrders)
+                        {
+                            var order = owc.Order;
+                            var cart = owc.Cart;
+
+                            <div class="order-card delivered" id="order-@order.Id">
+                                <div class="card-header">
+                                    <span class="order-number">
+                                        سفارش شماره:
+                                        <strong>@order.Id.ToString().PadLeft(6 , '0')</strong>
+                                    </span>
+                                    <span class="order-date">
+                                        تاریخ ثبت: @order.CreationDate
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table order-items-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>عکس</th>
+                                                    <th>محصول</th>
+                                                    <th>قیمت واحد</th>
+                                                    <th>تعداد</th>
+                                                    <th>مبلغ کل بدون تخفیف</th>
+                                                    <th>درصد تخفیف</th>
+                                                    <th>مبلغ کل تخفیف</th>
+                                                    <th>مبلغ پس از تخفیف</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in cart.Items)
+                                                {
+                                                    <tr>
+                                                        <td class="item-picture">
+                                                            <img src="~/ProductPictures/@item.Picture"
+                                                                 alt="@item.Name"
+                                                                 class="img-fluid item-img" />
+                                                        </td>
+                                                        <td class="item-name">@item.Name</td>
+                                                        <td class="item-unitprice">@item.UnitPrice.ToMoney() تومان</td>
+                                                        <td class="item-count">@item.Count</td>
+                                                        <td class="item-total">@item.TotalItemPrice.ToMoney() تومان</td>
+                                                        <td class="item-discountrate">@item.DiscountRate %</td>
+                                                        <td class="item-discount">@item.DiscountAmount.ToMoney() تومان</td>
+                                                        <td class="item-final">@item.ItemPayAmount.ToMoney() تومان</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="order-meta-summary mt-3">
+                                        <span><strong>مبلغ کل:</strong> @order.TotalAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ تخفیف:</strong> @order.DiscountAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ پرداخت‌شده:</strong> @order.PayAmount.ToString("N0") تومان</span>
+                                        <span>
+                                            <strong>کد پیگیری:</strong>
+                                            @(string.IsNullOrEmpty(order.IssueTrackingNo) ? "—" : order.IssueTrackingNo)
+                                        </span>
+                                        <span><strong>تعداد اقلام:</strong> @cart.Items.Count</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- تب «لغو شده» -->
+                <div class="tab-pane fade" id="tabCanceled" role="tabpanel" aria-labelledby="canceled-tab">
+                    @if (Model.CanceledOrders == null || !Model.CanceledOrders.Any())
+                    {
+                        <div class="empty-tab-msg">
+                            هیچ سفارشی در وضعیت «لغو شده» وجود ندارد.
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var owc in Model.CanceledOrders)
+                        {
+                            var order = owc.Order;
+                            var cart = owc.Cart;
+
+                            <div class="order-card canceled" id="order-@order.Id">
+                                <div class="card-header">
+                                    <span class="order-number">
+                                        سفارش شماره:
+                                        <strong>@order.Id.ToString().PadLeft(6 , '0')</strong>
+                                    </span>
+                                    <span class="order-date">
+                                        تاریخ ثبت: @order.CreationDate
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table order-items-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>عکس</th>
+                                                    <th>محصول</th>
+                                                    <th>قیمت واحد</th>
+                                                    <th>تعداد</th>
+                                                    <th>مبلغ کل بدون تخفیف</th>
+                                                    <th>درصد تخفیف</th>
+                                                    <th>مبلغ کل تخفیف</th>
+                                                    <th>مبلغ پس از تخفیف</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in cart.Items)
+                                                {
+                                                    <tr>
+                                                        <td class="item-picture">
+                                                            <img src="~/ProductPictures/@(item.Picture)"
+                                                                 alt="@item.Name"
+                                                                 class="img-fluid item-img" />
+                                                        </td>
+                                                        <td class="item-name">@item.Name</td>
+                                                        <td class="item-unitprice">@item.UnitPrice.ToMoney() تومان</td>
+                                                        <td class="item-count">@item.Count</td>
+                                                        <td class="item-total">@item.TotalItemPrice.ToMoney() تومان</td>
+                                                        <td class="item-discountrate">@item.DiscountRate %</td>
+                                                        <td class="item-discount">@item.DiscountAmount.ToMoney() تومان</td>
+                                                        <td class="item-final">@item.ItemPayAmount.ToMoney() تومان</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="order-meta-summary mt-3">
+                                        <span><strong>مبلغ کل:</strong> @order.TotalAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ تخفیف:</strong> @order.DiscountAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ پرداخت‌شده:</strong> @order.PayAmount.ToString("N0") تومان</span>
+                                        <span>
+                                            <strong>کد پیگیری:</strong>
+                                            @(string.IsNullOrEmpty(order.IssueTrackingNo) ? "—" : order.IssueTrackingNo)
+                                        </span>
+                                        <span><strong>تعداد اقلام:</strong> @cart.Items.Count</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+            </div>
+        }
+    </div>
+</div>

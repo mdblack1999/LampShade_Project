@@ -12,6 +12,9 @@ namespace ShopManagement.Domain.OrderAgg
         public double PayAmount { get; private set; }
         public bool IsPaid { get; private set; }
         public bool IsCanceled { get; private set; }
+        public bool Pending { get; private set; }
+        public bool Checked { get; private set; }
+        public bool Delivered { get; private set; }
         public string IssueTrackingNo { get; private set; }
         public long RefId { get; private set; }
         public List<OrderItem> Items { get; private set; }
@@ -21,8 +24,10 @@ namespace ShopManagement.Domain.OrderAgg
             AccountId = accountId;
             TotalAmount = totalAmount;
             DiscountAmount = discountAmount;
-            PayAmount = payAmount;  
             PaymentMethod = paymentMethod;
+            PayAmount = payAmount;
+            Pending = false;
+            Delivered = false;
             IsPaid = false;
             IsCanceled = false;
             RefId = 0;
@@ -35,6 +40,11 @@ namespace ShopManagement.Domain.OrderAgg
 
             if (refId != 0)
                 RefId = refId;
+
+            if (IsPaid && !string.IsNullOrWhiteSpace(IssueTrackingNo))
+            {
+                Pending = true;
+            }
         }
 
         public void SetIssueTrackingNo(string number)
@@ -42,10 +52,11 @@ namespace ShopManagement.Domain.OrderAgg
             this.IssueTrackingNo = number;
         }
 
-        public void Cancel()
-        {
-            this.IsCanceled = true;
-        }
+        public void Cancel() => IsCanceled = true;
+
+        public void MarkAsDelivered() => Delivered = true;
+
+        public void MarkAsChecked() => Checked = true;
 
         public void AddItem(OrderItem item)
         {

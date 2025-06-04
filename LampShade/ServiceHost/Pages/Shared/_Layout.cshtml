@@ -21,6 +21,12 @@
     <link href="~/Theme/assets/css/style.css" rel="stylesheet">
     <link href="~/Theme/assets/css/Custom.css" rel="stylesheet">
     <link href="~/Theme/assets/css/AccessDenied403.css" rel="stylesheet" />
+    <link href="/AdminTheme/assets/css/animate.css" rel="stylesheet">
+    <link href="/AdminTheme/assets/css/waves-effect.css" rel="stylesheet" />
+    <link href="/AdminTheme/assets/css/helper.css" rel="stylesheet" type="text/css" />
+    <link href="/AdminTheme/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    @await RenderSectionAsync("Css" , false)
 
 
 </head>
@@ -59,6 +65,8 @@
     <script src="~/Theme/assets/js/custom.js"></script>
     <script src="~/lib/jquery-Validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-Validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    @await RenderSectionAsync("Scripts" , false)
 
 </body>
 </html>

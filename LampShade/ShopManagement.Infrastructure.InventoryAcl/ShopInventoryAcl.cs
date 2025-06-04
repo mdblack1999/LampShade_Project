@@ -21,7 +21,7 @@ namespace ShopManagement.Infrastructure.InventoryAcl
                 new ReduceInventory(orderItem.ProductId , orderItem.Count , "خرید مشتری" ,
                     orderItem.OrderId)).ToList();
 
-            return _inventoryApplication.Reduce(command).IsSuccedded;
+            return _inventoryApplication.Reduce(command).IsSucceeded;
         }
     }
 }

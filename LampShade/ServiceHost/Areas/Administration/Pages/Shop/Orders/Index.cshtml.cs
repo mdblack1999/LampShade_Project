@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// File: ServiceHost/Areas/Administration/Pages/Shop/Orders/Index.cshtml.cs
+using System.Collections.Generic;
+using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
 using AccountManagement.Application.Contracts.Account;
@@ -24,7 +26,10 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Orders
         private readonly IAccountApplication _accountApplication;
         private readonly IReportExporter _reportExporter;
 
-        public IndexModel(IOrderApplication orderApplication, IAccountApplication accountApplication, IReportExporter reportExporter)
+        public IndexModel(
+            IOrderApplication orderApplication,
+            IAccountApplication accountApplication,
+            IReportExporter reportExporter)
         {
             _orderApplication = orderApplication;
             _accountApplication = accountApplication;
@@ -52,20 +57,34 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Orders
             return RedirectToPage("./Index");
         }
 
+        public IActionResult OnGetChecked(long id)
+        {
+            _orderApplication.Checked(id);
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnGetDeliver(long id)
+        {
+            _orderApplication.Deliverd(id);
+            return RedirectToPage("./Index");
+        }
+
         [NeedsPermission(ShopPermissions.ListItemOrder)]
         public IActionResult OnGetItems(long id)
         {
             var items = _orderApplication.GetItems(id);
-            return Partial("Items" , items);
+            return Partial("Items", items);
         }
 
         public IActionResult OnPostExportToExcel()
         {
             var data = JsonConvert.DeserializeObject<List<OrderViewModel>>(TableJson);
             var fileContent = _reportExporter.ExportToExcel(data, "Orders.xlsx");
-            return File(fileContent,
+            return File(
+                fileContent,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                "OrdersReport.xlsx");
+                "OrdersReport.xlsx"
+            );
         }
     }
 }

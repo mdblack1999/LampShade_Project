@@ -55,12 +55,12 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
 
             if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
             {
-                query = query.Where(x => x.StartDateGr > searchModel.StartDate.ToGeorgianDateTime());
+                query = query.Where(x => x.StartDateGr > searchModel.StartDate.ToGregorianDateTime());
             }
 
             if (!string.IsNullOrWhiteSpace(searchModel.EndDate))
             {
-                query = query.Where(x => x.EndDateGr < searchModel.EndDate.ToGeorgianDateTime());
+                query = query.Where(x => x.EndDateGr < searchModel.EndDate.ToGregorianDateTime());
             }
 
             var discount = query.OrderByDescending(x => x.Id).AsNoTracking().ToList();

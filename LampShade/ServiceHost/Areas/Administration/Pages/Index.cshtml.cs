@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using _0_Framework.Application;
+using _0_Framework.Application.Sms;
 using AccountManagement.Application.Contracts.Account;
 using BlogManagement.Application.Contracts.Article;
 using CommentManagement.Application.Contracts.Comment;
@@ -103,8 +104,7 @@ namespace ServiceHost.Areas.Administration.Pages
         public List<int> PendingOrdersCount { get; set; } = new();
         public List<int> PaidOrdersCount { get; set; } = new();
         public List<int> CanceledOrdersCount { get; set; } = new();
-
-
+        public List<RecentSmsDto> RecentSms { get; set; }
         #endregion
 
         #region Services
@@ -117,6 +117,7 @@ namespace ServiceHost.Areas.Administration.Pages
         private readonly ICustomerDiscountApplication _customerDiscountApp;
         private readonly IColleagueDiscountApplication _colleagueDiscountApp;
         private readonly IInventoryApplication _inventoryApp;
+        private readonly ISmsService _smsService;
 
         #endregion
 
@@ -129,7 +130,7 @@ namespace ServiceHost.Areas.Administration.Pages
             ICommentApplication commentApp ,
             ICustomerDiscountApplication customerDiscountApp ,
             IColleagueDiscountApplication colleagueDiscountApp ,
-            IInventoryApplication inventoryApp)
+            IInventoryApplication inventoryApp, ISmsService smsService)
         {
             _accountApp = accountApp;
             _articleApp = articleApp;
@@ -139,6 +140,7 @@ namespace ServiceHost.Areas.Administration.Pages
             _customerDiscountApp = customerDiscountApp;
             _colleagueDiscountApp = colleagueDiscountApp;
             _inventoryApp = inventoryApp;
+            _smsService = smsService;
         }
 
         #endregion
@@ -146,6 +148,10 @@ namespace ServiceHost.Areas.Administration.Pages
 
         public void OnGet()
         {
+            #region SmsReport
+            RecentSms = _smsService.GetRecentSmsSent();
+            #endregion
+
             #region Widgets
             // Total Prop
             var allProducts = _productApp.GetProducts();
@@ -167,11 +173,11 @@ namespace ServiceHost.Areas.Administration.Pages
 
             #region Sales % Change
             TodaySales = allOrders
-                .Where(o => o.CreationDate.ToGeorgianDateTime().Date == today)
+                .Where(o => o.CreationDate.ToGregorianDateTime().Date == today)
                 .Sum(o => o.TotalAmount);
 
             YesterdaySales = allOrders
-                .Where(o => o.CreationDate.ToGeorgianDateTime().Date == yesterday)
+                .Where(o => o.CreationDate.ToGregorianDateTime().Date == yesterday)
                 .Sum(o => o.TotalAmount);
 
             SalesChangePercent = YesterdaySales > 0
@@ -180,32 +186,32 @@ namespace ServiceHost.Areas.Administration.Pages
             #endregion
 
             #region Orders % Change
-            TodayOrdersCount = allOrders.Count(o => o.CreationDate.ToGeorgianDateTime().Date == today);
-            YesterdayOrdersCount = allOrders.Count(o => o.CreationDate.ToGeorgianDateTime().Date == yesterday);
+            TodayOrdersCount = allOrders.Count(o => o.CreationDate.ToGregorianDateTime().Date == today);
+            YesterdayOrdersCount = allOrders.Count(o => o.CreationDate.ToGregorianDateTime().Date == yesterday);
             OrdersChangePercent = YesterdayOrdersCount > 0
                 ? (int)Math.Round((TodayOrdersCount - YesterdayOrdersCount) * 100.0 / YesterdayOrdersCount)
                 : 0;
             #endregion
 
             #region Products % Change
-            TodayProductsCount = allProducts.Count(p => p.CreationDate.ToGeorgianDateTime().Date == today);
-            YesterdayProductsCount = allProducts.Count(p => p.CreationDate.ToGeorgianDateTime().Date == yesterday);
+            TodayProductsCount = allProducts.Count(p => p.CreationDate.ToGregorianDateTime().Date == today);
+            YesterdayProductsCount = allProducts.Count(p => p.CreationDate.ToGregorianDateTime().Date == yesterday);
             ProductsChangePercent = YesterdayProductsCount > 0
                 ? (int)Math.Round((TodayProductsCount - YesterdayProductsCount) * 100.0 / YesterdayProductsCount)
                 : 0;
             #endregion
 
             #region Articles % Change
-            TodayArticlesCount = allArticles.Count(a => a.PublishDate.ToGeorgianDateTime().Date == today);
-            YesterdayArticlesCount = allArticles.Count(a => a.PublishDate.ToGeorgianDateTime().Date == yesterday);
+            TodayArticlesCount = allArticles.Count(a => a.PublishDate.ToGregorianDateTime().Date == today);
+            YesterdayArticlesCount = allArticles.Count(a => a.PublishDate.ToGregorianDateTime().Date == yesterday);
             ArticlesChangePercent = YesterdayArticlesCount > 0
                 ? (int)Math.Round((TodayArticlesCount - YesterdayArticlesCount) * 100.0 / YesterdayArticlesCount)
                 : 0;
             #endregion
 
             #region Users % Change
-            TodayUsersCount = allUsers.Count(u => u.CreationDate.ToGeorgianDateTime().Date == today);
-            YesterdayUsersCount = allUsers.Count(u => u.CreationDate.ToGeorgianDateTime().Date == yesterday);
+            TodayUsersCount = allUsers.Count(u => u.CreationDate.ToGregorianDateTime().Date == today);
+            YesterdayUsersCount = allUsers.Count(u => u.CreationDate.ToGregorianDateTime().Date == yesterday);
             UsersChangePercent = YesterdayUsersCount > 0
                 ? (int)Math.Round((TodayUsersCount - YesterdayUsersCount) * 100.0 / YesterdayUsersCount)
                 : 0;
@@ -227,7 +233,7 @@ namespace ServiceHost.Areas.Administration.Pages
                 .Where(o => !string.IsNullOrWhiteSpace(o.CreationDate))
                 .Where(o =>
                 {
-                    var dt = o.CreationDate.ToGeorgianDateTime();
+                    var dt = o.CreationDate.ToGregorianDateTime();
                     return dt >= startDate && dt <= endDate;
                 })
                 .ToList();
@@ -235,11 +241,11 @@ namespace ServiceHost.Areas.Administration.Pages
 
             #region Monthly Revenue & Orders
             var revDict = orders
-                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGeorgianDateTime()))
+                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Sum(o => o.TotalAmount));
 
             var ordDict = orders
-                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGeorgianDateTime()))
+                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Count());
 
             var persianMonthNames = new[]
@@ -335,8 +341,8 @@ namespace ServiceHost.Areas.Administration.Pages
             var users = _accountApp.GetAccounts()
                 .Where(u =>
                     !string.IsNullOrWhiteSpace(u.CreationDate) &&
-                    u.CreationDate.ToGeorgianDateTime() >= startDate &&
-                    u.CreationDate.ToGeorgianDateTime() <= endDate);
+                    u.CreationDate.ToGregorianDateTime() >= startDate &&
+                    u.CreationDate.ToGregorianDateTime() <= endDate);
 
             var usrDict = users
                 .GroupBy(u => DateTime.Parse(u.CreationDate).Month)
@@ -463,17 +469,17 @@ namespace ServiceHost.Areas.Administration.Pages
             var published = _articleApp.GetAllArticles()
                 .Where(a =>
                 {
-                    var dt = a.PublishDate.ToGeorgianDateTime();
+                    var dt = a.PublishDate.ToGregorianDateTime();
                     return dt >= startDate && dt <= endDate;
                 })
                 .ToList();
 
             var artDict = published
-                .GroupBy(a => pc.GetMonth(a.PublishDate.ToGeorgianDateTime()))
+                .GroupBy(a => pc.GetMonth(a.PublishDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Count());
 
             var artCatDict = published
-                .GroupBy(a => pc.GetMonth(a.PublishDate.ToGeorgianDateTime()))
+                .GroupBy(a => pc.GetMonth(a.PublishDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g
                     .GroupBy(x => x.Category)
                     .OrderByDescending(gg => gg.Count())
@@ -491,17 +497,17 @@ namespace ServiceHost.Areas.Administration.Pages
 
             var pendingDict = orders
                 .Where(o => !o.IsPaid && !o.IsCanceled)
-                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGeorgianDateTime()))
+                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Count());
 
             var paidDict = orders
                 .Where(o => o.IsPaid && !o.IsCanceled)
-                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGeorgianDateTime()))
+                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Count());
 
             var canceledDict = orders
                 .Where(o => o.IsCanceled)
-                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGeorgianDateTime()))
+                .GroupBy(o => pc.GetMonth(o.CreationDate.ToGregorianDateTime()))
                 .ToDictionary(g => g.Key , g => g.Count());
 
             for (int m = 1; m <= 12; m++)

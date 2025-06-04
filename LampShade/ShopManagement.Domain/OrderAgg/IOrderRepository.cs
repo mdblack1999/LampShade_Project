@@ -10,5 +10,6 @@ namespace ShopManagement.Domain.OrderAgg
         List<OrderItemViewModel> GetItems(long orderId);
         List<OrderViewModel> Search(OrderSearchModel searchModel);
         List<OrderViewModel> GetAllOrders();
+        OrderViewModel GetOrderBy(long id);
     }
 }

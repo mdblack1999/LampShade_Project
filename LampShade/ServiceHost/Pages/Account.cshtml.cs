@@ -1,3 +1,4 @@
+using _0_Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,6 +16,7 @@ namespace ServiceHost.Pages
         [BindProperty]
         public RegisterAccount RegisterModel { get; set; }
 
+
         private readonly IAccountApplication _accountApplication;
 
         public AccountModel(IAccountApplication accountApplication)
@@ -29,7 +31,7 @@ namespace ServiceHost.Pages
         public IActionResult OnPostLogin(Login command)
         {
             var result = _accountApplication.Login(command);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
                 return RedirectToPage("/Index");
 
             LoginMessage = result.Message;
@@ -46,7 +48,7 @@ namespace ServiceHost.Pages
         {
             RegisterModel = command;
             var result = _accountApplication.Register(command);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
             {
                 RegisterMessage = result.Message;
                 return Page();

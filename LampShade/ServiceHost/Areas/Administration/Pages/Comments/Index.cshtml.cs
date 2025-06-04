@@ -39,7 +39,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         public IActionResult OnGetConfirm(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Confirmed);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
                 return RedirectToPage("./Index");
 
             Message = result.Message;
@@ -49,7 +49,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         public IActionResult OnGetCancel(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Canceled);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
                 return RedirectToPage("./Index");
 
             Message = result.Message;
@@ -60,7 +60,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         public IActionResult OnGetSpam(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Spam);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
                 return RedirectToPage("./Index");
 
             Message = result.Message;
@@ -71,7 +71,7 @@ namespace ServiceHost.Areas.Administration.Pages.Comments
         public IActionResult OnGetPending(long id)
         {
             var result = _commentApplication.ChangeStatus(id , CommentViewModel.CommentStatus.Pending);
-            if (result.IsSuccedded)
+            if (result.IsSucceeded)
                 return RedirectToPage("./Index");
 
             Message = result.Message;

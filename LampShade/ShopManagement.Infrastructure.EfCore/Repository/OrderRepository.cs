@@ -3,6 +3,7 @@ using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Infrastructure;
 using AccountManagement.Infrastructure.EFCore;
+using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contracts;
 using ShopManagement.Application.Contracts.Order;
@@ -47,7 +48,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 DiscountRate = x.DiscountRate ,
                 OrderId = x.OrderId ,
                 ProductId = x.ProductId ,
-                UnitPrice = x.UnitPrice ,
+                UnitPrice = x.UnitPrice
             }).ToList();
 
             foreach (var item in items)
@@ -74,6 +75,9 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 PayAmount = x.PayAmount ,
                 PaymentMethodId = x.PaymentMethod ,
                 RefId = x.RefId ,
+                Pending = x.Pending ,
+                Checked = x.Checked ,
+                Delivered = x.Delivered ,
                 TotalAmount = x.TotalAmount ,
                 CreationDate = x.CreationDate.ToFarsi()
             });
@@ -94,7 +98,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
 
         public List<OrderViewModel> GetAllOrders()
         {
-            return _context.Orders.Include(x=>x.Items).AsNoTracking().Select(x => new OrderViewModel
+            return _context.Orders.Include(x => x.Items).AsNoTracking().Select(x => new OrderViewModel
             {
                 Id = x.Id ,
                 AccountId = x.AccountId ,
@@ -106,9 +110,36 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 PaymentMethodId = x.PaymentMethod ,
                 RefId = x.RefId ,
                 TotalAmount = x.TotalAmount ,
-                CreationDate = x.CreationDate.ToFarsi(),
-                
+                CreationDate = x.CreationDate.ToFarsi() ,
+                Pending = x.Pending ,
+                Delivered = x.Delivered ,
+                Checked = x.Checked ,
             }).ToList();
+        }
+
+        public OrderViewModel GetOrderBy(long id)
+        {
+            var orders = _context.Orders.Select(x => new OrderViewModel
+            {
+                Id = x.Id ,
+                IsCanceled = x.IsCanceled ,
+                Pending = x.Pending ,
+                TotalAmount = x.TotalAmount ,
+                CreationDate = x.CreationDate.ToFarsi() ,
+                AccountId = x.AccountId ,
+                Delivered = x.Delivered ,
+                IsPaid = x.IsPaid ,
+                PayAmount = x.PayAmount ,
+                PaymentMethod = x.PaymentMethod.ToString() ,
+                RefId = x.RefId ,
+                IssueTrackingNo = x.IssueTrackingNo ,
+                DiscountAmount = x.DiscountAmount ,
+
+            }).FirstOrDefault(x => x.Id == id);
+
+            if (orders == null)
+                return new OrderViewModel();
+            return orders;
         }
     }
 }

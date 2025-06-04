@@ -20,8 +20,8 @@ namespace DiscountManagement.Application
             if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var startDate = command.StartDate.ToGeorgianDateTime();
-            var endDate = command.EndDate.ToGeorgianDateTime();
+            var startDate = command.StartDate.ToGregorianDateTime();
+            var endDate = command.EndDate.ToGregorianDateTime();
             var customerDiscount = new CustomerDiscount(command.ProductId , command.DiscountRate , startDate ,
                 endDate , command.Reason);
             _customerDiscountRepository.Create(customerDiscount);
@@ -39,8 +39,8 @@ namespace DiscountManagement.Application
             if (_customerDiscountRepository.Exists(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate &&  x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var startDate = command.StartDate.ToGeorgianDateTime();
-            var endDate = command.EndDate.ToGeorgianDateTime();
+            var startDate = command.StartDate.ToGregorianDateTime();
+            var endDate = command.EndDate.ToGregorianDateTime();
             customerDiscount.Edit(command.ProductId,command.DiscountRate,startDate,endDate,command.Reason);
 
             _customerDiscountRepository.SaveChanges();

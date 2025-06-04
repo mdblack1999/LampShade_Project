@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RestSharp;
 using System;
-using System.Drawing;
 
 namespace _0_Framework.Application.ZarinPal
 {
@@ -15,7 +14,7 @@ namespace _0_Framework.Application.ZarinPal
         {
             _configuration = configuration;
             var paymentSection = _configuration.GetSection("Payment");
-            var prefix = paymentSection["method"];      // e.g. "sandbox"
+            var prefix = paymentSection["method"];      
             _merchantId = paymentSection["merchant"];
             _baseUrl = $"https://{prefix}.zarinpal.com/pg/v4/payment";
         }
@@ -57,7 +56,7 @@ namespace _0_Framework.Application.ZarinPal
         public VerificationResponse CreateVerificationRequest(string authority , string amount)
         {
             if (!long.TryParse(amount.Replace("," , "") , out var finalAmount))
-                throw new ArgumentException("Amount is not in correct format." , nameof(amount));
+                throw new ArgumentException("فرمت مبلغ نامعتبر است" , nameof(amount));
 
             var client = new RestClient(_baseUrl + "/verify.json");
             var request = new RestRequest(Method.POST);
@@ -82,7 +81,7 @@ namespace _0_Framework.Application.ZarinPal
 
         public string GetStartPayUrl(string authority)
         {
-            var host = new Uri(_baseUrl).GetLeftPart(UriPartial.Authority); // مثلا "https://sandbox.zarinpal.com"
+            var host = new Uri(_baseUrl).GetLeftPart(UriPartial.Authority); // Example: "https://sandbox.zarinpal.com"
             return $"{host}/pg/StartPay/{authority}";
         }
     }
