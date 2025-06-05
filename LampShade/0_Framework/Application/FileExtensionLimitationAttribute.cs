@@ -19,13 +19,14 @@ namespace _0_Framework.Application
         {
             var file = value as IFormFile;
             if (file == null) return true;
-            var fileExtension = Path.GetExtension(file.FileName);
-            return _validExtension.Contains(fileExtension);
+
+            var fileExtension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+            return _validExtension.Select(ext => ext.ToLowerInvariant()).Contains(fileExtension);
         }
+
         public void AddValidation(ClientModelValidationContext context)
         {
-            //context.Attributes.Add("data-val" , "true");
-            context.Attributes.Add("data-val-FileExtensionLimit" , ErrorMessage);
+            context.Attributes.Add("data-val-FileExtensionLimit", ErrorMessage);
         }
     }
 }

@@ -52,7 +52,7 @@
 
 /* ===== کارت سفارش ===== */
 .order-card {
-    border: 1px solid #ddd;
+    border: 3px solid #ddd;
     border-radius: 0.7rem;
     margin-bottom: 2rem;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
@@ -94,7 +94,9 @@
     }
 
     .order-card .order-number,
-    .order-card .order-date {
+    .order-card .order-date,
+    .order-card .order-title-deliverd
+    .order-card .order-title-cancel {
         font-size: 1rem;
         color: #333;
     }
@@ -184,7 +186,7 @@
 
 /* ===== پیام بررسی شده ===== */
 .text-success.small {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #28a745 !important;
     margin-top: 0.5rem;
 }
@@ -192,6 +194,16 @@
 /* ===== شماره سفارش ===== */
 .order-number strong {
     color: #333;
+}
+
+/* ===== عنوان سفارش تحویل شده ===== */
+.order-title-deliverd strong {
+    color: #007200;
+}
+
+/* ===== عنوان سفارش لغو شده ===== */
+.order-title-cancel strong {
+    color: #d90429;
 }
 
 /* ===== متن تاریخ ===== */

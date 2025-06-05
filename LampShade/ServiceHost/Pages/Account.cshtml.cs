@@ -1,4 +1,3 @@
-using _0_Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,9 +12,14 @@ namespace ServiceHost.Pages
         [TempData]
         public string RegisterMessage { get; set; }
 
+        [TempData]
+        public bool RegisterSucceeded { get; set; }
+
+        [BindProperty]
+        public Login Login { get; set; }
+
         [BindProperty]
         public RegisterAccount RegisterModel { get; set; }
-
 
         private readonly IAccountApplication _accountApplication;
 
@@ -28,15 +32,20 @@ namespace ServiceHost.Pages
         {
         }
 
-        public IActionResult OnPostLogin(Login command)
+        public IActionResult OnPostLogin()
         {
-            var result = _accountApplication.Login(command);
+            var result = _accountApplication.Login(Login);
             if (result.IsSucceeded)
+            {
+
                 return RedirectToPage("/Index");
+            }
 
             LoginMessage = result.Message;
             return Page();
+
         }
+
 
         public IActionResult OnGetLogout()
         {
@@ -44,18 +53,17 @@ namespace ServiceHost.Pages
             return RedirectToPage("/Account");
         }
 
-        public IActionResult OnPostRegister(RegisterAccount command)
+        public IActionResult OnPostRegister()
         {
-            RegisterModel = command;
-            var result = _accountApplication.Register(command);
-            if (result.IsSucceeded)
-            {
-                RegisterMessage = result.Message;
-                return Page();
-            }
+            var result = _accountApplication.Register(RegisterModel);
             RegisterMessage = result.Message;
+            RegisterSucceeded = result.IsSucceeded;
+
+            if (!ModelState.IsValid || !result.IsSucceeded)
+                return Page();
+
+            RegisterModel = null;
             return Page();
         }
     }
-
 }

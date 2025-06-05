@@ -21,6 +21,8 @@ namespace AccountManagement.Application.Contracts.Account
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Mobile { get; set; }
 
+        [FileExtensionLimitation(new []{".jpeg",".jpg",".png"},ErrorMessage = ValidationMessages.IsInValidFileFormat)]
+        [MaxFileSize(10*1024*1024,ErrorMessage = ValidationMessages.MaxFileSize)]
         public IFormFile ProfilePhoto { get; set; }
 
         public string CurrentPhotoPath { get; set; }

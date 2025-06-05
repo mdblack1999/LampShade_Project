@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\wwwroot\\admintheme\\assets\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\wwwroot\\admintheme\\assets\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\account.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\account.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\servicehost\\areas\\administration\\pages\\shop\\orders\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shop\\orders\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\account.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\account.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\servicehost\\areas\\administration\\pages\\shop\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\areas\\administration\\pages\\shop\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\servicehost\\pages\\orderinfo.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\orderinfo.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\servicehost\\pages\\orderinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\orderinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|d:\\asp.net\\0-asp.net.core\\lampshade_project\\code\\lampshade\\servicehost\\pages\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF652907-5FDA-4A1F-9A7D-100BB5B26E06}|ServiceHost\\ServiceHost.csproj|solutionrelative:servicehost\\pages\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,66 +51,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "bootstrap.css",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\wwwroot\\AdminTheme\\assets\\css\\bootstrap.css",
-              "RelativeDocumentMoniker": "ServiceHost\\wwwroot\\AdminTheme\\assets\\css\\bootstrap.css",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\wwwroot\\AdminTheme\\assets\\css\\bootstrap.css",
-              "RelativeToolTip": "ServiceHost\\wwwroot\\AdminTheme\\assets\\css\\bootstrap.css",
-              "ViewState": "AQIAAHYJAAAAAAAAAAAEwIgJAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-04T15:33:49.135Z",
+              "Title": "Account.cshtml.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml.cs",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Account.cshtml.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml.cs*",
+              "RelativeToolTip": "ServiceHost\\Pages\\Account.cshtml.cs*",
+              "ViewState": "AQIAABkAAAAAAAAAAAAAACoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T23:23:19.076Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml.cs",
-              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAqwEIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:24:34.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml",
-              "RelativeToolTip": "ServiceHost\\Areas\\Administration\\Pages\\Shop\\Orders\\Index.cshtml",
-              "ViewState": "AQIAANQAAAAAAAAAAAAowN0AAAAXAAAA",
+              "Title": "Account.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Account.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Account.cshtml",
+              "RelativeToolTip": "ServiceHost\\Pages\\Account.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACAAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T23:24:19.415Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderInfo.cshtml",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\OrderInfo.cshtml",
-              "RelativeDocumentMoniker": "ServiceHost\\Pages\\OrderInfo.cshtml",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\OrderInfo.cshtml",
-              "RelativeToolTip": "ServiceHost\\Pages\\OrderInfo.cshtml",
-              "ViewState": "AQIAALAAAAAAAAAAAAAAALwAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-02T12:10:05.276Z",
+              "WhenOpened": "2025-06-04T23:23:17.868Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "OrderInfo.cshtml.cs",
-              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\OrderInfo.cshtml.cs",
-              "RelativeDocumentMoniker": "ServiceHost\\Pages\\OrderInfo.cshtml.cs",
-              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\OrderInfo.cshtml.cs",
-              "RelativeToolTip": "ServiceHost\\Pages\\OrderInfo.cshtml.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAAGUAAAAjAAAA",
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Profile.cshtml",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Profile.cshtml",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Profile.cshtml",
+              "RelativeToolTip": "ServiceHost\\Pages\\Profile.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T22:16:49.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Profile.cshtml.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Profile.cshtml.cs",
+              "RelativeDocumentMoniker": "ServiceHost\\Pages\\Profile.cshtml.cs",
+              "ToolTip": "D:\\ASP.NET\\0-Asp.Net.Core\\LampShade_Project\\Code\\LampShade\\ServiceHost\\Pages\\Profile.cshtml.cs",
+              "RelativeToolTip": "ServiceHost\\Pages\\Profile.cshtml.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAAAD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T12:09:38.613Z",
+              "WhenOpened": "2025-06-04T22:02:33.176Z",
               "EditorCaption": ""
             }
           ]

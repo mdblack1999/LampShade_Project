@@ -96,7 +96,9 @@ namespace ServiceHost
                     builder => builder.RequireRole(new List<string> { Roles.Administrator , Roles.ContentAdmin }));
             });
 
+            
             services.AddControllers();
+
 
             services.AddCors(option => option.AddPolicy("MyPolicy" , builder =>
                 builder.WithOrigins("https://localhost:5002")

@@ -6,7 +6,6 @@ using ShopManagement.Application.Contracts.Product;
 using System.Collections.Generic;
 using _0_Framework.Infrastructure;
 using _01_LampShadeQuery.Contracts.ReportingManagement.Interface;
-using BlogManagement.Application.Contracts.Article;
 using InventoryManagement.Infrastructure.Configuration.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;

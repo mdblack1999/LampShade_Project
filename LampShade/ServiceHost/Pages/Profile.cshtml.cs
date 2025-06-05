@@ -9,7 +9,14 @@ namespace ServiceHost.Pages
     [Authorize]
     public class ProfileModel : PageModel
     {
+        [BindProperty]
         public EditProfileViewModel Profile { get; set; }
+
+        [TempData]
+        public string ErrorMessage { get; set; }
+
+        [TempData]
+        public string SuccessMessage { get; set; }
 
         private readonly IAccountApplication _accountApplication;
         private readonly IAuthHelper _authHelper;
@@ -19,26 +26,45 @@ namespace ServiceHost.Pages
             _accountApplication = accountApplication;
             _authHelper = authHelper;
         }
-
-        public void OnGet()
+        private void ReloadProfileFromService()
         {
             var userId = _authHelper.CurrentAccountId();
             Profile = _accountApplication.GetProfile(userId);
         }
-        public IActionResult OnPost(EditProfileViewModel command)
+
+        public void OnGet()
         {
-            if (!ModelState.IsValid)
+            ReloadProfileFromService();
+        }
+
+        public IActionResult OnPost()
+        {
+            var userId = _authHelper.CurrentAccountId();
+            if (Profile == null)
             {
+                ReloadProfileFromService();
+                ErrorMessage = "خطای داخلی: اطلاعات پروفایل پیدا نشد.";
                 return Page();
             }
 
-            var result = _accountApplication.EditProfile(command);
+            if (!ModelState.IsValid)
+            {
+                ReloadProfileFromService();
+                ErrorMessage = "لطفاً فرم را به‌درستی پر کنید";
+                return Page();
+            }
+
+            var result = _accountApplication.EditProfile(Profile);
             if (!result.IsSucceeded)
             {
+                ReloadProfileFromService();
                 ModelState.AddModelError(string.Empty, result.Message);
                 return Page();
             }
-            return RedirectToPage("/profile",result); 
+
+            SuccessMessage = result.Message;
+            ReloadProfileFromService();
+            return Page();
         }
     }
 }

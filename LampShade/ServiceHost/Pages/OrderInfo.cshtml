@@ -205,6 +205,9 @@
                                         سفارش شماره:
                                         <strong>@order.Id.ToString().PadLeft(6 , '0')</strong>
                                     </span>
+                                    <span class="order-title-deliverd">
+                                        <strong>«تحویل شد»</strong>
+                                    </span>
                                     <span class="order-date">
                                         تاریخ ثبت: @order.CreationDate
                                     </span>
@@ -249,7 +252,7 @@
                                     <div class="order-meta-summary mt-3">
                                         <span><strong>مبلغ کل:</strong> @order.TotalAmount.ToString("N0") تومان</span>
                                         <span><strong>مبلغ تخفیف:</strong> @order.DiscountAmount.ToString("N0") تومان</span>
-                                        <span><strong>مبلغ پرداخت‌شده:</strong> @order.PayAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ پرداختی:</strong> @order.PayAmount.ToString("N0") تومان</span>
                                         <span>
                                             <strong>کد پیگیری:</strong>
                                             @(string.IsNullOrEmpty(order.IssueTrackingNo) ? "—" : order.IssueTrackingNo)
@@ -282,6 +285,9 @@
                                     <span class="order-number">
                                         سفارش شماره:
                                         <strong>@order.Id.ToString().PadLeft(6 , '0')</strong>
+                                    </span>
+                                    <span class="order-title-cancel">
+                                        <strong>«لغو شد»</strong>
                                     </span>
                                     <span class="order-date">
                                         تاریخ ثبت: @order.CreationDate
@@ -327,7 +333,7 @@
                                     <div class="order-meta-summary mt-3">
                                         <span><strong>مبلغ کل:</strong> @order.TotalAmount.ToString("N0") تومان</span>
                                         <span><strong>مبلغ تخفیف:</strong> @order.DiscountAmount.ToString("N0") تومان</span>
-                                        <span><strong>مبلغ پرداخت‌شده:</strong> @order.PayAmount.ToString("N0") تومان</span>
+                                        <span><strong>مبلغ پرداختی:</strong> @order.PayAmount.ToString("N0") تومان</span>
                                         <span>
                                             <strong>کد پیگیری:</strong>
                                             @(string.IsNullOrEmpty(order.IssueTrackingNo) ? "—" : order.IssueTrackingNo)
